@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import logo from "@/imgs/logo.vue";
+import Search from "./Search.vue";
 
 let searchContent = ref("dsad123啊啊啊");
 </script>
@@ -10,7 +11,9 @@ let searchContent = ref("dsad123啊啊啊");
     <div>
       <logo></logo>
     </div>
-    <div>2</div>
+    <div>
+      <search></search>
+    </div>
     <div>3</div>
   </div>
 </template>
