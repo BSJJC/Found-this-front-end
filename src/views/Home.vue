@@ -1,8 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NavBar from "@/components/NavBar.vue";
+import MainPage from "@/components/MainPage.vue";
+</script>
 
 <template>
-  <div class="bg-red-500 h-20 w-20">Home page</div>
-  <el-button>test btn</el-button>
+  <el-container class="h-full">
+    <el-header class="bg-red-200">
+      <nav-bar></nav-bar>
+    </el-header>
+    <el-main class="bg-yellow-200 h-full">
+      <main-page></main-page>
+    </el-main>
+  </el-container>
 </template>
 
 <style scoped></style>
