@@ -4,14 +4,14 @@ import MainPage from "@/components/MainPage.vue";
 </script>
 
 <template>
-  <el-container class="h-full">
-    <el-header class="bg-red-200">
+  <div class="w-full h-full">
+    <div class="h-[10%]">
       <nav-bar></nav-bar>
-    </el-header>
-    <el-main class="bg-yellow-200 h-full">
+    </div>
+    <div class="h-[90%]">
       <main-page></main-page>
-    </el-main>
-  </el-container>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>
