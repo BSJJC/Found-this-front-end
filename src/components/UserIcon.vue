@@ -3,14 +3,10 @@ import { ref } from "vue";
 import { loginIcon, menuIcon } from "@/imgs";
 
 const state = ref("not-logged-in");
-
-setInterval(() => {
-  console.log(state.value);
-}, 1000);
 </script>
 
 <template>
-  <div class="w-[100px] h-[40px] relative overflow-hidden" :class="state">
+  <div class="w-[100px] h-[40px] relative" :class="state">
     <div
       id="user-icon"
       class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-0"
@@ -27,7 +23,7 @@ setInterval(() => {
 
     <div
       id="login-icon"
-      class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-10"
+      class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-10 hover:-translate-y-1 hover:shadow-lg"
     >
       <el-tooltip content="Log in" placement="bottom" effect="light">
         <img

@@ -4,13 +4,9 @@ import { searchIcon } from "@/imgs";
 
 const maxHeight = ref(0);
 const keyWords = ref("");
-const list = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-];
+const list = [1, 2, 3, 4, 5];
 
-const _list = ref([
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-]);
+const _list = ref([1, 2, 3, 4, 5]);
 
 function listFilte() {
   if (keyWords.value.length === 0) {
@@ -71,7 +67,7 @@ function listFilte() {
                 v-for="(i, index) in _list"
                 :key="_list[index]"
                 class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer bg-[#fafcfd75] transition duration-300 hover:bg-[#fafcfdf3] hover:-translate-y-1"
-                @click="keyWords = i.toString()"
+                @mousedown="keyWords = i.toString()"
               >
                 {{ i }}
               </li>
