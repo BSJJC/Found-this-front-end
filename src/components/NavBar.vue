@@ -1,20 +1,17 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import logo from "@/components/logo.vue";
 import Search from "./Search.vue";
-
-let searchContent = ref("dsad123啊啊啊");
 </script>
 
 <template>
-  <div class="flex justify-between items-center px-10 h-full">
-    <div>
+  <div class="grid grid-cols-5 px-10 h-full">
+    <div class="col-span-1 flex justify-left items-center">
       <logo></logo>
     </div>
-    <div>
+    <div class="col-span-3 flex justify-center items-center">
       <search></search>
     </div>
-    <div>3</div>
+    <div class="col-span-1 flex justify-end items-center">3</div>
   </div>
 </template>
 

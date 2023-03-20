@@ -45,7 +45,7 @@ function listFilte() {
       <el-divider direction="vertical" class="h-full" />
     </div>
 
-    <div class="w-1/2 flex justify-center items-center rounded-r-3xl">
+    <div class="w-1/2 flex justify-around items-center rounded-r-3xl">
       <div class="w-3/4 h-full">
         <input
           v-model="keyWords"
