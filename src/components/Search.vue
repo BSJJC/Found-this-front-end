@@ -49,7 +49,7 @@ function listFilte() {
       <div class="w-3/4 h-full">
         <input
           v-model="keyWords"
-          class="w-full h-full transition duration-300 focus:outline-none"
+          class="w-full h-full transition duration-300 focus:outline-none text-xl"
           type="text"
           placeholder="Type to filter"
           @click="
@@ -70,6 +70,7 @@ function listFilte() {
               <li
                 v-for="(i, index) in _list"
                 :key="_list[index]"
+                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer bg-[#fafcfd75] transition duration-300 hover:bg-[#fafcfdf3] hover:-translate-y-1"
                 @click="keyWords = i.toString()"
               >
                 {{ i }}
@@ -108,15 +109,6 @@ function listFilte() {
   overflow: hidden;
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
   transition: 0.3s ease;
-
-  li {
-    height: 3rem;
-    background-color: #fafcfd95;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
 }
 
 .el-divider {
