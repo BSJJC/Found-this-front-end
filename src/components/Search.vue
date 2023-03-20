@@ -1,12 +1,38 @@
 <script lang="ts" setup>
-import { ref, Ref } from "vue";
+import { ref } from "vue";
 import { searchIcon } from "@/imgs";
 
-let maxHeight = ref(0);
-let keyWords = ref("");
+const maxHeight = ref(0);
+const keyWords = ref("");
 const list = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 ];
+
+const _list = ref([
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+]);
+
+function listFilte() {
+  if (keyWords.value.length === 0) {
+    _list.value = [...list];
+
+    maxHeight.value = (_list.value.length >= 5 ? 5 : _list.value.length) * 48;
+
+    return;
+  }
+
+  _list.value = [...list];
+  for (let i = 0; i < _list.value.length; i++) {
+    if (
+      _list.value[i].toString().toLowerCase().indexOf(keyWords.value) === -1
+    ) {
+      _list.value.splice(i, 1);
+      i--;
+    }
+  }
+
+  maxHeight.value = (_list.value.length >= 5 ? 5 : _list.value.length) * 48;
+}
 </script>
 
 <template>
@@ -28,10 +54,11 @@ const list = [
           placeholder="Type to filter"
           @click="
             maxHeight === 0
-              ? (maxHeight = (list.length >= 5 ? 5 : list.length) * 48)
+              ? (maxHeight = (_list.length >= 5 ? 5 : _list.length) * 48)
               : (maxHeight = 0)
           "
           @focusout="maxHeight = 0"
+          @input="listFilte"
         />
 
         <ul
@@ -41,12 +68,11 @@ const list = [
           <el-scrollbar height="240px">
             <transition-group name="list">
               <li
-                v-for="(i, index) in list"
-                :key="index"
+                v-for="(i, index) in _list"
+                :key="_list[index]"
                 @click="keyWords = i.toString()"
               >
                 {{ i }}
-                {{ index }}
               </li>
             </transition-group>
           </el-scrollbar>
@@ -62,7 +88,7 @@ const list = [
 </template>
 
 <style scoped lang="scss">
-.list-move, /* 对移动中的元素应用的过渡 */
+.list-move,
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
@@ -74,8 +100,6 @@ const list = [
   transform: translateX(30px);
 }
 
-/* 确保将离开的元素从布局流中删除
-  以便能够正确地计算移动的动画。 */
 .list-leave-active {
   position: absolute;
 }
