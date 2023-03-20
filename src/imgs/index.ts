@@ -1,3 +1,5 @@
 import searchIcon from "./search.svg";
+import loginIcon from "./logIn.svg";
+import menuIcon from "./menu.svg";
 
-export { searchIcon };
+export { loginIcon, menuIcon, searchIcon };
