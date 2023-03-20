@@ -1,22 +1,24 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 import { searchIcon } from "@/imgs";
 
 let maxHeight = ref(0);
 let keyWords = ref("");
-const list = ref([1]);
-
-function test() {
-  if (list.value.length === 0) {
-  }
-}
+const list = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+];
 </script>
 
 <template>
-  <div class="flex flex-row w-[700px] h-[40px] rounded-3xl border shadow-lg">
+  <div class="flex flex-row w-[700px] h-[50px] rounded-3xl border shadow-lg">
     <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
       <input class="w-4/6 outline-none text-xl" />
     </div>
+
+    <div class="h-full w-2 flex justify-center items-center">
+      <el-divider direction="vertical" class="h-full" />
+    </div>
+
     <div class="w-1/2 flex justify-center items-center rounded-r-3xl">
       <div class="w-3/4 h-full">
         <input
@@ -25,28 +27,59 @@ function test() {
           type="text"
           placeholder="Type to filter"
           @click="
-            maxHeight === 0 ? (maxHeight = list.length * 48) : (maxHeight = 0)
+            maxHeight === 0
+              ? (maxHeight = (list.length >= 5 ? 5 : list.length) * 48)
+              : (maxHeight = 0)
           "
           @focusout="maxHeight = 0"
-          @input="test"
         />
 
-        <ul class="value-list" :style="{ maxHeight: `${maxHeight}px` }">
-          <el-scrollbar height="320px">
-            <li v-for="i in list" @click="keyWords = i.toString()">
-              {{ i }}
-            </li>
+        <ul
+          class="value-list rounded-b-xl"
+          :style="{ maxHeight: `${maxHeight}px` }"
+        >
+          <el-scrollbar height="240px">
+            <transition-group name="list">
+              <li
+                v-for="(i, index) in list"
+                :key="index"
+                @click="keyWords = i.toString()"
+              >
+                {{ i }}
+                {{ index }}
+              </li>
+            </transition-group>
           </el-scrollbar>
         </ul>
       </div>
-      <div class="w-1/5 h-full bg-blue-300">
-        <img :src="searchIcon" alt="search icon" />
+      <div
+        class="w-[50px] h-[40px] rounded-3xl bg-[#2088E5] shadow shadow-[#2089e5a9] flex justify-center items-center cursor-pointer"
+      >
+        <img :src="searchIcon" alt="search icon" class="w-[30px]" />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.list-move, /* 对移动中的元素应用的过渡 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list-leave-active {
+  position: absolute;
+}
+
 .value-list {
   overflow: hidden;
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
@@ -54,11 +87,16 @@ function test() {
 
   li {
     height: 3rem;
-    background-color: #fafcfd;
+    background-color: #fafcfd95;
     padding: 1rem;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
+}
+
+.el-divider {
+  height: 80%;
+  margin: 0px;
 }
 </style>
