@@ -31,6 +31,7 @@ function test() {
           @focusout="maxHeight = 0"
           @input="test"
         />
+
         <ul class="value-list" :style="{ maxHeight: `${maxHeight}px` }">
           <el-scrollbar height="320px">
             <li v-for="i in list" @click="keyWords = i.toString()">
