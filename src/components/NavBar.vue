@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import logo from "@/imgs/logo.vue";
+import logo from "@/components/logo.vue";
 import Search from "./Search.vue";
 
 let searchContent = ref("dsad123啊啊啊");

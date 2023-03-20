@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { searchIcon } from "@/imgs";
 
 let maxHeight = ref(0);
 let keyWords = ref("");
@@ -12,13 +13,11 @@ function test() {
 </script>
 
 <template>
-  <div class="flex flex-row w-[700px] h-[40px]">
-    <div class="w-1/2">
-      <input
-        class="w-full h-full outline-none rounded-l-2xl indent-5 text-xl bg-red-200"
-      />
+  <div class="flex flex-row w-[700px] h-[40px] rounded-3xl border shadow-lg">
+    <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
+      <input class="w-4/6 outline-none text-xl" />
     </div>
-    <div class="w-1/2 h-full flex justify-center items-center bg-blue-200">
+    <div class="w-1/2 flex justify-center items-center rounded-r-3xl">
       <div class="w-3/4 h-full">
         <input
           v-model="keyWords"
@@ -39,6 +38,9 @@ function test() {
             </li>
           </el-scrollbar>
         </ul>
+      </div>
+      <div class="w-1/5 h-full bg-blue-300">
+        <img :src="searchIcon" alt="search icon" />
       </div>
     </div>
   </div>
