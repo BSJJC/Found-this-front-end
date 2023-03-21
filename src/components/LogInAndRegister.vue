@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import logo from "./logo.vue";
-import { circleIcon } from "@/imgs";
+import { circleIcon, copyrightIcon } from "@/imgs";
 
 const remember = ref(false);
 </script>
@@ -29,7 +28,7 @@ const remember = ref(false);
 
         <!-- form -->
         <div class="w-full flex-grow flex justify-center items-center flex-col">
-          <div class="text-4xl w-1/2">Welcome Back!</div>
+          <div class="text-3xl w-1/2">Welcome Back!</div>
           <div class="w-1/2 opacity-80">
             Welcome back! Pleace enter yor details.
           </div>
@@ -64,13 +63,13 @@ const remember = ref(false);
           </div>
 
           <button
-            class="w-1/2 h-[45px] bg-[#7E56DA] text-white rounded-lg transition duration-200 hover:bg-[#a07bf7]"
+            class="w-1/2 h-[45px] bg-[#7E56DA] text-white rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
           >
             SIgn In
           </button>
 
           <div
-            class="w-1/2 h-[45px] mt-5 flex justify-center items-center opacity-50"
+            class="w-1/2 h-[45px] flex justify-center items-center opacity-50"
           >
             Don't have an account?&nbsp;
             <a href="#" class="text-[#7E56DA] hover:text-[#a07bf7]">Sign up</a>
@@ -78,10 +77,23 @@ const remember = ref(false);
         </div>
 
         <!-- copyright -->
-        <div class="flex-none h-[70px]">copyright</div>
+        <div
+          class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
+        >
+          <img
+            :src="copyrightIcon"
+            alt="copyright icon"
+            class="w-[20px] mr-2"
+          />
+          copyright
+        </div>
       </div>
 
-      <div class="col-span-1 w-full h-full bg-blue-200 rounded-r-2xl">2</div>
+      <div
+        class="col-span-1 w-full h-full bg-[#F3F4F8] rounded-r-2xl flex justify-center items-center"
+      >
+        123
+      </div>
     </div>
   </div>
 </template>
