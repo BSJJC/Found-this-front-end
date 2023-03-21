@@ -4,14 +4,6 @@ import { circleIcon, copyrightIcon } from "@/imgs";
 
 const remember = ref(false);
 const mode = ref("login-mode");
-
-setTimeout(() => {
-  mode.value = "register-mode";
-}, 2000);
-
-setTimeout(() => {
-  mode.value = "login-mode";
-}, 4000);
 </script>
 
 <template>
@@ -38,7 +30,7 @@ setTimeout(() => {
 
         <div class="w-full flex-grow flex justify-center items-center flex-col">
           <div class="text-3xl w-1/2 h-[40px]">
-            <Transition name="slide-up">
+            <Transition name="ooo">
               <div v-if="mode === 'login-mode'">1</div>
               <div v-else>2</div>
             </Transition>
@@ -85,8 +77,17 @@ setTimeout(() => {
           <div
             class="w-1/2 h-[45px] flex justify-center items-center opacity-50"
           >
-            Don't have an account?&nbsp;
-            <a href="#" class="text-[#7E56DA] hover:text-[#a07bf7]">Sign up</a>
+            Don't have an account?
+            <a
+              href="#"
+              class="text-[#7E56DA] hover:text-[#a07bf7]"
+              @click="
+                mode === 'login-mode'
+                  ? (mode = 'register-mode')
+                  : (mode = 'login-mode')
+              "
+              >Sign up</a
+            >
           </div>
         </div>
 
@@ -119,23 +120,38 @@ setTimeout(() => {
 </template>
 
 <style lang="scss" scoped>
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transition: all 0s ease-out;
+.ooo-enter-active,
+.ooo-leave-active {
+  transition: all 0.3s ease-out;
+  position: absolute;
 }
 
-.slide-up-enter-from {
+.ooo-enter-from {
   opacity: 0;
-  transform: translateY(30px);
+  transition-delay: 0.3s;
 }
 
-.slide-up-leave-to {
+.ooo-leave-to {
   opacity: 0;
-  transform: translateY(-30px);
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+input {
+  height: 50px;
+  width: 100%;
+  margin-top: 10px;
+  text-indent: 10px;
+  border: 1px solid rgb(208, 208, 208);
+  border-radius: 8px;
+  font-size: large;
+  outline: none;
 }
 
 #panel {
-  animation: panel-in 1s ease-in-out forwards;
+  animation: panel-in 1.5s ease-in-out forwards;
 }
 @keyframes panel-in {
   30% {
@@ -164,24 +180,9 @@ setTimeout(() => {
   }
 }
 
-img {
-  -webkit-user-drag: none;
-}
-
-input {
-  height: 50px;
-  width: 100%;
-  margin-top: 10px;
-  text-indent: 10px;
-  border: 1px solid rgb(208, 208, 208);
-  border-radius: 8px;
-  font-size: large;
-  outline: none;
-}
-
 #form {
   z-index: 10;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.75s ease-in-out;
   animation: form-padding-in 1.5s ease-in-out forwards;
   * {
     animation: form-content-in 1.5s ease-in-out forwards;
@@ -219,7 +220,7 @@ input {
 
 #pattern {
   z-index: 0;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.75s ease-in-out;
   * {
     animation: pattern-content-in 1.5s ease-in-out forwards;
   }
@@ -250,17 +251,14 @@ input {
   #form {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
-    transform: translateX(0%);
   }
 
   #pattern {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-    transform: translateX(0%);
 
     > div {
-      transition: all 0.5s ease-in-out;
-      transform: rotate(-0);
+      transition: all 0.75s ease-in-out;
     }
   }
 }
@@ -278,7 +276,7 @@ input {
     transform: translateX(-100%);
 
     > div {
-      transition: all 0.5s ease-in-out;
+      transition: all 0.75s ease-in-out;
       transform: rotate(-540deg);
     }
   }
