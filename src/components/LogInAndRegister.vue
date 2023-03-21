@@ -23,6 +23,7 @@ setTimeout(() => {
       class="rounded-l-lg w-[1px] h-[1px] shadow-xl grid grid-cols-2"
       :class="mode"
     >
+      <!-- form -->
       <div id="form" class="bg-white col-span-1 flex flex-col">
         <div class="w-full h-[70px] flex flex-row flex-none select-none">
           <img
@@ -36,7 +37,12 @@ setTimeout(() => {
         </div>
 
         <div class="w-full flex-grow flex justify-center items-center flex-col">
-          <div class="text-3xl w-1/2">Welcome Back!</div>
+          <div class="text-3xl w-1/2 h-[40px]">
+            <Transition name="slide-up">
+              <div v-if="mode === 'login-mode'">1</div>
+              <div v-else>2</div>
+            </Transition>
+          </div>
           <div class="w-1/2 opacity-80">
             Welcome back! Pleace enter yor details.
           </div>
@@ -96,11 +102,12 @@ setTimeout(() => {
         </div>
       </div>
 
+      <!-- pattern -->
       <div
         id="pattern"
-        class="col-span-1 w-full h-full bg-[#F3F4F8] flex justify-center items-center flex-col"
+        class="col-span-1 w-full h-full bg-[#F3F4F8] flex justify-center items-center flex-col opacity-50"
       >
-        <div>
+        <div class="flex justify-center items-center flex-col">
           <div class="w-[300px] h-[150px] bg-[#623EBC] rounded-t-[150px]"></div>
           <div
             class="w-[300px] h-[150px] bg-[#9371e8] rounded-b-[150px] blur-lg"
@@ -112,10 +119,24 @@ setTimeout(() => {
 </template>
 
 <style lang="scss" scoped>
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0s ease-out;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
 #panel {
   animation: panel-in 1s ease-in-out forwards;
 }
-
 @keyframes panel-in {
   30% {
     height: 81%;
@@ -166,7 +187,6 @@ input {
     animation: form-content-in 1.5s ease-in-out forwards;
   }
 }
-
 @keyframes form-padding-in {
   0% {
     padding: 0px;
@@ -180,7 +200,6 @@ input {
     padding: 40px;
   }
 }
-
 @keyframes form-content-in {
   0% {
     opacity: 0;
@@ -202,22 +221,27 @@ input {
   z-index: 0;
   transition: all 0.5s ease-in-out;
   * {
-    animation: test 1.5s ease-in-out forwards;
+    animation: pattern-content-in 1.5s ease-in-out forwards;
+  }
+
+  > div {
+    width: 300px !important;
+    height: 300px !important;
   }
 }
-
-@keyframes test {
+@keyframes pattern-content-in {
   0% {
-    height: 10px;
+    height: 0px;
     opacity: 0;
   }
 
   50% {
-    height: 10px;
+    height: 0px;
     opacity: 0;
   }
 
   100% {
+    height: 150px;
     opacity: 1;
   }
 }
