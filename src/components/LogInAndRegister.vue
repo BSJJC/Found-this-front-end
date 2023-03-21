@@ -17,6 +17,7 @@ const mode = ref("login-mode");
     >
       <!-- form -->
       <div id="form" class="bg-white col-span-1 flex flex-col">
+        <!-- logo-->
         <div class="w-full h-[70px] flex flex-row flex-none select-none">
           <img
             :src="circleIcon"
@@ -28,51 +29,57 @@ const mode = ref("login-mode");
           </div>
         </div>
 
-        <div class="w-full flex-grow flex justify-center items-center flex-col">
-          <div class="text-3xl w-1/2 h-[40px]">
-            <transition mode="out-in" name="mode-change">
-              <div v-if="mode === 'login-mode'">Welcome back!</div>
-              <div v-else>abc</div>
-            </transition>
-          </div>
+        <!-- Main  -->
 
-          <div class="w-1/2 opacity-80">
+        <!-- Log in main page -->
+        <div class="w-full flex-grow flex justify-center items-center flex-col">
+          <div class="text-3xl w-[400px] h-[40px]">Welcome back!</div>
+
+          <div class="w-[400px] opacity-80">
             Welcome back! Pleace enter yor details.
           </div>
 
-          <el-form class="w-1/2 mt-5">
+          <el-form class="w-[400px] mt-5">
             <div class="text-xl">Email:</div>
+
             <el-form-item>
               <input type="text" placeholder="Enter your email" />
             </el-form-item>
+
             <div class="text-xl">Password:</div>
+
             <el-form-item>
               <input type="password" placeholder="Enter your password" />
             </el-form-item>
+
+            <el-form-item>
+              <div class="w-full flex justify-between items-center text-lg">
+                <div
+                  class="cursor-pointer h-full flex justify-center items-center flex-row"
+                  @click="remember = !remember"
+                >
+                  <el-checkbox v-model="remember"></el-checkbox>
+                  <div
+                    class="ml-3 select-none transition duration-300"
+                    :style="{ color: `${remember ? '#7E56DA' : '#999'}` }"
+                  >
+                    Remember me for 30 days
+                  </div>
+                </div>
+
+                <a
+                  href="#"
+                  class="transition duration-300 text-[#7E56DA] hover:text-[#a07bf7]"
+                  >Forget password?</a
+                >
+              </div>
+            </el-form-item>
           </el-form>
 
-          <div class="w-1/2 h-[50px] flex justify-between items-center">
-            <div
-              class="flex fle-cool cursor-pointer h-full justify-center items-center"
-              @click="remember = !remember"
-            >
-              <el-checkbox v-model="remember"></el-checkbox>
-              <div class="ml-2 select-none text-lg opacity-70">
-                Remember me for 30 days
-              </div>
-            </div>
-
-            <a
-              href="#"
-              class="text-[#7D64B9] transition duration-300 hover:text-[#a07bf7] text-lg"
-              >Forget password?</a
-            >
-          </div>
-
           <button
-            class="w-1/2 h-[45px] bg-[#7E56DA] text-white rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
+            class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
           >
-            SIgn In
+            Log in
           </button>
 
           <div
@@ -87,11 +94,12 @@ const mode = ref("login-mode");
                   ? (mode = 'register-mode')
                   : (mode = 'login-mode')
               "
-              >Sign up</a
+              >Sign up!</a
             >
           </div>
         </div>
 
+        <!-- copyright -->
         <div
           class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
         >
@@ -121,9 +129,7 @@ const mode = ref("login-mode");
 </template>
 
 <style lang="scss" scoped>
-.mode-change-enter-active {
-  transition: all 0.3s ease-in-out;
-}
+.mode-change-enter-active,
 .mode-change-leave-active {
   transition: all 0.3s ease-in-out;
 }
