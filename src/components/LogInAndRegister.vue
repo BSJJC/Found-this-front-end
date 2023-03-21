@@ -13,8 +13,7 @@ const remember = ref(false);
       id="panel"
       class="rounded-l-lg w-[1px] h-[1px] shadow-xl grid grid-cols-2"
     >
-      <div class="bg-white col-span-1 p-10 rounded-l-2xl flex flex-col">
-        <!-- logo -->
+      <div id="left" class="bg-white col-span-1 rounded-l-2xl flex flex-col">
         <div class="w-full h-[70px] flex flex-row flex-none select-none">
           <img
             :src="circleIcon"
@@ -26,7 +25,6 @@ const remember = ref(false);
           </div>
         </div>
 
-        <!-- form -->
         <div class="w-full flex-grow flex justify-center items-center flex-col">
           <div class="text-3xl w-1/2">Welcome Back!</div>
           <div class="w-1/2 opacity-80">
@@ -76,7 +74,6 @@ const remember = ref(false);
           </div>
         </div>
 
-        <!-- copyright -->
         <div
           class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
         >
@@ -90,9 +87,13 @@ const remember = ref(false);
       </div>
 
       <div
-        class="col-span-1 w-full h-full bg-[#F3F4F8] rounded-r-2xl flex justify-center items-center"
+        id="right"
+        class="col-span-1 w-full h-full bg-[#F3F4F8] rounded-r-2xl flex justify-center items-center flex-col"
       >
-        123
+        <div class="w-[300px] h-[150px] bg-[#623EBC] rounded-t-[150px]"></div>
+        <div
+          class="w-[300px] h-[150px] bg-[#9371e8] rounded-b-[150px] blur-lg"
+        ></div>
       </div>
     </div>
   </div>
@@ -127,7 +128,7 @@ const remember = ref(false);
 }
 
 #panel {
-  animation: panel-in 1.3s ease-in-out forwards;
+  animation: panel-in 1s ease-in-out forwards;
 }
 
 img {
@@ -143,5 +144,65 @@ input {
   border-radius: 8px;
   font-size: large;
   outline: none;
+}
+
+#left {
+  animation: left-padding-in 1.5s ease-in-out forwards;
+  * {
+    animation: left-content-in 1.5s ease-in-out forwards;
+  }
+}
+
+@keyframes left-padding-in {
+  0% {
+    padding: 0px;
+  }
+
+  50% {
+    padding: 0px;
+  }
+
+  100% {
+    padding: 40px;
+  }
+}
+
+@keyframes left-content-in {
+  0% {
+    opacity: 0;
+    height: 0px;
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+#right {
+  * {
+    animation: test 1.5s ease-in-out forwards;
+  }
+}
+
+@keyframes test {
+  0% {
+    height: 10px;
+    opacity: 0;
+  }
+
+  50% {
+    height: 10px;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 </style>
