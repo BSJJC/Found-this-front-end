@@ -3,6 +3,15 @@ import { ref } from "vue";
 import { circleIcon, copyrightIcon } from "@/imgs";
 
 const remember = ref(false);
+const mode = ref("login-mode");
+
+setTimeout(() => {
+  mode.value = "register-mode";
+}, 2000);
+
+setTimeout(() => {
+  mode.value = "login-mode";
+}, 4000);
 </script>
 
 <template>
@@ -12,8 +21,9 @@ const remember = ref(false);
     <div
       id="panel"
       class="rounded-l-lg w-[1px] h-[1px] shadow-xl grid grid-cols-2"
+      :class="mode"
     >
-      <div id="left" class="bg-white col-span-1 rounded-l-2xl flex flex-col">
+      <div id="form" class="bg-white col-span-1 flex flex-col">
         <div class="w-full h-[70px] flex flex-row flex-none select-none">
           <img
             :src="circleIcon"
@@ -87,19 +97,25 @@ const remember = ref(false);
       </div>
 
       <div
-        id="right"
-        class="col-span-1 w-full h-full bg-[#F3F4F8] rounded-r-2xl flex justify-center items-center flex-col"
+        id="pattern"
+        class="col-span-1 w-full h-full bg-[#F3F4F8] flex justify-center items-center flex-col"
       >
-        <div class="w-[300px] h-[150px] bg-[#623EBC] rounded-t-[150px]"></div>
-        <div
-          class="w-[300px] h-[150px] bg-[#9371e8] rounded-b-[150px] blur-lg"
-        ></div>
+        <div>
+          <div class="w-[300px] h-[150px] bg-[#623EBC] rounded-t-[150px]"></div>
+          <div
+            class="w-[300px] h-[150px] bg-[#9371e8] rounded-b-[150px] blur-lg"
+          ></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+#panel {
+  animation: panel-in 1s ease-in-out forwards;
+}
+
 @keyframes panel-in {
   30% {
     height: 81%;
@@ -127,10 +143,6 @@ const remember = ref(false);
   }
 }
 
-#panel {
-  animation: panel-in 1s ease-in-out forwards;
-}
-
 img {
   -webkit-user-drag: none;
 }
@@ -146,14 +158,16 @@ input {
   outline: none;
 }
 
-#left {
-  animation: left-padding-in 1.5s ease-in-out forwards;
+#form {
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+  animation: form-padding-in 1.5s ease-in-out forwards;
   * {
-    animation: left-content-in 1.5s ease-in-out forwards;
+    animation: form-content-in 1.5s ease-in-out forwards;
   }
 }
 
-@keyframes left-padding-in {
+@keyframes form-padding-in {
   0% {
     padding: 0px;
   }
@@ -167,7 +181,7 @@ input {
   }
 }
 
-@keyframes left-content-in {
+@keyframes form-content-in {
   0% {
     opacity: 0;
     height: 0px;
@@ -184,7 +198,9 @@ input {
   }
 }
 
-#right {
+#pattern {
+  z-index: 0;
+  transition: all 0.5s ease-in-out;
   * {
     animation: test 1.5s ease-in-out forwards;
   }
@@ -203,6 +219,44 @@ input {
 
   100% {
     opacity: 1;
+  }
+}
+
+.login-mode {
+  #form {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    transform: translateX(0%);
+  }
+
+  #pattern {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    transform: translateX(0%);
+
+    > div {
+      transition: all 0.5s ease-in-out;
+      transform: rotate(-0);
+    }
+  }
+}
+
+.register-mode {
+  #form {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    transform: translateX(100%);
+  }
+
+  #pattern {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    transform: translateX(-100%);
+
+    > div {
+      transition: all 0.5s ease-in-out;
+      transform: rotate(-540deg);
+    }
   }
 }
 </style>
