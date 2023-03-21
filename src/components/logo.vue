@@ -16,6 +16,6 @@
 }
 
 p {
-  color: #010c80;
+  color: #1d89e6;
 }
 </style>

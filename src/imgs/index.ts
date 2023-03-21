@@ -1,5 +1,6 @@
+import circleIcon from "./circle.svg";
 import searchIcon from "./search.svg";
 import loginIcon from "./logIn.svg";
 import menuIcon from "./menu.svg";
 
-export { loginIcon, menuIcon, searchIcon };
+export { circleIcon, loginIcon, menuIcon, searchIcon };

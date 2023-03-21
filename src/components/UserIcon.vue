@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { loginIcon, menuIcon } from "@/imgs";
 
 const state = ref("not-logged-in");
+
+function test() {}
 </script>
 
 <template>
@@ -26,12 +28,7 @@ const state = ref("not-logged-in");
       class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-10 hover:-translate-y-1 hover:shadow-lg"
     >
       <el-tooltip content="Log in" placement="bottom" effect="light">
-        <img
-          :src="loginIcon"
-          alt="log in icon"
-          class="w-[90%]"
-          @click="state = 'logged-in'"
-        />
+        <img :src="loginIcon" alt="log in icon" class="w-[90%]" @click="test" />
       </el-tooltip>
     </div>
   </div>
