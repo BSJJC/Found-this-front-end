@@ -30,11 +30,12 @@ const mode = ref("login-mode");
 
         <div class="w-full flex-grow flex justify-center items-center flex-col">
           <div class="text-3xl w-1/2 h-[40px]">
-            <Transition name="ooo">
-              <div v-if="mode === 'login-mode'">1</div>
-              <div v-else>2</div>
-            </Transition>
+            <transition mode="out-in" name="mode-change">
+              <div v-if="mode === 'login-mode'">Welcome back!</div>
+              <div v-else>abc</div>
+            </transition>
           </div>
+
           <div class="w-1/2 opacity-80">
             Welcome back! Pleace enter yor details.
           </div>
@@ -109,9 +110,9 @@ const mode = ref("login-mode");
         class="col-span-1 w-full h-full bg-[#F3F4F8] flex justify-center items-center flex-col opacity-50"
       >
         <div class="flex justify-center items-center flex-col">
-          <div class="w-[300px] h-[150px] bg-[#623EBC] rounded-t-[150px]"></div>
+          <div class="w-[300px] h-[0px] bg-[#623EBC] rounded-t-[150px]"></div>
           <div
-            class="w-[300px] h-[150px] bg-[#9371e8] rounded-b-[150px] blur-lg"
+            class="w-[300px] h-[0px] bg-[#9371e8] rounded-b-[150px] blur-lg"
           ></div>
         </div>
       </div>
@@ -120,19 +121,21 @@ const mode = ref("login-mode");
 </template>
 
 <style lang="scss" scoped>
-.ooo-enter-active,
-.ooo-leave-active {
-  transition: all 0.3s ease-out;
-  position: absolute;
+.mode-change-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+.mode-change-leave-active {
+  transition: all 0.3s ease-in-out;
 }
 
-.ooo-enter-from {
+.mode-change-enter-from {
   opacity: 0;
-  transition-delay: 0.3s;
+  transform: translateY(100%);
 }
 
-.ooo-leave-to {
+.mode-change-leave-to {
   opacity: 0;
+  transform: translateY(-100%);
 }
 
 img {
@@ -184,7 +187,7 @@ input {
   z-index: 10;
   transition: all 0.75s ease-in-out;
   animation: form-padding-in 1.5s ease-in-out forwards;
-  * {
+  > * {
     animation: form-content-in 1.5s ease-in-out forwards;
   }
 }
@@ -207,14 +210,13 @@ input {
     height: 0px;
   }
 
-  50% {
+  70% {
     opacity: 0;
-    transform: translateY(10px);
+    height: 0px;
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0px);
   }
 }
 
@@ -224,25 +226,19 @@ input {
   * {
     animation: pattern-content-in 1.5s ease-in-out forwards;
   }
-
-  > div {
-    width: 300px !important;
-    height: 300px !important;
-  }
 }
 @keyframes pattern-content-in {
   0% {
-    height: 0px;
     opacity: 0;
   }
 
-  50% {
+  60% {
     height: 0px;
     opacity: 0;
   }
 
   100% {
-    height: 150px;
+    height: 300px;
     opacity: 1;
   }
 }
