@@ -74,9 +74,9 @@ const { show } = storeToRefs(LogInAndSignUpStore);
         </div>
       </div>
 
-      <!-- pattern -->
+      <!-- decorate -->
       <div
-        id="pattern"
+        id="decorate"
         class="col-span-1 w-full h-full bg-[#F3F4F8] flex justify-center items-center flex-col opacity-50"
       >
         <div class="flex justify-center items-center flex-col">
@@ -188,14 +188,14 @@ input {
   }
 }
 
-#pattern {
+#decorate {
   z-index: 0;
   transition: all 0.75s ease-in-out;
   * {
-    animation: pattern-content-in 1.5s ease-in-out forwards;
+    animation: decorate-content-in 1.5s ease-in-out forwards;
   }
 }
-@keyframes pattern-content-in {
+@keyframes decorate-content-in {
   0% {
     opacity: 0;
   }
@@ -217,7 +217,7 @@ input {
     border-bottom-left-radius: 16px;
   }
 
-  #pattern {
+  #decorate {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
 
@@ -234,7 +234,7 @@ input {
     transform: translateX(100%);
   }
 
-  #pattern {
+  #decorate {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
     transform: translateX(-100%);
