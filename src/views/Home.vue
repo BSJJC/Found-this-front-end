@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import NavBar from "@/components/NavBar.vue";
-import MainPage from "@/components/MainPage.vue";
+import { defineAsyncComponent } from "vue";
+
+const NavBar = defineAsyncComponent(() => import("@/components/NavBar.vue"));
+const MainPage = defineAsyncComponent(
+  () => import("@/components/MainPage.vue")
+);
 </script>
 
 <template>

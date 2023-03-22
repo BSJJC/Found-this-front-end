@@ -1,7 +1,11 @@
 <script lang="ts" setup>
-import logo from "@/components/logo.vue";
-import Search from "./Search.vue";
-import UserIcon from "@/components/UserIcon.vue";
+import { defineAsyncComponent } from "vue";
+
+const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
+const Search = defineAsyncComponent(() => import("@/components/Search.vue"));
+const UserIcon = defineAsyncComponent(
+  () => import("@/components/UserIcon.vue")
+);
 </script>
 
 <template>

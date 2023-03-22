@@ -1,3 +1,4 @@
+//@ts-nocheck
 import circleIcon from "./circle.svg";
 import copyrightIcon from "./copyright.svg";
 import searchIcon from "./search.svg";
