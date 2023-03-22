@@ -2,8 +2,10 @@
 import { defineAsyncComponent } from "vue";
 import { logIn, LogInAndSignUp } from "@/stores";
 import { storeToRefs } from "pinia";
-import { circleIcon, copyrightIcon } from "@/imgs";
+import { copyrightIcon } from "@/imgs";
 import LottieAnimation from "./LottieAnimation.vue";
+
+const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 
 const LogInForm = defineAsyncComponent(
   () => import("@/components/LogInForm.vue")
@@ -37,14 +39,7 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
       <div id="form" class="bg-white col-span-1 flex flex-col">
         <!-- logo-->
         <div class="w-full h-[70px] flex flex-row flex-none select-none">
-          <img
-            :src="circleIcon"
-            alt="circle icon"
-            class="opacity-70 w-[25px]"
-          />
-          <div class="h-[70px] flex justify-center items-center text-2xl ml-5">
-            Web Dump
-          </div>
+          <logo class="text-3xl"></logo>
         </div>
 
         <!-- Main form  -->
@@ -80,7 +75,7 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
         id="decorate"
         class="col-span-1 w-full h-full flex justify-center items-center overflow-hidden relative"
       >
-        <div class="absolute w-full h-full bg-[#ffffff80]"></div>
+        <div class="absolute w-full h-full bg-[#ffffff72]"></div>
         <transition name="mode-change" mode="out-in">
           <lottie-animation
             v-if="mode === 'login-mode'"
@@ -114,36 +109,21 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
   transform: translateY(-50px);
 }
 
-img {
-  -webkit-user-drag: none;
-}
-
-input {
-  height: 50px;
-  width: 100%;
-  margin-top: 10px;
-  text-indent: 10px;
-  border: 1px solid rgb(208, 208, 208);
-  border-radius: 8px;
-  font-size: large;
-  outline: none;
-}
-
 #panel {
   animation: panel-in 1.5s ease-in-out forwards;
 }
 @keyframes panel-in {
   30% {
     height: 81%;
-    width: 1px;
+    width: 5px;
   }
   40% {
     height: 79%;
-    width: 1px;
+    width: 5px;
   }
   50% {
     height: 80%;
-    width: 1px;
+    width: 5px;
   }
   80% {
     height: 80%;
@@ -199,24 +179,6 @@ input {
 #decorate {
   z-index: 0;
   transition: all 0.75s ease-in-out;
-  * {
-    // animation: decorate-content-in 1.5s ease-in-out forwards;
-  }
-}
-@keyframes decorate-content-in {
-  0% {
-    opacity: 0;
-  }
-
-  60% {
-    height: 0px;
-    opacity: 0;
-  }
-
-  100% {
-    height: 50%;
-    opacity: 1;
-  }
 }
 
 .login-mode {
