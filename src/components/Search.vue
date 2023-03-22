@@ -4,9 +4,13 @@ import { searchIcon } from "@/imgs";
 
 const maxHeight = ref(0);
 const keyWords = ref("");
-const list = [1, 2, 3, 4, 5];
+const list = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+];
 
-const _list = ref([1, 2, 3, 4, 5]);
+const _list = ref([
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+]);
 
 function listFilte() {
   if (keyWords.value.length === 0) {
@@ -33,19 +37,22 @@ function listFilte() {
 
 <template>
   <div class="flex flex-row w-[700px] h-[50px] rounded-3xl border shadow-lg">
+    <!-- search input -->
     <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
-      <input class="w-4/6 outline-none text-xl" />
+      <input class="w-4/6 outline-none text-xl" placeholder="I want..." />
     </div>
 
+    <!-- divider -->
     <div class="h-full w-2 flex justify-center items-center">
       <el-divider direction="vertical" class="h-full" />
     </div>
 
+    <!-- selects -->
     <div class="w-1/2 flex justify-around items-center rounded-r-3xl">
       <div class="w-3/4 h-full">
         <input
           v-model="keyWords"
-          class="w-full h-full transition duration-300 focus:outline-none text-xl"
+          class="w-full h-full transition duration-300 focus:outline-none text-xl indent-4"
           type="text"
           placeholder="Type to filter"
           @click="
@@ -66,7 +73,7 @@ function listFilte() {
               <li
                 v-for="(i, index) in _list"
                 :key="_list[index]"
-                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer bg-[#fafcfd75] transition duration-300 hover:bg-[#fafcfdf3] hover:-translate-y-1"
+                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer bg-[#fafcfd75] transition duration-300 hover:bg-[#7e56da3f] hover:text-white"
                 @mousedown="keyWords = i.toString()"
               >
                 {{ i }}
@@ -75,8 +82,10 @@ function listFilte() {
           </el-scrollbar>
         </ul>
       </div>
+
+      <!-- search button -->
       <div
-        class="w-[50px] h-[40px] rounded-3xl bg-[#2088E5] shadow shadow-[#2089e5a9] flex justify-center items-center cursor-pointer"
+        class="w-[50px] h-[40px] rounded-3xl bg-[#7E56DA] shadow shadow-[#9375da] flex justify-center items-center cursor-pointer"
       >
         <img :src="searchIcon" alt="search icon" class="w-[30px]" />
       </div>
