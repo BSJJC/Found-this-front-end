@@ -7,9 +7,11 @@ const mode = ref("login-mode");
 </script>
 
 <template>
+  <!-- mask -->
   <div
-    class="absolute w-screen h-screen flex justify-center items-center bg-[#25252595]"
+    class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
   >
+    <!-- panel -->
     <div
       id="panel"
       class="rounded-l-lg w-[1px] h-[1px] shadow-xl grid grid-cols-2"
@@ -30,73 +32,150 @@ const mode = ref("login-mode");
         </div>
 
         <!-- Main  -->
-
-        <!-- Log in main page -->
         <div class="w-full flex-grow flex justify-center items-center flex-col">
-          <div class="text-3xl w-[400px] h-[40px]">Welcome back!</div>
+          <transition name="mode-change" mode="out-in">
+            <!-- Log in main page -->
+            <div v-if="mode === 'login-mode'">
+              <div class="text-3xl w-[400px] h-[40px] text-[#7E56DA]">
+                Welcome back!
+              </div>
 
-          <div class="w-[400px] opacity-80">
-            Welcome back! Pleace enter yor details.
-          </div>
+              <div class="w-[400px] opacity-80">
+                Welcome back! Pleace enter your details.
+              </div>
 
-          <el-form class="w-[400px] mt-5">
-            <div class="text-xl">Email:</div>
+              <el-form class="w-[400px] mt-5">
+                <div class="text-xl">Email:</div>
 
-            <el-form-item>
-              <input type="text" placeholder="Enter your email" />
-            </el-form-item>
+                <el-form-item>
+                  <input
+                    type="text"
+                    placeholder="Enter your email"
+                    class="text-[#7E56DA]"
+                  />
+                </el-form-item>
 
-            <div class="text-xl">Password:</div>
+                <div class="text-xl">Password:</div>
 
-            <el-form-item>
-              <input type="password" placeholder="Enter your password" />
-            </el-form-item>
+                <el-form-item>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    class="text-[#7E56DA]"
+                  />
+                </el-form-item>
 
-            <el-form-item>
-              <div class="w-full flex justify-between items-center text-lg">
-                <div
-                  class="cursor-pointer h-full flex justify-center items-center flex-row"
-                  @click="remember = !remember"
-                >
-                  <el-checkbox v-model="remember"></el-checkbox>
-                  <div
-                    class="ml-3 select-none transition duration-300"
-                    :style="{ color: `${remember ? '#7E56DA' : '#999'}` }"
-                  >
-                    Remember me for 30 days
+                <el-form-item>
+                  <div class="w-full flex justify-between items-center text-lg">
+                    <div
+                      class="cursor-pointer h-full flex justify-center items-center flex-row"
+                      @click="remember = !remember"
+                    >
+                      <el-checkbox v-model="remember"></el-checkbox>
+                      <div
+                        class="ml-3 select-none transition duration-300"
+                        :style="{ color: `${remember ? '#7E56DA' : '#999'}` }"
+                      >
+                        Remember me for 30 days
+                      </div>
+                    </div>
+
+                    <a
+                      href="#"
+                      class="transition duration-300 text-[#7E56DA] hover:text-[#a07bf7]"
+                      >Forget password?</a
+                    >
                   </div>
-                </div>
+                </el-form-item>
+              </el-form>
 
+              <button
+                class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
+              >
+                Log in!
+              </button>
+
+              <div
+                class="w-1/2 h-[45px] flex justify-center items-center opacity-50"
+              >
+                Don't have an account?
                 <a
                   href="#"
-                  class="transition duration-300 text-[#7E56DA] hover:text-[#a07bf7]"
-                  >Forget password?</a
+                  class="text-[#7E56DA] hover:text-[#a07bf7]"
+                  @click="
+                    mode === 'login-mode'
+                      ? (mode = 'register-mode')
+                      : (mode = 'login-mode')
+                  "
+                  >Sign up!</a
                 >
               </div>
-            </el-form-item>
-          </el-form>
+            </div>
 
-          <button
-            class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
-          >
-            Log in
-          </button>
+            <!-- Register main page -->
+            <div v-else>
+              <div class="text-3xl w-[400px] h-[40px] text-[#7E56DA]">
+                Welcome! New friend!
+              </div>
 
-          <div
-            class="w-1/2 h-[45px] flex justify-center items-center opacity-50"
-          >
-            Don't have an account?
-            <a
-              href="#"
-              class="text-[#7E56DA] hover:text-[#a07bf7]"
-              @click="
-                mode === 'login-mode'
-                  ? (mode = 'register-mode')
-                  : (mode = 'login-mode')
-              "
-              >Sign up!</a
-            >
-          </div>
+              <div class="w-[400px] opacity-80">Pleace enter your details.</div>
+
+              <el-form class="w-[400px] mt-5">
+                <div class="text-xl">Email:</div>
+
+                <el-form-item>
+                  <input
+                    type="text"
+                    placeholder="Enter your email"
+                    class="text-[#7E56DA]"
+                  />
+                </el-form-item>
+
+                <div class="text-xl">Password:</div>
+
+                <el-form-item>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    class="text-[#7E56DA]"
+                  />
+                </el-form-item>
+
+                <div class="text-xl">Confirm Password:</div>
+
+                <el-form-item>
+                  <input
+                    type="password"
+                    placeholder="Enter your password again"
+                    class="text-[#7E56DA]"
+                  />
+                </el-form-item>
+              </el-form>
+
+              <button
+                class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
+              >
+                Sign up!
+              </button>
+
+              <div
+                class="w-1/2 h-[45px] flex justify-center items-center opacity-50"
+              >
+                Already have an account?
+                <a
+                  href="#"
+                  class="text-[#7E56DA] hover:text-[#a07bf7]"
+                  @click="
+                    mode === 'login-mode'
+                      ? (mode = 'register-mode')
+                      : (mode = 'login-mode')
+                  "
+                >
+                  Log in!</a
+                >
+              </div>
+            </div>
+          </transition>
         </div>
 
         <!-- copyright -->
@@ -136,12 +215,12 @@ const mode = ref("login-mode");
 
 .mode-change-enter-from {
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(50px);
 }
 
 .mode-change-leave-to {
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateY(-50px);
 }
 
 img {
