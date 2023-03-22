@@ -2,8 +2,8 @@
 import { defineAsyncComponent } from "vue";
 import { logIn, LogInAndSignUp } from "@/stores";
 import { storeToRefs } from "pinia";
-
 import { circleIcon, copyrightIcon } from "@/imgs";
+import LottieAnimation from "./LottieAnimation.vue";
 
 const LogInForm = defineAsyncComponent(
   () => import("@/components/LogInForm.vue")
@@ -17,7 +17,8 @@ const logInStore = logIn();
 const { mode } = storeToRefs(logInStore);
 
 const LogInAndSignUpStore = LogInAndSignUp();
-const { show } = storeToRefs(LogInAndSignUpStore);
+const { show, logInAnimationUrl, signUpAnimationUrl } =
+  storeToRefs(LogInAndSignUpStore);
 </script>
 
 <template>
@@ -77,14 +78,21 @@ const { show } = storeToRefs(LogInAndSignUpStore);
       <!-- decorate -->
       <div
         id="decorate"
-        class="col-span-1 w-full h-full bg-[#F3F4F8] flex justify-center items-center flex-col opacity-50"
+        class="col-span-1 w-full h-full flex justify-center items-center overflow-hidden relative"
       >
-        <div class="flex justify-center items-center flex-col">
-          <div class="w-[300px] h-[0px] bg-[#623EBC] rounded-t-[150px]"></div>
-          <div
-            class="w-[300px] h-[0px] bg-[#9371e8] rounded-b-[150px] blur-lg"
-          ></div>
-        </div>
+        <div class="absolute w-full h-full bg-[#ffffff80]"></div>
+        <transition name="mode-change" mode="out-in">
+          <lottie-animation
+            v-if="mode === 'login-mode'"
+            :animationUrl="logInAnimationUrl"
+            class="w-2/3"
+          ></lottie-animation>
+          <lottie-animation
+            v-else
+            :animationUrl="signUpAnimationUrl"
+            class="w-2/3"
+          ></lottie-animation>
+        </transition>
       </div>
     </div>
   </div>
@@ -192,7 +200,7 @@ input {
   z-index: 0;
   transition: all 0.75s ease-in-out;
   * {
-    animation: decorate-content-in 1.5s ease-in-out forwards;
+    // animation: decorate-content-in 1.5s ease-in-out forwards;
   }
 }
 @keyframes decorate-content-in {
@@ -206,7 +214,7 @@ input {
   }
 
   100% {
-    height: 300px;
+    height: 50%;
     opacity: 1;
   }
 }
@@ -220,14 +228,10 @@ input {
   #decorate {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-
-    > div {
-      transition: all 0.75s ease-in-out;
-    }
   }
 }
 
-.register-mode {
+.sign-up-mode {
   #form {
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -238,11 +242,6 @@ input {
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
     transform: translateX(-100%);
-
-    > div {
-      transition: all 0.75s ease-in-out;
-      transform: rotate(-540deg);
-    }
   }
 }
 </style>

@@ -2,8 +2,12 @@
 import { storeToRefs } from "pinia";
 import { logIn } from "@/stores/index";
 
-const store = logIn();
-const { mode, remember } = storeToRefs(store);
+const logInStore = logIn();
+const { mode, remember } = storeToRefs(logInStore);
+
+function toSignUpForm() {
+  mode.value = "sign-up-mode";
+}
 </script>
 
 <template>
@@ -70,11 +74,7 @@ const { mode, remember } = storeToRefs(store);
       <a
         href="#"
         class="text-[#7E56DA] hover:text-[#a07bf7]"
-        @click="
-          mode === 'login-mode'
-            ? (mode = 'register-mode')
-            : (mode = 'login-mode')
-        "
+        @click="toSignUpForm"
         >Sign up!</a
       >
     </div>

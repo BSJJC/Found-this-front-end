@@ -4,6 +4,10 @@ import { logIn } from "@/stores/index";
 
 const store = logIn();
 const { mode } = storeToRefs(store);
+
+function toLogInForm() {
+  mode.value = "login-mode";
+}
 </script>
 
 <template>
@@ -57,11 +61,7 @@ const { mode } = storeToRefs(store);
       <a
         href="#"
         class="text-[#7E56DA] hover:text-[#a07bf7]"
-        @click="
-          mode === 'login-mode'
-            ? (mode = 'register-mode')
-            : (mode = 'login-mode')
-        "
+        @click="toLogInForm"
       >
         Log in!</a
       >
