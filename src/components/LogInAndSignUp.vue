@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { defineAsyncComponent } from "vue";
-import { logIn } from "@/stores";
+import { logIn, LogInAndSignUp } from "@/stores";
 import { storeToRefs } from "pinia";
 
 import { circleIcon, copyrightIcon } from "@/imgs";
-
-const store = logIn();
-const { mode } = storeToRefs(store);
 
 const LogInForm = defineAsyncComponent(
   () => import("@/components/LogInForm.vue")
@@ -15,12 +12,19 @@ const LogInForm = defineAsyncComponent(
 const SignUpForm = defineAsyncComponent(
   () => import("@/components/SignUpForm.vue")
 );
+
+const logInStore = logIn();
+const { mode } = storeToRefs(logInStore);
+
+const LogInAndSignUpStore = LogInAndSignUp();
+const { show } = storeToRefs(LogInAndSignUpStore);
 </script>
 
 <template>
   <!-- mask -->
   <div
     class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
+    @click.self="show = false"
   >
     <!-- panel -->
     <div

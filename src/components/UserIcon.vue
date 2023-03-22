@@ -1,10 +1,13 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { LogInAndSignUp } from "@/stores";
 import { loginIcon, menuIcon } from "@/imgs";
 
 const state = ref("not-logged-in");
 
-function test() {}
+const store = LogInAndSignUp();
+const { show } = storeToRefs(store);
 </script>
 
 <template>
@@ -28,7 +31,12 @@ function test() {}
       class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-10 hover:-translate-y-1 hover:shadow-lg"
     >
       <el-tooltip content="Log in" placement="bottom" effect="light">
-        <img :src="loginIcon" alt="log in icon" class="w-[90%]" @click="test" />
+        <img
+          :src="loginIcon"
+          alt="log in icon"
+          class="w-[90%]"
+          @click="show = !show"
+        />
       </el-tooltip>
     </div>
   </div>
