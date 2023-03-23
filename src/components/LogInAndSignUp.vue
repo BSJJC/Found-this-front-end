@@ -5,6 +5,8 @@ import { storeToRefs } from "pinia";
 import { copyrightIcon } from "@/imgs";
 import LottieAnimation from "./LottieAnimation.vue";
 
+import SquareBackground from "./SquareBackground.vue";
+
 const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 
 const LogInForm = defineAsyncComponent(
@@ -36,7 +38,14 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
       :class="mode"
     >
       <!-- form -->
-      <div id="form" class="bg-white col-span-1 flex flex-col">
+      <div
+        id="form"
+        class="bg-white col-span-1 flex flex-col relative overflow-hidden"
+      >
+        <square-background
+          class="absolute w-full h-full -translate-x-10"
+        ></square-background>
+
         <!-- logo-->
         <div class="w-full h-[70px] flex flex-row flex-none select-none">
           <logo class="text-3xl"></logo>

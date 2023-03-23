@@ -79,6 +79,7 @@ function toSignUpForm() {
       >
     </div>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
