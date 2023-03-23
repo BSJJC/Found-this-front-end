@@ -5,7 +5,9 @@ import { storeToRefs } from "pinia";
 import { copyrightIcon } from "@/imgs";
 import LottieAnimation from "./LottieAnimation.vue";
 
-import SquareBackground from "./SquareBackground.vue";
+const SquareBackground = defineAsyncComponent(
+  () => import("@/components/SquareBackground.vue")
+);
 
 const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 

@@ -1,9 +1,52 @@
 <script lang="ts" setup>
+import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import { logIn } from "@/stores/index";
+import type { FormInstance, FormRules } from "element-plus";
 
 const logInStore = logIn();
 const { mode, remember } = storeToRefs(logInStore);
+
+const ruleFormRef = ref<FormInstance>();
+
+const ruleForm = reactive({
+  email: "",
+  password: "",
+});
+
+const emailCheck = (rule: any, value: any, callback: any) => {
+  if (value === "") {
+    callback(new Error("Please input the email"));
+  }
+
+  const reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  if (!reg.test(ruleForm.email)) {
+    callback(new Error("Pleace input the right email"));
+  }
+
+  if (ruleForm.email !== "") {
+    if (!ruleFormRef.value) return;
+    ruleFormRef.value.validateField("checkPass", () => null);
+  }
+
+  callback();
+};
+const passwordCheck = (rule: any, value: any, callback: any) => {
+  if (value === "") {
+    callback(new Error("Please input the password"));
+  } else {
+    if (ruleForm.password !== "") {
+      if (!ruleFormRef.value) return;
+      ruleFormRef.value.validateField("checkPass", () => null);
+    }
+    callback();
+  }
+};
+
+const rules = reactive<FormRules>({
+  email: [{ validator: emailCheck, trigger: "blur" }],
+  password: [{ validator: passwordCheck, trigger: "blur" }],
+});
 
 function toSignUpForm() {
   mode.value = "sign-up-mode";
@@ -18,11 +61,17 @@ function toSignUpForm() {
       Welcome back! Pleace enter your details.
     </div>
 
-    <el-form class="w-[400px] mt-5">
+    <el-form
+      class="w-[400px] mt-5"
+      ref="ruleFormRef"
+      :model="ruleForm"
+      :rules="rules"
+    >
       <div class="text-xl">Email:</div>
 
-      <el-form-item>
-        <input
+      <el-form-item prop="email">
+        <el-input
+          v-model="ruleForm.email"
           type="text"
           placeholder="Enter your email"
           class="text-[#7E56DA]"
@@ -31,8 +80,9 @@ function toSignUpForm() {
 
       <div class="text-xl">Password:</div>
 
-      <el-form-item>
-        <input
+      <el-form-item prop="password">
+        <el-input
+          v-model="ruleForm.password"
           type="password"
           placeholder="Enter your password"
           class="text-[#7E56DA]"
@@ -40,7 +90,7 @@ function toSignUpForm() {
       </el-form-item>
 
       <el-form-item>
-        <div class="w-full flex justify-between items-center text-lg">
+        <div class="w-full flex justify-between items-center text-lg my-3">
           <div
             class="cursor-pointer h-full flex justify-center items-center flex-row"
             @click="remember = !remember"
@@ -64,7 +114,7 @@ function toSignUpForm() {
     </el-form>
 
     <button
-      class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
+      class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 hover:bg-[#a07bf7]"
     >
       Log in!
     </button>
@@ -79,18 +129,41 @@ function toSignUpForm() {
       >
     </div>
   </div>
-
 </template>
 
 <style lang="scss" scoped>
-input {
+.el-input {
+  all: unset;
   height: 50px;
   width: 100%;
   margin-top: 10px;
   text-indent: 10px;
   border: 1px solid rgb(208, 208, 208);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: large;
   outline: none;
+}
+
+:deep(.el-input__wrapper) {
+  all: unset;
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+
+:deep(.el-input__inner) {
+  all: unset;
+  display: block;
+  width: 95%;
+  height: 100%;
+  padding-right: 10px;
+  color: #7e56da;
+}
+
+:deep(.el-form-item__error) {
+  font-size: 1rem;
 }
 </style>
