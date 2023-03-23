@@ -7,7 +7,7 @@ const store = LogInAndSignUpStore();
 const { show } = storeToRefs(store);
 
 const LogInAndSignUp = defineAsyncComponent(
-  () => import("@/components/LogInAndSignUp.vue")
+  () => import("@/components/LogInAndSignUp/LogInAndSignUp.vue")
 );
 </script>
 

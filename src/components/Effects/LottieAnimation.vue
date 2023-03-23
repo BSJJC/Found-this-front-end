@@ -7,7 +7,6 @@ const props = defineProps<{
 }>();
 
 const lottieContainer = ref(null);
-const path = ref(props.animationUrl);
 
 onMounted(() => {
   lottie.loadAnimation({

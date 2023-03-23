@@ -3,20 +3,25 @@ import { defineAsyncComponent } from "vue";
 import { logIn, LogInAndSignUp } from "@/stores";
 import { storeToRefs } from "pinia";
 import { copyrightIcon } from "@/imgs";
-import LottieAnimation from "./LottieAnimation.vue";
+
+const LottieAnimation = defineAsyncComponent(
+  () => import("@/components/Effects/LottieAnimation.vue")
+);
 
 const SquareBackground = defineAsyncComponent(
-  () => import("@/components/SquareBackground.vue")
+  () => import("@/components/Effects/SquareBackground.vue")
+);
+
+const SendLogIn = defineAsyncComponent(
+  () => import("@/components/LogInAndSignUp/SendLogIn.vue")
 );
 
 const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
-
 const LogInForm = defineAsyncComponent(
-  () => import("@/components/LogInForm.vue")
+  () => import("@/components/LogInAndSignUp/LogInForm.vue")
 );
-
 const SignUpForm = defineAsyncComponent(
-  () => import("@/components/SignUpForm.vue")
+  () => import("@/components/LogInAndSignUp/SignUpForm.vue")
 );
 
 const logInStore = logIn();
@@ -33,10 +38,11 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
     class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
     @click.self="show = false"
   >
+    <send-log-in></send-log-in>
     <!-- panel -->
     <div
       id="panel"
-      class="rounded-l-lg w-[1px] h-[1px] shadow-xl grid grid-cols-2"
+      class="w-[1px] h-[1px] shadow-xl grid grid-cols-2"
       :class="mode"
     >
       <!-- form -->
@@ -75,7 +81,7 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
           <img
             :src="copyrightIcon"
             alt="copyright icon"
-            class="w-[20px] mr-2"
+            class="w-[20px] mr-1"
           />
           copyright
         </div>
