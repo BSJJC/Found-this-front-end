@@ -21,7 +21,7 @@ const emailCheck = (rule: any, value: any, callback: any) => {
 
   const reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   if (!reg.test(ruleForm.email)) {
-    callback(new Error("Pleace input the right email"));
+    callback(new Error("Please input the right email"));
   }
 
   if (ruleForm.email !== "") {
