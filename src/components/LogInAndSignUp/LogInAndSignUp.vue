@@ -38,7 +38,7 @@ const { show, logInAnimationUrl, signUpAnimationUrl } =
     class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
     @click.self="show = false"
   >
-    <send-log-in></send-log-in>
+    <send-log-in v-if="false"></send-log-in>
     <!-- panel -->
     <div
       id="panel"

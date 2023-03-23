@@ -3,6 +3,7 @@ import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import { logIn } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
+import signUpUser from "@/api/signUpUser";
 
 const store = logIn();
 const { mode } = storeToRefs(store);
@@ -27,7 +28,6 @@ const emailCheck = (rule: any, value: any, callback: any) => {
 
   if (ruleForm.email !== "") {
     if (!ruleFormRef.value) return;
-    ruleFormRef.value.validateField("checkPass", () => null);
   }
 
   callback();
@@ -38,7 +38,6 @@ const passwordCheck = (rule: any, value: any, callback: any) => {
   } else {
     if (ruleForm.password !== "") {
       if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("checkPass", () => null);
     }
     callback();
   }
@@ -54,8 +53,6 @@ const confirmPasswordCheck = (rule: any, value: any, callback: any) => {
 
   if (!ruleFormRef.value) return;
 
-  ruleFormRef.value.validateField("checkPass", () => null);
-
   callback();
 };
 
@@ -67,6 +64,25 @@ const rules = reactive<FormRules>({
 
 function toLogInForm() {
   mode.value = "login-mode";
+}
+
+function signUp(formEl: FormInstance | undefined) {
+  if (!formEl) return;
+
+  formEl.validate(async (valid) => {
+    if (valid) {
+      const user = await signUpUser({
+        email: ruleForm.email,
+        password: ruleForm.password,
+      });
+
+      console.log("submit!");
+      console.log(user.data);
+    } else {
+      console.log("error submit!");
+      return false;
+    }
+  });
 }
 </script>
 
@@ -120,6 +136,7 @@ function toLogInForm() {
 
     <button
       class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
+      @click="signUp(ruleFormRef)"
     >
       Sign up!
     </button>

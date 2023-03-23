@@ -4,7 +4,7 @@ export const sendLogIn = defineStore({
   id: "sendLogIn",
   state: () => ({
     animations: {
-      in: true,
+      in: false,
       out: false,
     },
 
