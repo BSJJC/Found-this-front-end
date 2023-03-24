@@ -75,6 +75,7 @@ function signUp(formEl: FormInstance | undefined) {
         email: ruleForm.email,
         password: ruleForm.password,
       });
+      
 
       console.log("submit!");
       console.log(user.data);
