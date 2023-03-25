@@ -3,6 +3,8 @@ import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import { uselogIn } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
+import logInUser from "@/api/logInUser";
+import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInStore = uselogIn();
 const { mode, remember } = storeToRefs(logInStore);
@@ -26,7 +28,6 @@ const emailCheck = (rule: any, value: any, callback: any) => {
 
   if (ruleForm.email !== "") {
     if (!ruleFormRef.value) return;
-    ruleFormRef.value.validateField("checkPass", () => null);
   }
 
   callback();
@@ -37,7 +38,6 @@ const passwordCheck = (rule: any, value: any, callback: any) => {
   } else {
     if (ruleForm.password !== "") {
       if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("checkPass", () => null);
     }
     callback();
   }
@@ -57,6 +57,8 @@ function logIn(formEl: FormInstance | undefined) {
 
   formEl.validate(async (valid) => {
     if (valid) {
+      console.log(ruleForm.email);
+      console.log(ruleForm.password);
     } else {
       console.log("error submit!");
       return false;
@@ -87,6 +89,7 @@ function logIn(formEl: FormInstance | undefined) {
           type="text"
           placeholder="Enter your email"
           class="text-[#7E56DA]"
+          @input="ruleForm.email = disableInputSpace(ruleForm.email)"
         />
       </el-form-item>
 
@@ -98,6 +101,7 @@ function logIn(formEl: FormInstance | undefined) {
           type="password"
           placeholder="Enter your password"
           class="text-[#7E56DA]"
+          @input="ruleForm.password = disableInputSpace(ruleForm.password)"
         />
       </el-form-item>
 

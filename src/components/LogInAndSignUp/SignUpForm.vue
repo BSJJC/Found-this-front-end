@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia";
 import { uselogIn } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
 import signUpUser from "@/api/signUpUser";
+import disableInputSpace from "@/utils/disableInputSpace";
 
 const store = uselogIn();
 const { mode } = storeToRefs(store);
@@ -108,6 +109,7 @@ function signUp(formEl: FormInstance | undefined) {
           type="text"
           placeholder="Enter your email"
           class="text-[#7E56DA]"
+          @input="ruleForm.email = disableInputSpace(ruleForm.email)"
         />
       </el-form-item>
 
@@ -119,6 +121,7 @@ function signUp(formEl: FormInstance | undefined) {
           type="password"
           placeholder="Enter your password"
           class="text-[#7E56DA]"
+          @input="ruleForm.password = disableInputSpace(ruleForm.password)"
         />
       </el-form-item>
 
@@ -130,6 +133,11 @@ function signUp(formEl: FormInstance | undefined) {
           type="password"
           placeholder="Enter your password again"
           class="text-[#7E56DA]"
+          @input="
+            ruleForm.confirmPassword = disableInputSpace(
+              ruleForm.confirmPassword
+            )
+          "
         />
       </el-form-item>
     </el-form>
