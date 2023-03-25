@@ -5,7 +5,7 @@ export const useLogInAndSignUp = defineStore({
   state: () => ({
     mode: "login-mode",
     remember: false,
-    show: false,
+    show: true,
     logInAnimationUrl:
       "https://assets8.lottiefiles.com/packages/lf20_jcikwtux.json",
     signUpAnimationUrl:

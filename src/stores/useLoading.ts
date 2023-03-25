@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 export const useLoading = defineStore({
   id: "sendLogIn",
   state: () => ({
-    show: false,
+    show: true,
+
     animations: {
       in: true,
       out: false,

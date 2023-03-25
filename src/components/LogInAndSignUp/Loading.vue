@@ -22,7 +22,7 @@ const {
   failSentence,
 } = storeToRefs(store);
 
-const state = ref("succese");
+const state = ref("failed");
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const state = ref("succese");
           ></lottie-animation>
 
           <lottie-animation
-            v-else-if="state === 'succese'"
+            v-else-if="state === 'successe'"
             class="h-1/2"
             :animationUrl="successUrl"
           ></lottie-animation>
@@ -67,11 +67,11 @@ const state = ref("succese");
             </div>
           </div>
 
-          <div v-else-if="state === 'succese'">
+          <div v-else-if="state === 'successe'">
             <div
               v-for="(i, index) in successSentence"
               :key="index"
-              class="loading w-[20px] text-center ml-[10px] shadow-lg inline-block"
+              class="success w-[20px] text-center ml-[10px] shadow-lg inline-block"
               :style="{ animationDelay: `${index * 0.1}s` }"
             >
               {{ i }}
@@ -82,8 +82,8 @@ const state = ref("succese");
             <div
               v-for="(i, index) in failSentence"
               :key="index"
-              class="loading w-[20px] text-center ml-[10px] shadow-lg inline-block"
-              :style="{ animationDelay: `${index * 0.1}s` }"
+              class="failed w-[20px] text-center ml-[10px] shadow-lg inline-block"
+              :style="{ animationDelay: `0.3s` }"
             >
               {{ i }}
             </div>
@@ -134,6 +134,34 @@ const state = ref("succese");
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+.success {
+  animation: success 0.3s ease-in-out forwards;
+}
+
+@keyframes success {
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.failed {
+  animation: failed 1.2s ease-in-out infinite;
+}
+
+@keyframes failed {
+  0% {
+    transform: translateY(0px);
+  }
+
+  80% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(-0px);
   }
 }
 
