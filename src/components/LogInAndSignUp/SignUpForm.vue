@@ -1,13 +1,16 @@
 <script lang="ts" setup>
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { useLogInAndSignUp } from "@/stores/index";
+import { useLogInAndSignUp, useLoading } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
 import signUpUser from "@/api/signUpUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
-const store = useLogInAndSignUp();
-const { mode } = storeToRefs(store);
+const logInAndSignUpStore = useLogInAndSignUp();
+const { mode } = storeToRefs(logInAndSignUpStore);
+
+const loadingStore = useLoading();
+const { showLoading, status } = storeToRefs(loadingStore);
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -72,13 +75,28 @@ function signUp(formEl: FormInstance | undefined) {
 
   formEl.validate(async (valid) => {
     if (valid) {
-      const user = await signUpUser({
-        email: ruleForm.email,
-        password: ruleForm.password,
-      });
+      try {
+        showLoading.value = true;
 
-      console.log("submit!");
-      console.log(user.data);
+        const user = await signUpUser({
+          email: ruleForm.email,
+          password: ruleForm.password,
+        });
+
+        setTimeout(() => {
+          status.value = "success";
+
+          console.log("submit!");
+          console.log(user.data);
+        }, 1000);
+      } catch (error) {
+        setTimeout(() => {
+          status.value = "failed";
+
+          console.log("sign up failed");
+          console.log(error);
+        }, 1000);
+      }
     } else {
       console.log("error submit!");
       return false;

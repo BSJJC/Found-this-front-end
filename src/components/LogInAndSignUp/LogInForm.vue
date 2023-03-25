@@ -6,10 +6,11 @@ import type { FormInstance, FormRules } from "element-plus";
 import logInUser from "@/api/logInUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
-const logInStore = useLogInAndSignUp();
-const { mode, remember } = storeToRefs(logInStore);
+const logInAndSignUpStore = useLogInAndSignUp();
+const { mode, remember, showPanel } = storeToRefs(logInAndSignUpStore);
+
 const loadingStore = useLoading();
-const { showLoading, status } = storeToRefs(loadingStore);
+const { showLoading, status, animations } = storeToRefs(loadingStore);
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -73,6 +74,16 @@ function logIn(formEl: FormInstance | undefined) {
           console.log("log in success");
           console.log(user);
         }, 1000);
+
+        setTimeout(() => {
+          animations.value.out = true;
+        }, 2000);
+
+        setTimeout(() => {
+          loadingStore.reset();
+
+          showPanel.value = false;
+        }, 2100);
       } catch (error) {
         setTimeout(() => {
           status.value = "failed";

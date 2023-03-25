@@ -13,6 +13,12 @@ export const useLogInAndSignUp = defineStore({
     signUpAnimationUrl:
       "https://assets6.lottiefiles.com/packages/lf20_puciaact.json",
   }),
+
+  actions: {
+    hide() {
+      this.showPanel = false;
+    },
+  },
 });
 
 export default useLogInAndSignUp;
