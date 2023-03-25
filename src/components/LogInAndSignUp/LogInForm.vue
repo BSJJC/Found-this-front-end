@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { uselogIn } from "@/stores/index";
+import { useLogInAndSignUp } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
 import logInUser from "@/api/logInUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
-const logInStore = uselogIn();
+const logInStore = useLogInAndSignUp();
 const { mode, remember } = storeToRefs(logInStore);
 
 const ruleFormRef = ref<FormInstance>();
@@ -57,8 +57,13 @@ function logIn(formEl: FormInstance | undefined) {
 
   formEl.validate(async (valid) => {
     if (valid) {
-      console.log(ruleForm.email);
-      console.log(ruleForm.password);
+      const user = await logInUser({
+        email: ruleForm.email,
+        password: ruleForm.password,
+      });
+
+      console.log("log in success");
+      console.log(user);
     } else {
       console.log("error submit!");
       return false;
@@ -182,5 +187,6 @@ function logIn(formEl: FormInstance | undefined) {
 
 :deep(.el-form-item__error) {
   font-size: 1rem;
+  color: #da5684;
 }
 </style>

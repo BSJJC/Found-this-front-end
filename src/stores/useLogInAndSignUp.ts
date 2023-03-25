@@ -3,6 +3,8 @@ import { defineStore } from "pinia";
 export const useLogInAndSignUp = defineStore({
   id: "LogInAndSignUp",
   state: () => ({
+    mode: "login-mode",
+    remember: false,
     show: false,
     logInAnimationUrl:
       "https://assets8.lottiefiles.com/packages/lf20_jcikwtux.json",

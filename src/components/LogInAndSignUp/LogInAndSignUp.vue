@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { defineAsyncComponent } from "vue";
-import { uselogIn, useLogInAndSignUp } from "@/stores";
+import { useLogInAndSignUp } from "@/stores";
 import { storeToRefs } from "pinia";
 import { copyrightIcon } from "@/imgs";
 
@@ -13,7 +13,7 @@ const SquareBackground = defineAsyncComponent(
 );
 
 const SendLogIn = defineAsyncComponent(
-  () => import("@/components/LogInAndSignUp/SIgnUpLogInLoading.vue")
+  () => import("@/components/LogInAndSignUp/Loading.vue")
 );
 
 const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
@@ -24,11 +24,8 @@ const SignUpForm = defineAsyncComponent(
   () => import("@/components/LogInAndSignUp/SignUpForm.vue")
 );
 
-const logInStore = uselogIn();
-const { mode } = storeToRefs(logInStore);
-
 const LogInAndSignUpStore = useLogInAndSignUp();
-const { show, logInAnimationUrl, signUpAnimationUrl } =
+const { mode, show, logInAnimationUrl, signUpAnimationUrl } =
   storeToRefs(LogInAndSignUpStore);
 </script>
 

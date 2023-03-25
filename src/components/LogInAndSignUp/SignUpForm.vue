@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { uselogIn } from "@/stores/index";
+import { useLogInAndSignUp } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
 import signUpUser from "@/api/signUpUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
-const store = uselogIn();
+const store = useLogInAndSignUp();
 const { mode } = storeToRefs(store);
 
 const ruleFormRef = ref<FormInstance>();
@@ -207,5 +207,6 @@ input {
 
 :deep(.el-form-item__error) {
   font-size: 1rem;
+  color: #da5684;
 }
 </style>
