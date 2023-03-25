@@ -14,7 +14,7 @@ const LogInAndSignUp = defineAsyncComponent(
 
 <template>
   <transition name="opacity">
-    <log-in-and-sign-up v-show="showPanel"></log-in-and-sign-up>
+    <log-in-and-sign-up v-if="showPanel"></log-in-and-sign-up>
   </transition>
 
   <router-view v-slot="{ Component }">

@@ -30,13 +30,19 @@ const { mode, showPanel, logInAnimationUrl, signUpAnimationUrl } =
 
 const loadingStore = useLoading();
 const { showLoading } = storeToRefs(loadingStore);
+
+function hidePanel() {
+  showPanel.value = false;
+
+  loadingStore.reset();
+}
 </script>
 
 <template>
   <!-- mask -->
   <div
     class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
-    @click.self="showPanel = false"
+    @click.self="hidePanel"
   >
     <loading v-if="showLoading"></loading>
     <!-- panel -->

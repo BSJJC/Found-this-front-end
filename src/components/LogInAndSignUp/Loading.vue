@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineAsyncComponent } from "vue";
+import { defineAsyncComponent } from "vue";
 import { useLoading } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
@@ -7,13 +7,10 @@ const LottieAnimation = defineAsyncComponent(
   () => import("@/components/Effects/LottieAnimation.vue")
 );
 
-const SquareBackground = defineAsyncComponent(
-  () => import("@/components/Effects/SquareBackground.vue")
-);
-
 const store = useLoading();
 const {
   animations,
+  status,
   loadingUrl,
   successUrl,
   failUrl,
@@ -22,7 +19,13 @@ const {
   failSentence,
 } = storeToRefs(store);
 
-const state = ref("loading");
+function back() {
+  animations.value.back = true;
+
+  setTimeout(() => {
+    store.reset();
+  }, 300);
+}
 </script>
 
 <template>
@@ -31,32 +34,34 @@ const state = ref("loading");
       class="w-full h-full rounded-xl translate-y-full grid grid-rows-2 overflow-hidden"
       :class="animations"
     >
+      <!-- lottie animation -->
       <div class="w-full bg-white row-span-1 flex justify-center items-center">
         <transition name="fade" mode="out-in">
           <lottie-animation
-            v-if="state === 'loading'"
+            v-if="status === 'loading'"
             :animationUrl="loadingUrl"
           ></lottie-animation>
 
           <lottie-animation
-            v-else-if="state === 'successe'"
+            v-else-if="status === 'success'"
             class="h-1/2"
             :animationUrl="successUrl"
           ></lottie-animation>
 
           <lottie-animation
-            v-else-if="state === 'failed'"
+            v-else-if="status === 'failed'"
             class="h-1/2"
             :animationUrl="failUrl"
           ></lottie-animation>
         </transition>
       </div>
 
+      <!-- state info -->
       <div
         class="row-span-1 w-full h-full flex justify-center items-center text-[2.5rem] bg-[#7e56da] text-white"
       >
         <transition name="fade" mode="out-in">
-          <div v-if="state === 'loading'">
+          <div v-if="status === 'loading'">
             <div
               v-for="(i, index) in loadingSentence"
               :key="index"
@@ -67,7 +72,7 @@ const state = ref("loading");
             </div>
           </div>
 
-          <div v-else-if="state === 'successe'">
+          <div v-else-if="status === 'success'">
             <div
               v-for="(i, index) in successSentence"
               :key="index"
@@ -78,25 +83,33 @@ const state = ref("loading");
             </div>
           </div>
 
-          <div v-else-if="state === 'failed'">
-            <div
-              v-for="(i, index) in failSentence"
-              :key="index"
-              class="failed w-[20px] text-center ml-[10px] shadow-lg inline-block"
-              :style="{ animationDelay: `0.3s` }"
-            >
-              {{ i }}
+          <div
+            v-else-if="status === 'failed'"
+            class="h-1/2 flex flex-col justify-around items-center"
+          >
+            <div>
+              <div
+                v-for="(i, index) in failSentence"
+                :key="index"
+                class="failed w-[20px] text-center ml-[10px] shadow-lg inline-block"
+                :style="{ animationDelay: `0.3s` }"
+              >
+                {{ i }}
+              </div>
             </div>
+            <button @click="back" class="animate-bounce">back</button>
           </div>
         </transition>
       </div>
-
-      <square-background class="absolute w-full h-full"></square-background>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+* {
+  user-select: none;
+}
+
 #container {
   position: absolute;
   z-index: 20;
@@ -121,10 +134,19 @@ const state = ref("loading");
   }
 }
 
+.back {
+  transform: translateY(0px);
+  animation: back 0.3s ease-in-out forwards;
+}
+@keyframes back {
+  to {
+    transform: translateY(100%);
+  }
+}
+
 .loading {
   animation: loading 1s ease-in-out infinite;
 }
-
 @keyframes loading {
   0% {
     transform: translateY(0);
@@ -140,7 +162,6 @@ const state = ref("loading");
 .success {
   animation: success 0.3s ease-in-out forwards;
 }
-
 @keyframes success {
   to {
     transform: translateY(-10px);
@@ -148,20 +169,27 @@ const state = ref("loading");
 }
 
 .failed {
-  animation: failed 1.5s ease-in-out infinite;
+  animation: failed 1.5s ease-in-out forwards;
 }
-
 @keyframes failed {
   0% {
     transform: translateY(0px);
   }
 
-  50% {
-    transform: translateY(-20px);
+  60% {
+    transform: translateY(-10px) scale(1.1);
   }
 
   70% {
-    transform: translateY(-0px);
+    transform: translateY(-30px) scale(1.3);
+  }
+
+  90% {
+    transform: translateY(10px) scale(0.9);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
   }
 }
 
