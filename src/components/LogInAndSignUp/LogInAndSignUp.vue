@@ -25,17 +25,20 @@ const SignUpForm = defineAsyncComponent(
 );
 
 const LogInAndSignUpStore = useLogInAndSignUp();
-const { mode, show, logInAnimationUrl, signUpAnimationUrl } =
+const { mode, showPanel, logInAnimationUrl, signUpAnimationUrl } =
   storeToRefs(LogInAndSignUpStore);
+
+const loadingStore = useLoading();
+const { showLoading } = storeToRefs(loadingStore);
 </script>
 
 <template>
   <!-- mask -->
   <div
     class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
-    @click.self="show = false"
+    @click.self="showPanel = false"
   >
-    <loading></loading>
+    <loading v-if="showLoading"></loading>
     <!-- panel -->
     <div
       id="panel"

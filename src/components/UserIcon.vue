@@ -7,7 +7,7 @@ import { loginIcon, menuIcon } from "@/imgs";
 const state = ref("not-logged-in");
 
 const store = useLogInAndSignUp();
-const { show } = storeToRefs(store);
+const { showPanel } = storeToRefs(store);
 </script>
 
 <template>
@@ -35,7 +35,7 @@ const { show } = storeToRefs(store);
           :src="loginIcon"
           alt="log in icon"
           class="w-[90%]"
-          @click="show = !show"
+          @click="showPanel = !showPanel"
         />
       </el-tooltip>
     </div>

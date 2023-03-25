@@ -22,7 +22,7 @@ const {
   failSentence,
 } = storeToRefs(store);
 
-const state = ref("failed");
+const state = ref("loading");
 </script>
 
 <template>
@@ -148,7 +148,7 @@ const state = ref("failed");
 }
 
 .failed {
-  animation: failed 1.2s ease-in-out infinite;
+  animation: failed 1.5s ease-in-out infinite;
 }
 
 @keyframes failed {
@@ -156,11 +156,11 @@ const state = ref("failed");
     transform: translateY(0px);
   }
 
-  80% {
+  50% {
     transform: translateY(-20px);
   }
 
-  100% {
+  70% {
     transform: translateY(-0px);
   }
 }

@@ -4,7 +4,8 @@ import { useLogInAndSignUp } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 const store = useLogInAndSignUp();
-const { show } = storeToRefs(store);
+1;
+const { showPanel } = storeToRefs(store);
 
 const LogInAndSignUp = defineAsyncComponent(
   () => import("@/components/LogInAndSignUp/LogInAndSignUp.vue")
@@ -13,7 +14,7 @@ const LogInAndSignUp = defineAsyncComponent(
 
 <template>
   <transition name="opacity">
-    <log-in-and-sign-up v-show="show"></log-in-and-sign-up>
+    <log-in-and-sign-up v-show="showPanel"></log-in-and-sign-up>
   </transition>
 
   <router-view v-slot="{ Component }">

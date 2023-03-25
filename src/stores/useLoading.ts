@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 
 export const useLoading = defineStore({
-  id: "sendLogIn",
+  id: "loading",
   state: () => ({
-    show: true,
+    showLoading: true,
 
     animations: {
       in: true,
