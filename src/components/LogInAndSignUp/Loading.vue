@@ -12,15 +12,17 @@ const SquareBackground = defineAsyncComponent(
 );
 
 const store = useLoading();
-const { animations, sendingUrl, successUrl, failUrl } = storeToRefs(store);
+const {
+  animations,
+  loadingUrl,
+  successUrl,
+  failUrl,
+  loadingSentence,
+  successSentence,
+  failSentence,
+} = storeToRefs(store);
 
-const sentence = ref("sending......");
-
-const test = ref(true);
-
-setInterval(() => {
-  test.value = !test.value;
-}, 2000);
+const state = ref("succese");
 </script>
 
 <template>
@@ -32,18 +34,18 @@ setInterval(() => {
       <div class="w-full bg-white row-span-1 flex justify-center items-center">
         <transition name="fade" mode="out-in">
           <lottie-animation
-            v-if="test"
-            :animationUrl="sendingUrl"
+            v-if="state === 'loading'"
+            :animationUrl="loadingUrl"
           ></lottie-animation>
 
-          <!-- <lottie-animation
-            v-else
+          <lottie-animation
+            v-else-if="state === 'succese'"
             class="h-1/2"
             :animationUrl="successUrl"
-          ></lottie-animation> -->
+          ></lottie-animation>
 
           <lottie-animation
-            v-else
+            v-else-if="state === 'failed'"
             class="h-1/2"
             :animationUrl="failUrl"
           ></lottie-animation>
@@ -53,14 +55,40 @@ setInterval(() => {
       <div
         class="row-span-1 w-full h-full flex justify-center items-center text-[2.5rem] bg-[#7e56da] text-white"
       >
-        <div
-          v-for="(i, index) in sentence"
-          :key="index"
-          class="jump w-[20px] text-center ml-[10px] shadow-lg"
-          :style="{ animationDelay: `${index * 0.1}s` }"
-        >
-          {{ i }}
-        </div>
+        <transition name="fade" mode="out-in">
+          <div v-if="state === 'loading'">
+            <div
+              v-for="(i, index) in loadingSentence"
+              :key="index"
+              class="loading w-[20px] text-center ml-[10px] shadow-lg inline-block"
+              :style="{ animationDelay: `${index * 0.1}s` }"
+            >
+              {{ i }}
+            </div>
+          </div>
+
+          <div v-else-if="state === 'succese'">
+            <div
+              v-for="(i, index) in successSentence"
+              :key="index"
+              class="loading w-[20px] text-center ml-[10px] shadow-lg inline-block"
+              :style="{ animationDelay: `${index * 0.1}s` }"
+            >
+              {{ i }}
+            </div>
+          </div>
+
+          <div v-else-if="state === 'failed'">
+            <div
+              v-for="(i, index) in failSentence"
+              :key="index"
+              class="loading w-[20px] text-center ml-[10px] shadow-lg inline-block"
+              :style="{ animationDelay: `${index * 0.1}s` }"
+            >
+              {{ i }}
+            </div>
+          </div>
+        </transition>
       </div>
 
       <square-background class="absolute w-full h-full"></square-background>
@@ -93,11 +121,11 @@ setInterval(() => {
   }
 }
 
-.jump {
-  animation: jump 1s ease-in-out infinite;
+.loading {
+  animation: loading 1s ease-in-out infinite;
 }
 
-@keyframes jump {
+@keyframes loading {
   0% {
     transform: translateY(0);
   }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { defineAsyncComponent } from "vue";
-import { useLogInAndSignUp } from "@/stores";
+import { useLogInAndSignUp, useLoading } from "@/stores";
 import { storeToRefs } from "pinia";
 import { copyrightIcon } from "@/imgs";
 
@@ -12,7 +12,7 @@ const SquareBackground = defineAsyncComponent(
   () => import("@/components/Effects/SquareBackground.vue")
 );
 
-const SendLogIn = defineAsyncComponent(
+const Loading = defineAsyncComponent(
   () => import("@/components/LogInAndSignUp/Loading.vue")
 );
 
@@ -35,7 +35,7 @@ const { mode, show, logInAnimationUrl, signUpAnimationUrl } =
     class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
     @click.self="show = false"
   >
-    <send-log-in v-if="false"></send-log-in>
+    <loading></loading>
     <!-- panel -->
     <div
       id="panel"
