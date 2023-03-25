@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { LogInAndSignUp } from "@/stores";
+import { useLogInAndSignUp } from "@/stores";
 import { loginIcon, menuIcon } from "@/imgs";
 
 const state = ref("not-logged-in");
 
-const store = LogInAndSignUp();
+const store = useLogInAndSignUp();
 const { show } = storeToRefs(store);
 </script>
 

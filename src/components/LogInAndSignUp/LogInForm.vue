@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { logIn } from "@/stores/index";
+import { uselogIn } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
 
-const logInStore = logIn();
+const logInStore = uselogIn();
 const { mode, remember } = storeToRefs(logInStore);
 
 const ruleFormRef = ref<FormInstance>();
@@ -50,6 +50,18 @@ const rules = reactive<FormRules>({
 
 function toSignUpForm() {
   mode.value = "sign-up-mode";
+}
+
+function logIn(formEl: FormInstance | undefined) {
+  if (!formEl) return;
+
+  formEl.validate(async (valid) => {
+    if (valid) {
+    } else {
+      console.log("error submit!");
+      return false;
+    }
+  });
 }
 </script>
 
@@ -115,6 +127,7 @@ function toSignUpForm() {
 
     <button
       class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 hover:bg-[#a07bf7]"
+      @click="logIn(ruleFormRef)"
     >
       Log in!
     </button>

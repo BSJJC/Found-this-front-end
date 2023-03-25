@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const sendLogIn = defineStore({
+export const useLoading = defineStore({
   id: "sendLogIn",
   state: () => ({
     animations: {
@@ -18,4 +18,4 @@ export const sendLogIn = defineStore({
   }),
 });
 
-export default sendLogIn;
+export default useLoading;

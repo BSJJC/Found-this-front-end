@@ -1,5 +1,5 @@
-import logIn from "./logIn";
-import LogInAndSignUp from "./LogInAndSignUp";
-import sendLogIn from "./sendLogIn";
+import uselogIn from "./uselogIn";
+import useLogInAndSignUp from "./useLogInAndSignUp";
+import useLoading from "./useLoading";
 
-export { logIn, LogInAndSignUp, sendLogIn };
+export { uselogIn, useLogInAndSignUp, useLoading };

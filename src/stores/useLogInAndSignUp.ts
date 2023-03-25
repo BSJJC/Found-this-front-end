@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const LogInAndSignUp = defineStore({
+export const useLogInAndSignUp = defineStore({
   id: "LogInAndSignUp",
   state: () => ({
     show: false,
@@ -11,4 +11,4 @@ export const LogInAndSignUp = defineStore({
   }),
 });
 
-export default LogInAndSignUp;
+export default useLogInAndSignUp;

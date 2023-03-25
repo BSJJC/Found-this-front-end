@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { logIn } from "@/stores/index";
+import { uselogIn } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
 import signUpUser from "@/api/signUpUser";
 
-const store = logIn();
+const store = uselogIn();
 const { mode } = storeToRefs(store);
 
 const ruleFormRef = ref<FormInstance>();
@@ -75,7 +75,6 @@ function signUp(formEl: FormInstance | undefined) {
         email: ruleForm.email,
         password: ruleForm.password,
       });
-      
 
       console.log("submit!");
       console.log(user.data);

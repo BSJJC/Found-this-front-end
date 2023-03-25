@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const logIn = defineStore({
+export const useLogIn = defineStore({
   id: "logIn",
   state: () => ({
     mode: "login-mode",
@@ -8,4 +8,4 @@ export const logIn = defineStore({
   }),
 });
 
-export default logIn;
+export default useLogIn;

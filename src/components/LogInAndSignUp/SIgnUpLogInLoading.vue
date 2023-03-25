@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, defineAsyncComponent } from "vue";
-import { sendLogIn } from "@/stores/index";
+import { useLoading } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 const LottieAnimation = defineAsyncComponent(
@@ -11,7 +11,7 @@ const SquareBackground = defineAsyncComponent(
   () => import("@/components/Effects/SquareBackground.vue")
 );
 
-const store = sendLogIn();
+const store = useLoading();
 const { animations, sendingUrl, successUrl, failUrl } = storeToRefs(store);
 
 const sentence = ref("sending......");
