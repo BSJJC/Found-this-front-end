@@ -27,33 +27,49 @@ function showUserInfo() {
   console.log(1);
 }
 
-function test() {
-  if (loggedIn.value) {
-    showUserInfo();
-  } else {
-    showLogInAndSignUp();
-  }
+function showUserControls() {
+  console.log(1);
 }
 </script>
 
 <template>
-  <div class="w-[110px] h-[50px] overflow-hidden">
+  <div class="w-[110px] h-[50px] overflow-hidden relative">
     <div
       class="w-full h-full flex justify-between items-center transition duration-500"
       :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }"
     >
       <div
         class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#9d7ce9] text-white hover:cursor-pointer"
-        @click="test"
+        @click="
+          () => {
+            if (loggedIn) {
+              showUserInfo();
+            } else {
+              showLogInAndSignUp();
+            }
+          }
+        "
       >
         {{ !loggedIn ? "Log In" : `${name}` }}
       </div>
 
       <div
         class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full hover:cursor-pointer"
+        @click="showUserControls"
       >
         <img :src="menuIcon" alt="menu icon" class="w-2/3" />
       </div>
+    </div>
+  </div>
+  <div
+    class="absolute right-[10px] top-[97px] h-[4rem] w-[100px] overflow-hidden bg-white"
+  >
+    <div
+      v-for="(i, index) in 10"
+      :key="index"
+      class="w-full h-[2rem] text-center flex justify-center items-center text-white bg-[#9d7ce98d]"
+    >
+      {{ i }}
     </div>
   </div>
 </template>
