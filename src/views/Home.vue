@@ -8,7 +8,7 @@ const MainPage = defineAsyncComponent(
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full overflow-hidden">
     <div class="h-[10%]">
       <nav-bar></nav-bar>
     </div>

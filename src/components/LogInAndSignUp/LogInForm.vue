@@ -7,7 +7,8 @@ import logInUser from "@/api/logInUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, remember, showPanel } = storeToRefs(logInAndSignUpStore);
+const { mode, loggedIn, remember, showPanel } =
+  storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
 const { showLoading, status, animations } = storeToRefs(loadingStore);
@@ -15,8 +16,8 @@ const { showLoading, status, animations } = storeToRefs(loadingStore);
 const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
-  email: "",
-  password: "",
+  email: "123@123.com",
+  password: "123",
 });
 
 const emailCheck = (rule: any, value: any, callback: any) => {
@@ -70,6 +71,10 @@ function logIn(formEl: FormInstance | undefined) {
 
         setTimeout(() => {
           status.value = "success";
+          loggedIn.value = true;
+
+          console.log(user.data);
+          sessionStorage.setItem("user", JSON.stringify(user.data));
 
           console.log("log in success");
           console.log(user);

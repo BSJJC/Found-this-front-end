@@ -1,84 +1,65 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp } from "@/stores";
-import { loginIcon, menuIcon } from "@/imgs";
+import { menuIcon } from "@/imgs";
 
-const state = ref("not-logged-in");
+const logInAndSignUpStore = useLogInAndSignUp();
+const { showPanel, loggedIn } = storeToRefs(logInAndSignUpStore);
 
-const store = useLogInAndSignUp();
-const { showPanel } = storeToRefs(store);
+const name = ref("");
+
+watch(
+  () => loggedIn.value,
+  (val) => {
+    if (val) {
+      const email = JSON.parse(sessionStorage.getItem("user") as string).email;
+      name.value = email.slice(0, 2);
+    }
+  }
+);
+
+function showLogInAndSignUp() {
+  showPanel.value = true;
+}
+
+function showUserInfo() {
+  console.log(1);
+}
+
+function test() {
+  if (loggedIn.value) {
+    showUserInfo();
+  } else {
+    showLogInAndSignUp();
+  }
+}
 </script>
 
 <template>
-  <div class="w-[100px] h-[40px] relative" :class="state">
+  <div class="w-[110px] h-[50px] overflow-hidden">
     <div
-      id="user-icon"
-      class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-0"
+      class="w-full h-full flex justify-between items-center transition duration-500"
+      :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }"
     >
-      <span>BR</span>
-    </div>
+      <div
+        class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#9d7ce9] text-white hover:cursor-pointer"
+        @click="test"
+      >
+        {{ !loggedIn ? "Log In" : `${name}` }}
+      </div>
 
-    <div
-      id="menu-icon"
-      class="h-[40px] w-[40px] rounded-full flex justify-center items-center cursor-pointer absolute right-0 z-0"
-    >
-      <img :src="menuIcon" alt="menu icon" class="w-[90%]" />
-    </div>
-
-    <div
-      id="login-icon"
-      class="h-[40px] w-[40px] bg-[#8b8b8b5f] rounded-full flex justify-center items-center cursor-pointer absolute z-10 hover:-translate-y-1 hover:shadow-lg"
-    >
-      <el-tooltip content="Log in" placement="bottom" effect="light">
-        <img
-          :src="loginIcon"
-          alt="log in icon"
-          class="w-[90%]"
-          @click="showPanel = !showPanel"
-        />
-      </el-tooltip>
+      <div
+        class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full hover:cursor-pointer"
+      >
+        <img :src="menuIcon" alt="menu icon" class="w-2/3" />
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.not-logged-in {
-  * {
-    transition: all 0.3s ease-in-out;
-  }
-
-  #user-icon {
-    left: -40px;
-  }
-
-  #menu-icon {
-    opacity: 0;
-  }
-
-  #login-icon {
-    right: 0px;
-  }
-}
-
-.logged-in {
-  * {
-    transition: all 0.3s ease-in-out;
-  }
-
-  #user-icon {
-    left: 0px;
-    background: #2089e5a9;
-  }
-
-  #menu-icon {
-    opacity: 1;
-    background: #2089e5a9;
-  }
-
-  #login-icon {
-    right: -40px;
-    background: #2089e5a9;
-  }
+* {
+  user-select: none;
 }
 </style>
