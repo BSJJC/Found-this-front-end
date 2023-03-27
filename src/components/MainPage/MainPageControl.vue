@@ -5,7 +5,7 @@ const sortWays = ref(["POPULAR", "CATEGORIES"]);
 </script>
 
 <template>
-  <div class="w-full h-full grid grid-cols-4">
+  <div class="w-full grid grid-cols-4">
     <div class="col-span-3 flex justify-start items-start">
       <div
         v-for="(i, index) in sortWays"
