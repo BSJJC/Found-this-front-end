@@ -16,7 +16,9 @@ const MainPage = defineAsyncComponent(
     </div>
 
     <div class="h-[90%] z-10">
-      <main-page></main-page>
+      <el-scrollbar>
+        <main-page></main-page>
+      </el-scrollbar>
     </div>
   </div>
 </template>
