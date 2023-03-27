@@ -12,7 +12,7 @@ const url = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`
         class="w-full h-1/3 rounded-xl overflow-hidden relative flex justify-start items-center p-8 bg-blue-300"
         :style="{ backgroundImage: `url(${url})`, backgroundSize: 'contain' }"
       >
-        <div class="text-[2rem] text-white">USMLE</div>
+        <div class="text-[2rem] text-white">TOPIC</div>
       </div>
 
       <!-- info -->
@@ -72,9 +72,4 @@ const url = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`
   </div>
 </template>
 
-<style lang="scss" scoped>
-p {
-  background-image: url();
-  background-size: cover;
-}
-</style>
+<style lang="scss" scoped></style>
