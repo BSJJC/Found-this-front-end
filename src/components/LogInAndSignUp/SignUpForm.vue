@@ -7,10 +7,10 @@ import signUpUser from "@/api/signUpUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode } = storeToRefs(logInAndSignUpStore);
+const { mode, loggedIn, showPanel } = storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
-const { showLoading, status } = storeToRefs(loadingStore);
+const { showLoading, status, animations } = storeToRefs(loadingStore);
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -83,12 +83,24 @@ function signUp(formEl: FormInstance | undefined) {
           password: ruleForm.password,
         });
 
+        console.log(user.data);
+        sessionStorage.setItem("user", JSON.stringify(user.data));
+
         setTimeout(() => {
           status.value = "success";
+          loggedIn.value = true;
 
           console.log("submit!");
           console.log(user.data);
         }, 1000);
+
+        setTimeout(() => {
+          animations.value.out = true;
+        }, 2000);
+
+        setTimeout(() => {
+          showPanel.value = false;
+        }, 2200);
       } catch (error) {
         setTimeout(() => {
           status.value = "failed";

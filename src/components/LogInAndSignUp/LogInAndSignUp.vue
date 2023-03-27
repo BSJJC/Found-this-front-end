@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onBeforeUnmount } from "vue";
 import { useLogInAndSignUp, useLoading } from "@/stores";
 import { storeToRefs } from "pinia";
 import { copyrightIcon } from "@/imgs";
@@ -36,6 +36,10 @@ function hidePanel() {
 
   loadingStore.reset();
 }
+
+onBeforeUnmount(() => {
+  mode.value = "login-mode";
+});
 </script>
 
 <template>

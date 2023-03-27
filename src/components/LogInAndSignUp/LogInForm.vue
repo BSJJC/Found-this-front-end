@@ -82,13 +82,13 @@ function logIn(formEl: FormInstance | undefined) {
 
         setTimeout(() => {
           animations.value.out = true;
-        }, 2000);
+        }, 2500);
 
         setTimeout(() => {
           loadingStore.reset();
 
           showPanel.value = false;
-        }, 2100);
+        }, 2600);
       } catch (error) {
         setTimeout(() => {
           status.value = "failed";
