@@ -32,10 +32,6 @@ function shuffle() {
       >
         {{ i }}
       </div>
-
-      <el-button @click="add">+</el-button>
-      <el-button @click="remove">-</el-button>
-      <el-button @click="shuffle">shuffle</el-button>
     </div>
 
     <!-- add topic -->

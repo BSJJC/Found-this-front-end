@@ -70,7 +70,6 @@ function listFilte() {
         <ul
           class="value-list rounded-b-xl bg-[#9d7ce9]"
           :style="{ maxHeight: `${maxHeight}px` }"
-          @mouseleave="maxHeight = 0"
         >
           <el-scrollbar height="240px">
             <transition-group name="list">
