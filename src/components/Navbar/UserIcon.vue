@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp } from "@/stores";
-import { menuIcon } from "@/imgs";
+import { menuIcon } from "@/imgs/icons";
 
 const logInAndSignUpStore = useLogInAndSignUp();
 const { showPanel, loggedIn } = storeToRefs(logInAndSignUpStore);
@@ -42,7 +42,7 @@ function userControl(i: string) {
       :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }"
     >
       <div
-        class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#9d7ce9] text-white transition duration-200 hover:cursor-pointer hover:-translate-y-1"
+        class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#7E56DA] text-white transition duration-200 hover:cursor-pointer hover:-translate-y-1"
         @click="
           () => {
             if (loggedIn) {

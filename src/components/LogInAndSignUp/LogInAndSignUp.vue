@@ -2,7 +2,7 @@
 import { defineAsyncComponent, onBeforeUnmount } from "vue";
 import { useLogInAndSignUp, useLoading } from "@/stores";
 import { storeToRefs } from "pinia";
-import { copyrightIcon } from "@/imgs";
+import { copyrightIcon } from "@/imgs/icons";
 
 const LottieAnimation = defineAsyncComponent(
   () => import("@/components/Effects/LottieAnimation.vue")

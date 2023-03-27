@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { searchIcon } from "@/imgs";
+import { searchIcon } from "@/imgs/icons";
 
 const maxHeight = ref(0);
 const keyWords = ref("");
