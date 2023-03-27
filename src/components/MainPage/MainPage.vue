@@ -5,9 +5,6 @@ const MainPageControl = defineAsyncComponent(
   () => import("./MainPageControl.vue")
 );
 const Topic = defineAsyncComponent(() => import("./Topic.vue"));
-const SquareBackground = defineAsyncComponent(
-  () => import("@/components/Effects/SquareBackground.vue")
-);
 </script>
 
 <template>
@@ -16,7 +13,7 @@ const SquareBackground = defineAsyncComponent(
       <main-page-control class="w-full h-[150px]"></main-page-control>
 
       <div class="w-full grid grid-cols-3">
-        <topic v-for="(i, index) in 20" :key="index" class="z-10"></topic>
+        <topic v-for="(i, index) in 20" :key="index"></topic>
       </div>
     </div>
   </el-scrollbar>
