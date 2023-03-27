@@ -8,6 +8,8 @@ const logInAndSignUpStore = useLogInAndSignUp();
 const { showPanel, loggedIn } = storeToRefs(logInAndSignUpStore);
 
 const name = ref("");
+const userOptions = ref(["123", "abc", "666"]);
+const showUserOptions = ref(false);
 
 watch(
   () => loggedIn.value,
@@ -27,8 +29,9 @@ function showUserInfo() {
   console.log(1);
 }
 
-function showUserControls() {
-  console.log(1);
+function userControl(i: string) {
+  console.log(i);
+  showUserOptions.value = false;
 }
 </script>
 
@@ -55,19 +58,26 @@ function showUserControls() {
 
       <div
         class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full hover:cursor-pointer"
-        @click="showUserControls"
+        @click="showUserOptions = !showUserOptions"
       >
         <img :src="menuIcon" alt="menu icon" class="w-2/3" />
       </div>
     </div>
   </div>
+
   <div
-    class="absolute right-[10px] top-[97px] h-[4rem] w-[100px] overflow-hidden bg-white"
+    class="absolute right-[10px] top-[97px] w-[100px] overflow-hidden rounded-b-lg transitio duration-300 bg-[#9d7ce9]"
+    :style="{
+      height: `${showUserOptions ? userOptions.length * 2 : 0}rem`,
+      boxShadow: ` 0px 5px 8px 0px rgba(0, 0, 0, 0.2)`,
+    }"
+    @mouseleave="showUserOptions = false"
   >
     <div
-      v-for="(i, index) in 10"
+      v-for="(i, index) in userOptions"
       :key="index"
-      class="w-full h-[2rem] text-center flex justify-center items-center text-white bg-[#9d7ce98d]"
+      class="w-full h-[2rem] text-center flex justify-center items-center text-lg text-white bg-[#9d7ce9] transition duration-200 hover:cursor-pointer hover:-translate-y-1"
+      @click="userControl(i)"
     >
       {{ i }}
     </div>

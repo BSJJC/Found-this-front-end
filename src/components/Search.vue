@@ -39,7 +39,10 @@ function listFilte() {
   <div class="flex flex-row w-[700px] h-[50px] rounded-3xl border shadow-lg">
     <!-- search input -->
     <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
-      <input class="w-4/6 outline-none text-xl" placeholder="I want..." />
+      <input
+        class="w-4/6 outline-none text-xl text-[#9d7ce9]"
+        placeholder="I want..."
+      />
     </div>
 
     <!-- divider -->
@@ -52,7 +55,7 @@ function listFilte() {
       <div class="w-3/4 h-full">
         <input
           v-model="keyWords"
-          class="w-full h-full transition duration-300 focus:outline-none text-xl indent-4"
+          class="w-full h-full transition duration-300 focus:outline-none text-xl indent-4 text-[#9d7ce9]"
           type="text"
           placeholder="Type to filter"
           @click="
@@ -60,20 +63,21 @@ function listFilte() {
               ? (maxHeight = (_list.length >= 5 ? 5 : _list.length) * 48)
               : (maxHeight = 0)
           "
-          @focusout="maxHeight = 0"
           @input="listFilte"
+          @focusout="maxHeight = 0"
         />
 
         <ul
-          class="value-list rounded-b-xl"
+          class="value-list rounded-b-xl bg-[#9d7ce9]"
           :style="{ maxHeight: `${maxHeight}px` }"
+          @mouseleave="maxHeight = 0"
         >
           <el-scrollbar height="240px">
             <transition-group name="list">
               <li
                 v-for="(i, index) in _list"
                 :key="_list[index]"
-                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer bg-[#fafcfd75] transition duration-300 hover:bg-[#7e56da3f] hover:text-white"
+                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer text-lg bg-[#9d7ce9] transition duration-300 text-white hover:-translate-y-2"
                 @mousedown="keyWords = i.toString()"
               >
                 {{ i }}
