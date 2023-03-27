@@ -2,9 +2,11 @@
 import { defineAsyncComponent } from "vue";
 
 const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
-const Search = defineAsyncComponent(() => import("@/components/Search.vue"));
+const Search = defineAsyncComponent(
+  () => import("@/components/Navbar/Search.vue")
+);
 const UserIcon = defineAsyncComponent(
-  () => import("@/components/UserIcon.vue")
+  () => import("@/components/Navbar/UserIcon.vue")
 );
 </script>
 
@@ -23,11 +25,3 @@ const UserIcon = defineAsyncComponent(
     </div>
   </div>
 </template>
-
-<style scoped>
-.el-input {
-  width: 30rem;
-  height: 40px;
-  font-size: 18px;
-}
-</style>

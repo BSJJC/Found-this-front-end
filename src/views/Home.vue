@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from "vue";
 
-const NavBar = defineAsyncComponent(() => import("@/components/NavBar.vue"));
+const NavBar = defineAsyncComponent(
+  () => import("@/components/Navbar/NavBar.vue")
+);
 const MainPage = defineAsyncComponent(
-  () => import("@/components/MainPage.vue")
+  () => import("@/components/MainPage/MainPage.vue")
 );
 </script>
 
 <template>
-  <div class="w-full h-full overflow-hidden">
-    <div class="h-[10%]">
+  <div class="w-full h-full">
+    <div class="h-[10%] shadow-lg z-20">
       <nav-bar></nav-bar>
     </div>
-    <div class="h-[90%]">
+
+    <div class="h-[90%] z-10">
       <main-page></main-page>
     </div>
   </div>

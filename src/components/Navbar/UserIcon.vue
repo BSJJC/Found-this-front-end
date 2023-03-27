@@ -36,13 +36,13 @@ function userControl(i: string) {
 </script>
 
 <template>
-  <div class="w-[110px] h-[50px] overflow-hidden relative">
+  <div class="w-[110px] h-[60px] overflow-hidden relative">
     <div
       class="w-full h-full flex justify-between items-center transition duration-500"
       :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }"
     >
       <div
-        class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#9d7ce9] text-white hover:cursor-pointer"
+        class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#9d7ce9] text-white transition duration-200 hover:cursor-pointer hover:-translate-y-1"
         @click="
           () => {
             if (loggedIn) {
@@ -57,7 +57,7 @@ function userControl(i: string) {
       </div>
 
       <div
-        class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full hover:cursor-pointer"
+        class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full transition duration-200 hover:cursor-pointer hover:-translate-y-1"
         @click="showUserOptions = !showUserOptions"
       >
         <img :src="menuIcon" alt="menu icon" class="w-2/3" />

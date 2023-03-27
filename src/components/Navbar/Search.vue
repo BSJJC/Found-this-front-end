@@ -36,7 +36,7 @@ function listFilte() {
 </script>
 
 <template>
-  <div class="flex flex-row w-[700px] h-[50px] rounded-3xl border shadow-lg">
+  <div class="flex flex-row w-[700px] h-[50px] rounded-3xl border shadow-md">
     <!-- search input -->
     <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
       <input
