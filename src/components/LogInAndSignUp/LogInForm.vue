@@ -88,7 +88,7 @@ function logIn(formEl: FormInstance | undefined) {
           loadingStore.reset();
 
           showPanel.value = false;
-        }, 2600);
+        }, 2800);
       } catch (error) {
         setTimeout(() => {
           status.value = "failed";
