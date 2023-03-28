@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useHome } from "@/stores";
 import { storeToRefs } from "pinia";
+import router from "@/router";
 
 const sortWays = ref(["POPULAR", "CATEGORIES"]);
 
@@ -9,12 +10,27 @@ const homeStore = useHome();
 const { showNavBar } = storeToRefs(homeStore);
 
 const addNewTopicBtn = ref(null);
+const copyElTop = ref(0);
+const copyElLeft = ref(0);
 
 function addNewTopic() {
   showNavBar.value = !showNavBar.value;
 
-  console.log(addNewTopicBtn.value);
+  const reactObject = (
+    addNewTopicBtn.value as unknown as HTMLElement
+  ).getBoundingClientRect();
+
+  copyElTop.value = reactObject.top;
+  copyElLeft.value = reactObject.left;
+
+  show.value = true;
+
+  setTimeout(() => {
+    // router.push("addTopic");
+  }, 1000);
 }
+
+const show = ref(false);
 </script>
 
 <template>
@@ -33,12 +49,24 @@ function addNewTopic() {
     <!-- add topic -->
     <div class="col-span-1 flex justify-end items-center">
       <div
+        v-if="!show"
         ref="addNewTopicBtn"
         class="z-20 px-8 py-5 rounded-lg bg-[#7E56DA] text-white text-xl transition duration-200 hover: cursor-pointer hover:shadow-[#7E56DA] hover:shadow-lg hover:scale-105 active:scale-100"
         @click="addNewTopic"
       >
-        + NEW TOPIC
+        ADD NEW TOPIC
       </div>
+
+      <teleport to="body">
+        <div
+          v-if="show"
+          id="add-topic-in"
+          class="fixed z-[200] flex justify-center items-center rounded-lg bg-[#7E56DA] text-white text-xl"
+          :style="{ top: `${copyElTop}px`, left: `${copyElLeft}px` }"
+        >
+          ADD NEW TOPIC
+        </div>
+      </teleport>
     </div>
   </div>
 </template>
@@ -46,5 +74,39 @@ function addNewTopic() {
 <style lang="scss" scoped>
 * {
   user-select: none;
+}
+
+#add-topic-in {
+  animation: add-topicin 1s ease-in-out forwards;
+}
+
+@keyframes add-topicin {
+  0% {
+    width: 178.19px;
+    height: 68px;
+    font-size: 1.25rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  50% {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: scale(1.4);
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    font-size: 5rem;
+    transform: scale(1);
+    border-radius: 0px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
 }
 </style>
