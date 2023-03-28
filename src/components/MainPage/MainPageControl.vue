@@ -1,28 +1,16 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useTopics } from "@/stores";
+import { useHome } from "@/stores";
 import { storeToRefs } from "pinia";
-
-const topicStore = useTopics();
-const { topics } = storeToRefs(topicStore);
 
 const sortWays = ref(["POPULAR", "CATEGORIES"]);
 
-function add() {
-  topics.value.push(Math.random());
-}
-
-function remove() {
-  topics.value.pop();
-}
-
-function shuffle() {
-  topics.value = topics.value.sort();
-}
+const homeStore = useHome();
+const { showNavBar } = storeToRefs(homeStore);
 </script>
 
 <template>
-  <div class="w-full grid grid-cols-4">
+  <div class="w-full h-[120px] grid grid-cols-4">
     <!-- topic sort ways -->
     <div class="col-span-3 flex justify-start items-start">
       <div
@@ -37,10 +25,19 @@ function shuffle() {
     <!-- add topic -->
     <div class="col-span-1 flex justify-end items-center">
       <div
-        class="px-8 py-5 rounded-lg bg-[#7E56DA] text-white text-xl transition duration-200 hover: cursor-pointer hover:shadow-lg hover:-translate-y-1"
+        class="px-8 py-5 rounded-lg bg-[#7E56DA] text-white text-xl transition duration-200 hover: cursor-pointer hover:shadow-[#7E56DA] hover:shadow-lg hover:scale-105 active:scale-100"
+        @click="showNavBar = !showNavBar"
       >
         + NEW TOPIC
       </div>
+
+      <!-- <div
+        v-if="showNavBar"
+        id="test"
+        class="bg-[#7e56da69] text-white text-xl transition duration-200 absolute w-screen h-screen top-0 left-0"
+      >
+        + NEW TOPIC
+      </div> -->
     </div>
   </div>
 </template>

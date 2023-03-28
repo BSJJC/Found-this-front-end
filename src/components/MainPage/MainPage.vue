@@ -13,17 +13,15 @@ const Topic = defineAsyncComponent(() => import("./Topic.vue"));
 </script>
 
 <template>
-  <el-scrollbar>
-    <div class="w-full h-full px-20">
-      <main-page-control class="w-full h-[150px]"></main-page-control>
+  <div class="px-20">
+    <main-page-control></main-page-control>
 
-      <div class="w-full grid grid-cols-3">
-        <transition-group name="fade">
-          <topic v-for="(i, index) in topics" :key="topics[index]"></topic>
-        </transition-group>
-      </div>
+    <div class="w-full grid grid-cols-3">
+      <transition-group name="fade">
+        <topic v-for="(i, index) in topics" :key="topics[index]"></topic>
+      </transition-group>
     </div>
-  </el-scrollbar>
+  </div>
 </template>
 
 <style lang="scss" scoped>

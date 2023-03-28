@@ -40,7 +40,7 @@ function listFilte() {
     <!-- search input -->
     <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
       <input
-        class="w-4/6 outline-none text-xl text-[#9d7ce9]"
+        class="w-4/6 outline-none text-xl text-[#7E56DA]"
         placeholder="I want..."
       />
     </div>
@@ -55,7 +55,7 @@ function listFilte() {
       <div class="w-3/4 h-full">
         <input
           v-model="keyWords"
-          class="w-full h-full transition duration-300 focus:outline-none text-xl indent-4 text-[#9d7ce9]"
+          class="w-full h-full transition duration-300 focus:outline-none text-xl indent-4 text-[#7E56DA]"
           type="text"
           placeholder="Type to filter"
           @click="
@@ -76,7 +76,7 @@ function listFilte() {
               <li
                 v-for="(i, index) in _list"
                 :key="_list[index]"
-                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer text-lg bg-[#9d7ce9] transition duration-300 text-white hover:-translate-y-2"
+                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer text-lg bg-[#7e56da70] transition duration-300 text-white hover:bg-[#7E56DA]"
                 @mousedown="keyWords = i.toString()"
               >
                 {{ i }}

@@ -1,16 +1,19 @@
 <script lang="ts" setup>
-const url = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`;
+// const bgUrl = ``;
+// const userUrl = ``;
+const userUrl = `http://localhost:5000/api/administratorAvater/641128f008a8d42d758a715d`;
+const bgUrl = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`;
 </script>
 
 <template>
   <div class="flex justify-center items-center">
     <div
-      class="w-[80%] h-[400px] m-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da] hover:-translate-y-1"
+      class="w-[80%] h-[400px] m-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-md shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da] hover:-translate-y-1"
     >
       <!-- title -->
       <div
-        class="w-full h-1/3 rounded-xl overflow-hidden relative flex justify-start items-center p-8 bg-blue-300"
-        :style="{ backgroundImage: `url(${url})`, backgroundSize: 'contain' }"
+        class="w-full h-1/3 rounded-xl overflow-hidden flex justify-start items-center p-8"
+        :style="{ backgroundImage: `url(${bgUrl})`, backgroundSize: 'contain' }"
       >
         <div class="text-[2rem] text-white">TOPIC</div>
       </div>
@@ -54,10 +57,7 @@ const url = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`
             class="w-full h-2/3 text-2xl text-[#5d5d5d] flex justify-center items-center flex-row"
           >
             <div class="h-full w-[20%] flex justify-start items-center">
-              <el-avatar
-                :size="50"
-                src="http://localhost:5000/api/administratorAvater/641128f008a8d42d758a715d"
-              >
+              <el-avatar :size="50" :src="userUrl">
                 <img src="https://empty" />
               </el-avatar>
             </div>
