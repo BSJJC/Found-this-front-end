@@ -20,5 +20,3 @@ const MainPage = defineAsyncComponent(
     </div>
   </div>
 </template>
-
-<style scoped></style>
