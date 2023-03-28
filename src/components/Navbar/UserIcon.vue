@@ -1,8 +1,12 @@
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { ref, watch, defineAsyncComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp } from "@/stores";
 import { menuIcon } from "@/imgs/icons";
+
+const logInAndSignUp = defineAsyncComponent(
+  () => import("@/components/LogInAndSignUp/LogInAndSignUp.vue")
+);
 
 const logInAndSignUpStore = useLogInAndSignUp();
 const { showPanel, loggedIn } = storeToRefs(logInAndSignUpStore);
@@ -36,7 +40,7 @@ function userControl(i: string) {
 </script>
 
 <template>
-  <div class="w-[110px] h-[60px] overflow-hidden relative">
+  <div class="w-[110px] h-[60px] overflow-hidden absolute">
     <div
       class="w-full h-full flex justify-between items-center transition duration-500"
       :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }"
@@ -55,6 +59,10 @@ function userControl(i: string) {
       >
         {{ !loggedIn ? "Log In" : `${name}` }}
       </div>
+
+      <teleport to="body">
+        <log-in-and-sign-up v-show="showPanel"></log-in-and-sign-up>
+      </teleport>
 
       <div
         class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full transition duration-200 hover:cursor-pointer hover:-translate-y-1"

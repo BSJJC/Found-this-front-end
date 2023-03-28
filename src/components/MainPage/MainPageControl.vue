@@ -7,6 +7,14 @@ const sortWays = ref(["POPULAR", "CATEGORIES"]);
 
 const homeStore = useHome();
 const { showNavBar } = storeToRefs(homeStore);
+
+const addNewTopicBtn = ref(null);
+
+function addNewTopic() {
+  showNavBar.value = !showNavBar.value;
+
+  console.log(addNewTopicBtn.value);
+}
 </script>
 
 <template>
@@ -25,19 +33,12 @@ const { showNavBar } = storeToRefs(homeStore);
     <!-- add topic -->
     <div class="col-span-1 flex justify-end items-center">
       <div
-        class="px-8 py-5 rounded-lg bg-[#7E56DA] text-white text-xl transition duration-200 hover: cursor-pointer hover:shadow-[#7E56DA] hover:shadow-lg hover:scale-105 active:scale-100"
-        @click="showNavBar = !showNavBar"
+        ref="addNewTopicBtn"
+        class="z-20 px-8 py-5 rounded-lg bg-[#7E56DA] text-white text-xl transition duration-200 hover: cursor-pointer hover:shadow-[#7E56DA] hover:shadow-lg hover:scale-105 active:scale-100"
+        @click="addNewTopic"
       >
         + NEW TOPIC
       </div>
-
-      <!-- <div
-        v-if="showNavBar"
-        id="test"
-        class="bg-[#7e56da69] text-white text-xl transition duration-200 absolute w-screen h-screen top-0 left-0"
-      >
-        + NEW TOPIC
-      </div> -->
     </div>
   </div>
 </template>

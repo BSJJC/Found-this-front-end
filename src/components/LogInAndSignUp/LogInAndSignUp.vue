@@ -43,84 +43,103 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- mask -->
-  <div
-    class="absolute w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
-    @click.self="hidePanel"
-  >
-    <loading v-if="showLoading"></loading>
-    <!-- panel -->
+  <transition name="opacity">
+    <!-- mask -->
     <div
-      id="panel"
-      class="w-[1px] h-[1px] shadow-xl grid grid-cols-2"
-      :class="mode"
+      class="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-[#0000009e] z-[100]"
+      @click.self="hidePanel"
     >
-      <!-- form -->
+      <loading v-if="showLoading"></loading>
+      <!-- panel -->
       <div
-        id="form"
-        class="bg-white col-span-1 flex flex-col relative overflow-hidden"
+        id="panel"
+        class="w-[1px] h-[1px] shadow-xl grid grid-cols-2"
+        :class="mode"
       >
-        <square-background
-          class="absolute w-full h-full -translate-x-10"
-        ></square-background>
+        <!-- form -->
+        <div
+          id="form"
+          class="bg-white col-span-1 flex flex-col relative overflow-hidden"
+        >
+          <square-background
+            class="absolute w-full h-full -translate-x-10"
+          ></square-background>
 
-        <!-- logo-->
-        <div class="w-full h-[70px] flex flex-row flex-none select-none">
-          <logo class="text-3xl"></logo>
+          <!-- logo-->
+          <div class="w-full h-[70px] flex flex-row flex-none select-none">
+            <logo class="text-3xl"></logo>
+          </div>
+
+          <!-- Main form  -->
+          <div
+            class="w-full flex-grow flex justify-center items-center flex-col"
+          >
+            <transition name="mode-change" mode="out-in">
+              <!-- Log in main page -->
+              <div v-if="mode === 'login-mode'">
+                <log-in-form></log-in-form>
+              </div>
+
+              <!-- Register main page -->
+              <div v-else>
+                <sign-up-form></sign-up-form>
+              </div>
+            </transition>
+          </div>
+
+          <!-- copyright -->
+          <div
+            class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
+          >
+            <img
+              :src="copyrightIcon"
+              alt="copyright icon"
+              class="w-[20px] mr-1"
+            />
+            copyright
+          </div>
         </div>
 
-        <!-- Main form  -->
-        <div class="w-full flex-grow flex justify-center items-center flex-col">
+        <!-- decorate -->
+        <div
+          id="decorate"
+          class="col-span-1 w-full h-full flex justify-center items-center overflow-hidden relative"
+        >
+          <div class="absolute w-full h-full bg-[#ffffff72]"></div>
           <transition name="mode-change" mode="out-in">
-            <!-- Log in main page -->
-            <div v-if="mode === 'login-mode'">
-              <log-in-form></log-in-form>
-            </div>
-
-            <!-- Register main page -->
-            <div v-else>
-              <sign-up-form></sign-up-form>
-            </div>
+            <lottie-animation
+              v-if="mode === 'login-mode'"
+              :animationUrl="logInAnimationUrl"
+              class="w-2/3"
+            ></lottie-animation>
+            <lottie-animation
+              v-else
+              :animationUrl="signUpAnimationUrl"
+              class="w-2/3"
+            ></lottie-animation>
           </transition>
         </div>
-
-        <!-- copyright -->
-        <div
-          class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
-        >
-          <img
-            :src="copyrightIcon"
-            alt="copyright icon"
-            class="w-[20px] mr-1"
-          />
-          copyright
-        </div>
-      </div>
-
-      <!-- decorate -->
-      <div
-        id="decorate"
-        class="col-span-1 w-full h-full flex justify-center items-center overflow-hidden relative"
-      >
-        <div class="absolute w-full h-full bg-[#ffffff72]"></div>
-        <transition name="mode-change" mode="out-in">
-          <lottie-animation
-            v-if="mode === 'login-mode'"
-            :animationUrl="logInAnimationUrl"
-            class="w-2/3"
-          ></lottie-animation>
-          <lottie-animation
-            v-else
-            :animationUrl="signUpAnimationUrl"
-            class="w-2/3"
-          ></lottie-animation>
-        </transition>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style lang="scss" scoped>
+.opacity-enter-active,
+.opacity-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.opacity-enter-from,
+.opacity-leave-to {
+  opacity: 0;
+}
+
+.opacity-enter-to,
+.opacity-leave-from {
+  opacity: 1;
+}
+
 .mode-change-enter-active,
 .mode-change-leave-active {
   transition: all 0.3s ease-in-out;

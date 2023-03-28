@@ -19,7 +19,9 @@ watch(
   () => showNavBar.value,
   () => {
     if (showNavBar.value) {
-      scrollbarHeihgt.value = "90%";
+      setTimeout(() => {
+        scrollbarHeihgt.value = "90%";
+      }, 300);
     } else {
       scrollbarHeihgt.value = "100%";
     }
@@ -67,9 +69,5 @@ watch(
     opacity: 1;
     transition: all 0.3s ease-in-out;
   }
-}
-
-.el-scrollbar {
-  transition: all 0.3s ease-in-out !important;
 }
 </style>
