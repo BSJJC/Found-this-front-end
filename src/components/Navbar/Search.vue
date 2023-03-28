@@ -68,7 +68,7 @@ function listFilte() {
         />
 
         <ul
-          class="value-list rounded-b-xl bg-[#9d7ce9]"
+          class="value-list rounded-b-xl"
           :style="{ maxHeight: `${maxHeight}px` }"
         >
           <el-scrollbar height="240px">
@@ -122,5 +122,12 @@ function listFilte() {
 .el-divider {
   height: 80%;
   margin: 0px;
+}
+
+ul {
+  z-index: 999;
+  * {
+    z-index: 999;
+  }
 }
 </style>

@@ -11,7 +11,7 @@ const MainPage = defineAsyncComponent(
 
 <template>
   <div class="w-full h-full">
-    <div class="h-[10%] shadow-lg shadow-[#7e56da4d] z-50">
+    <div class="h-[10%] shadow-lg shadow-[#7e56da4d]">
       <nav-bar></nav-bar>
     </div>
 

@@ -66,7 +66,7 @@ function userControl(i: string) {
   </div>
 
   <div
-    class="absolute right-[10px] top-[97px] w-[100px] overflow-hidden rounded-b-lg transitio duration-300 bg-[#9d7ce9]"
+    class="absolute right-[10px] top-[97px] w-[100px] overflow-hidden rounded-b-lg transitio duration-300 bg-[#9d7ce9] z-[999]"
     :style="{
       height: `${showUserOptions ? userOptions.length * 2 : 0}rem`,
       boxShadow: ` 0px 5px 8px 0px rgba(0, 0, 0, 0.2)`,
