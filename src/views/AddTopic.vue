@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
+
+function test() {
+  console.log(1);
+}
 </script>
 
 <template>
@@ -10,20 +14,32 @@ import Editor from "@tinymce/tinymce-vue";
     ADD NEW TOPIC
   </div>
 
+  <!-- main container -->
   <div
     class="bg-red-200 w-screen h-screen flex justify-center items-center flex-col p-10"
   >
+    <!-- main -->
     <main class="w-full h-2/3">
       <Editor
         class="h-full"
         api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y"
         :init="{
-          plugins: 'lists link image table code help wordcount',
+          plugins:
+            'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+          toolbar:
+            'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+          toolbar_sticky: true,
+          contextmenu: 'link image table',
           language: 'zh_CN',
+          resize: false,
+          skin: 'oxide-dark',
+          content_css: 'dark',
+          editimage_cors_hosts: ['picsum.photos'],
         }"
       />
     </main>
 
+    <!-- footer -->
     <footer class="w-full h-1/3 bg-blue-200">123</footer>
   </div>
 </template>
@@ -43,5 +59,9 @@ import Editor from "@tinymce/tinymce-vue";
     display: none;
     z-index: -1;
   }
+}
+
+* {
+  resize: none !important;
 }
 </style>
