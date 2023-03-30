@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@tinymce/tinymce-vue': ^5
+  '@tinymce/tinymce-vue': ^5.0.1
   '@types/node': ^18.15.3
   '@types/quill': ^2.0.10
   '@vitejs/plugin-vue': ^4.1.0
@@ -13,6 +13,8 @@ specifiers:
   postcss: ^8.4.21
   sass: ^1.59.3
   tailwindcss: ^3.2.7
+  tinymce: ^6.4.1
+  tinymce-vue: ^1.0.0
   typescript: ^4.9.3
   vite: ^4.2.0
   vue: ^3.2.47
@@ -27,6 +29,8 @@ dependencies:
   lottie-web: registry.npmmirror.com/lottie-web/5.10.2
   pinia: registry.npmmirror.com/pinia/2.0.33_hmuptsblhheur2tugfgucj7gc4
   sass: registry.npmmirror.com/sass/1.60.0
+  tinymce: registry.npmmirror.com/tinymce/6.4.1
+  tinymce-vue: registry.npmmirror.com/tinymce-vue/1.0.0
   vue: registry.npmmirror.com/vue/3.2.47
   vue-router: registry.npmmirror.com/vue-router/4.1.6_vue@3.2.47
 
@@ -507,6 +511,16 @@ packages:
       '@vue/compiler-core': registry.npmmirror.com/@vue/compiler-core/3.2.47
       '@vue/shared': registry.npmmirror.com/@vue/shared/3.2.47
 
+  registry.npmmirror.com/@vue/compiler-sfc/2.7.14:
+    resolution: {integrity: sha512-aNmNHyLPsw+sVvlQFQ2/8sjNuLtK54TC6cuKnVzAY93ks4ZBrvwQSnkkIh7bsbNhum5hJBS00wSDipQ937f5DA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/compiler-sfc/-/compiler-sfc-2.7.14.tgz}
+    name: '@vue/compiler-sfc'
+    version: 2.7.14
+    dependencies:
+      '@babel/parser': registry.npmmirror.com/@babel/parser/7.21.3
+      postcss: registry.npmmirror.com/postcss/8.4.21
+      source-map: registry.npmmirror.com/source-map/0.6.1
+    dev: false
+
   registry.npmmirror.com/@vue/compiler-sfc/3.2.47:
     resolution: {integrity: sha512-rog05W+2IFfxjMcFw10tM9+f7i/+FFpZJJ5XHX72NP9eC2uRD+42M3pYcQqDXVYoj74kHMSEdQ/WmCjt8JFksQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/compiler-sfc/-/compiler-sfc-3.2.47.tgz}
     name: '@vue/compiler-sfc'
@@ -805,6 +819,12 @@ packages:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csstype/-/csstype-2.6.21.tgz}
     name: csstype
     version: 2.6.21
+
+  registry.npmmirror.com/csstype/3.1.1:
+    resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csstype/-/csstype-3.1.1.tgz}
+    name: csstype
+    version: 3.1.1
+    dev: false
 
   registry.npmmirror.com/dayjs/1.11.7:
     resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dayjs/-/dayjs-1.11.7.tgz}
@@ -1645,6 +1665,21 @@ packages:
       any-promise: registry.npmmirror.com/any-promise/1.3.0
     dev: true
 
+  registry.npmmirror.com/tinymce-vue/1.0.0:
+    resolution: {integrity: sha512-htEc8lDGC4guQx1H5QzsNu55ynyehUKhAYdWRUqu9VfgA41x0VHqXTMoLRdo2oDlZYqJ4u5k7XqL3HtyxI7HgQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tinymce-vue/-/tinymce-vue-1.0.0.tgz}
+    name: tinymce-vue
+    version: 1.0.0
+    dependencies:
+      tinymce: registry.npmmirror.com/tinymce/4.9.11
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
+
+  registry.npmmirror.com/tinymce/4.9.11:
+    resolution: {integrity: sha512-nkSLsax+VY5DBRjMFnHFqPwTnlLEGHCco82FwJF2JNH6W+5/ClvNC1P4uhD5lXPDNiDykSHR0XJdEh7w/ICHzA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tinymce/-/tinymce-4.9.11.tgz}
+    name: tinymce
+    version: 4.9.11
+    dev: false
+
   registry.npmmirror.com/tinymce/6.4.1:
     resolution: {integrity: sha512-+/cS2AM9l6p72IBs2uolHbGsBUztLs0WslqNgFaTXtmMksTNUOhh8p08xtA/fa03UGlWEC6/EJoeV95/QDXa2A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tinymce/-/tinymce-6.4.1.tgz}
     name: tinymce
@@ -1788,6 +1823,15 @@ packages:
       '@volar/vue-typescript': registry.npmmirror.com/@volar/vue-typescript/1.2.0
       typescript: registry.npmmirror.com/typescript/4.9.5
     dev: true
+
+  registry.npmmirror.com/vue/2.7.14:
+    resolution: {integrity: sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue/-/vue-2.7.14.tgz}
+    name: vue
+    version: 2.7.14
+    dependencies:
+      '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/2.7.14
+      csstype: registry.npmmirror.com/csstype/3.1.1
+    dev: false
 
   registry.npmmirror.com/vue/3.2.47:
     resolution: {integrity: sha512-60188y/9Dc9WVrAZeUVSDxRQOZ+z+y5nO2ts9jWXSTkMvayiWxCWOWtBQoYjLeccfXkiiPZWAHcV+WTPhkqJHQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue/-/vue-3.2.47.tgz}

@@ -77,10 +77,10 @@ const show = ref(false);
 }
 
 #add-topic-in {
-  animation: add-topicin 1s ease-in-out forwards;
+  animation: add-topic-in 1s ease-in-out forwards;
 }
 
-@keyframes add-topicin {
+@keyframes add-topic-in {
   0% {
     width: 178.19px;
     height: 68px;
