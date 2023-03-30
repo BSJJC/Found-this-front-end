@@ -1,9 +1,8 @@
 <script lang="ts" setup>
+import { ref } from "vue";
 import Editor from "@tinymce/tinymce-vue";
 
-function test() {
-  console.log(1);
-}
+const editorData = ref(``);
 </script>
 
 <template>
@@ -21,6 +20,7 @@ function test() {
     <!-- main -->
     <main class="w-full h-2/3">
       <Editor
+        v-model="editorData"
         class="h-full"
         api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y"
         :init="{
