@@ -20,7 +20,6 @@ const editorData = ref(``);
     <!-- main -->
     <main class="w-full h-2/3">
       <Editor
-        v-model="editorData"
         class="h-full"
         api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y"
         :init="{
@@ -38,6 +37,7 @@ const editorData = ref(``);
         }"
       />
     </main>
+    
 
     <!-- footer -->
     <footer class="w-full h-1/3 bg-blue-200">123</footer>
@@ -59,9 +59,5 @@ const editorData = ref(``);
     display: none;
     z-index: -1;
   }
-}
-
-* {
-  resize: none !important;
 }
 </style>
