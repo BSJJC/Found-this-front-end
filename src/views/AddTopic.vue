@@ -37,7 +37,6 @@ const editorData = ref(``);
         }"
       />
     </main>
-    
 
     <!-- footer -->
     <footer class="w-full h-1/3 bg-blue-200">123</footer>
