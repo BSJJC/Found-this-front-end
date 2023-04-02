@@ -36,7 +36,7 @@ function back() {
     >
       <!-- lottie animation -->
       <div class="w-full bg-white row-span-1 flex justify-center items-center">
-        <transition name="fade" mode="out-in">
+        <transition name="opacity-fade" mode="out-in">
           <lottie-animation
             v-if="status === 'loading'"
             :animationUrl="loadingUrl"
@@ -60,7 +60,7 @@ function back() {
       <div
         class="row-span-1 w-full h-full flex justify-center items-center text-[2.5rem] bg-[#7e56da] text-white"
       >
-        <transition name="fade" mode="out-in">
+        <transition name="opacity-fade" mode="out-in">
           <div v-if="status === 'loading'">
             <div
               v-for="(i, index) in loadingSentence"
@@ -106,6 +106,8 @@ function back() {
 </template>
 
 <style lang="scss" scoped>
+@use "@/scss/animations.scss";
+
 * {
   user-select: none;
 }
@@ -191,20 +193,5 @@ function back() {
   100% {
     transform: translateY(0px) scale(1);
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
 }
 </style>

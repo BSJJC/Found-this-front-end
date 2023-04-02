@@ -15,3 +15,23 @@ opacity fade
 .opacity-fade-leave-from {
   opacity: 1;
 }
+
+/*
+opacity fade with scale
+*/
+.opacity-scale-enter-active,
+.opacity-scale-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.opacity-scale-enter-from,
+.opacity-scale-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.opacity-scale-enter-to,
+.opacity-scale-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
