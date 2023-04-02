@@ -18,8 +18,9 @@ const editorData = ref(``);
     class="bg-red-200 w-screen h-screen flex justify-center items-center flex-col p-10"
   >
     <!-- main -->
-    <main class="w-full h-2/3">
+    <main class="w-full h-3/4" :v-loading="true">
       <Editor
+        v-model="editorData"
         class="h-full"
         api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y"
         :init="{
@@ -39,7 +40,7 @@ const editorData = ref(``);
     </main>
 
     <!-- footer -->
-    <footer class="w-full h-1/3 bg-blue-200">123</footer>
+    <footer class="w-full h-1/4 bg-blue-200">123</footer>
   </div>
 </template>
 

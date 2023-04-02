@@ -1,8 +1,14 @@
 <script lang="ts" setup>
+import { ref } from "vue";
+
+import Avater from "@/components/Avater.vue";
+
 // const bgUrl = ``;
-// const userUrl = ``;
-const userUrl = `http://localhost:5000/api/administratorAvater/641128f008a8d42d758a715d`;
+// const url = ``;
+const url = `http://localhost:5000/api/topicBackground/64290e15c49898aeddb98a6a`;
 const bgUrl = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`;
+
+const loading = ref(true);
 </script>
 
 <template>
@@ -57,9 +63,7 @@ const bgUrl = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e4
             class="w-full h-2/3 text-2xl text-[#5d5d5d] flex justify-center items-center flex-row"
           >
             <div class="h-full w-[20%] flex justify-start items-center">
-              <el-avatar :size="50" :src="userUrl">
-                <img src="https://empty" />
-              </el-avatar>
+              <Avater :src="url" alt="test" loading-text="loading"></Avater>
             </div>
             <div class="h-full w-[80%] text-[1.2rem] overflow-clip">
               Lorem ipsum, dolor sit amet consectetur consectetur consectetur
