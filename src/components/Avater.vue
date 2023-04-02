@@ -23,7 +23,7 @@ function imgLoad() {
 </script>
 
 <template>
-  <div class="w-[50px] h-[50px] relative rounded-full overflow-hidden">
+  <div class="w-[50px] h-[50px] relative rounded-full overflow-hidden z-0">
     <!-- loading text -->
     <div
       v-loading="loading"

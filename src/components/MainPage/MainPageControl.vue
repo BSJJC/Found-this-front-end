@@ -77,14 +77,13 @@ const show = ref(false);
 }
 
 #add-topic-in {
-  animation: add-topic-in 1s ease-in-out forwards;
+  animation: add-topic-in 1s ease forwards;
 }
 
 @keyframes add-topic-in {
   0% {
     width: 178.19px;
     height: 68px;
-    font-size: 1.25rem;
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -93,9 +92,9 @@ const show = ref(false);
   50% {
     top: 0;
     left: 0;
+    font-size: 5rem;
     width: 100vw;
     height: 100vh;
-    transform: scale(1.4);
   }
 
   100% {
@@ -104,7 +103,6 @@ const show = ref(false);
     width: 100vw;
     height: 100vh;
     font-size: 5rem;
-    transform: scale(1);
     border-radius: 0px;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
