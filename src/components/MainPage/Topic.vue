@@ -2,11 +2,12 @@
 import { ref } from "vue";
 
 import Avater from "@/components/Avater.vue";
+import BackgroundImg from "@/components/BackgroundImg.vue";
 
-const bgUrl = ``;
-const url = ``;
-// const url = `http://localhost:5000/api/topicBackground/64290e15c49898aeddb98a6a`;
-// const bgUrl = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`;
+// const bgUrl = ``;
+// const url = ``;
+const url = `http://localhost:5000/api/topicBackground/64290e15c49898aeddb98a6a`;
+const bgUrl = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`;
 
 const loading = ref(true);
 </script>
@@ -18,10 +19,19 @@ const loading = ref(true);
     >
       <!-- title -->
       <div
-        class="w-full h-1/3 rounded-xl overflow-hidden flex justify-start items-center p-8"
-        :style="{ backgroundImage: `url(${bgUrl})`, backgroundSize: 'contain' }"
+        class="w-full h-1/3 rounded-xl overflow-hidden flex justify-start items-center relative"
       >
-        <div class="text-[2rem] text-white">TOPIC</div>
+        <div
+          class="absolute w-full h-full flex justify-start items-center p-8 z-10 text-white text-3xl"
+        >
+          TOPICS
+        </div>
+
+        <background-img
+          :src="bgUrl"
+          alt="test"
+          class="absolute z-0"
+        ></background-img>
       </div>
 
       <!-- info -->

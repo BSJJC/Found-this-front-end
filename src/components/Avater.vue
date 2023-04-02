@@ -1,22 +1,18 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 
-const props = defineProps({
-  src: {
-    type: String,
-  },
-  alt: {
-    type: String,
-  },
-  loadingText: {
-    type: String,
-  },
-});
+interface avater {
+  src: string;
+  alt: string;
+  loadingText: string;
+}
 
-const loading = ref(true);
-const translateY = ref(100);
+const props = defineProps<avater>();
 
-function imgLoad() {
+const loading: Ref<boolean> = ref(true);
+const translateY: Ref<number> = ref(100);
+
+function imgLoaded() {
   translateY.value = 0;
   loading.value = false;
 }
@@ -25,20 +21,27 @@ function imgLoad() {
 <template>
   <div class="w-[50px] h-[50px] relative rounded-full overflow-hidden z-0">
     <!-- loading text -->
-    <div
-      v-loading="loading"
-      class="absolute w-full h-full bg-[#7e56da] text-base flex justify-center items-center"
-    >
-      {{ props.loadingText }}
-    </div>
+    <transition name="opacity-fade">
+      <div
+        v-if="loading"
+        v-loading="loading"
+        class="absolute w-full h-full bg-[#7e56da] text-base text-white flex justify-center items-center"
+      >
+        {{ props.loadingText }}
+      </div>
+    </transition>
 
     <!-- image -->
     <img
-      class="absolute w-full h-full bg-purple-200 translate-y-[100%] transition duration-300"
+      class="absolute w-full h-full transition duration-300 ease"
       :style="{ transform: `translateY(${translateY}%)` }"
       :src="props.src"
       :alt="props.alt"
-      @load="imgLoad"
+      @load="imgLoaded"
     />
   </div>
 </template>
+
+<style lang="scss" scoped>
+@use "@/scss/animations.scss";
+</style>

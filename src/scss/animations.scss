@@ -1,0 +1,17 @@
+/*
+opacity fade
+*/
+.opacity-fade-enter-active,
+.opacity-fade-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.opacity-fade-enter-from,
+.opacity-fade-leave-to {
+  opacity: 0;
+}
+
+.opacity-fade-enter-to,
+.opacity-fade-leave-from {
+  opacity: 1;
+}
