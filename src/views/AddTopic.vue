@@ -68,9 +68,7 @@ const Upload = defineAsyncComponent(() => import("@/components/Upload.vue"));
     </main>
 
     <!-- footer -->
-    <footer
-      class="w-full h-[10%] shadow-lg shadow-[#7E56DA] rounded-lg overflow-hidden"
-    >
+    <footer class="w-full h-[10%] shadow-lg shadow-[#7E56DA] rounded-lg">
       <Upload></Upload>
     </footer>
   </div>
