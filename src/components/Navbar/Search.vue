@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { searchIcon } from "@/imgs/icons";
+import { searchVue } from "@/imgs/icons";
 
 const maxHeight = ref(0);
 const keyWords = ref("");
@@ -90,7 +90,7 @@ function listFilte() {
       <div
         class="w-[50px] h-[40px] rounded-3xl bg-[#7E56DA] shadow shadow-[#9375da] flex justify-center items-center cursor-pointer"
       >
-        <img :src="searchIcon" alt="search icon" class="w-[30px]" />
+        <search-vue color="white" class="w-[30px]"> </search-vue>
       </div>
     </div>
   </div>

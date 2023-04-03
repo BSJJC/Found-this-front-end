@@ -2,7 +2,7 @@
 import { ref, watch, defineAsyncComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp } from "@/stores";
-import { menuIcon } from "@/imgs/icons";
+import { menuVue } from "@/imgs/icons";
 
 const logInAndSignUp = defineAsyncComponent(
   () => import("@/components/LogInAndSignUp/LogInAndSignUp.vue")
@@ -68,7 +68,7 @@ function userControl(i: string) {
         class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full transition duration-200 hover:cursor-pointer hover:-translate-y-1"
         @click="showUserOptions = !showUserOptions"
       >
-        <img :src="menuIcon" alt="menu icon" class="w-2/3" />
+        <menu-vue color="black" class="w-2/3"></menu-vue>
       </div>
     </div>
   </div>

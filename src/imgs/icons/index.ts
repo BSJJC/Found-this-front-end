@@ -1,19 +1,18 @@
-//@ts-nocheck
-import copyrightIcon from "./copyright.svg";
-import searchIcon from "./search.svg";
-import menuIcon from "./menu.svg";
+import copyrightVue from "./copyright.vue";
+import menuVue from "./menu.vue";
+import searchVue from "./search.vue";
 
-import elDelete from "./elDelete.svg";
-import elDownload from "./elDownload.svg";
-import elPlus from "./elPlus.svg";
-import elZoomIn from "./elZoomIn.svg";
+import elDeleteVue from "./elDelete.vue";
+import elDownloadVue from "./elDownload.vue";
+import elPlushVue from "./elPlush.vue";
+import elZoomInVue from "./elZoomIn.vue";
 
 export {
-  copyrightIcon,
-  menuIcon,
-  searchIcon,
-  elDelete,
-  elDownload,
-  elPlus,
-  elZoomIn,
+  copyrightVue,
+  menuVue,
+  searchVue,
+  elDeleteVue,
+  elDownloadVue,
+  elPlushVue,
+  elZoomInVue,
 };

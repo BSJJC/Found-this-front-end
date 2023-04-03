@@ -2,7 +2,7 @@
 import { defineAsyncComponent, onBeforeUnmount } from "vue";
 import { useLogInAndSignUp, useLoading } from "@/stores";
 import { storeToRefs } from "pinia";
-import { copyrightIcon } from "@/imgs/icons";
+import { copyrightVue } from "@/imgs/icons";
 
 const LottieAnimation = defineAsyncComponent(
   () => import("@/components/Effects/LottieAnimation.vue")
@@ -91,11 +91,10 @@ onBeforeUnmount(() => {
           <div
             class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
           >
-            <img
-              :src="copyrightIcon"
-              alt="copyright icon"
-              class="w-[20px] mr-1"
-            />
+            <copyright-vue
+              color="black"
+              class="w-[20px] h-auto mr-1"
+            ></copyright-vue>
             copyright
           </div>
         </div>
