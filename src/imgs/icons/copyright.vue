@@ -8,7 +8,9 @@ const props = defineProps<config>();
 
 <template>
   <svg
-    :fill="props.color"
+    :style="{
+      color: `${props.color}`,
+    }"
     t="1679362435279"
     class="icon"
     viewBox="0 0 1024 1024"

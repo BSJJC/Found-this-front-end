@@ -1,19 +1,15 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import {
-  elDelete,
-  elDownload,
-  elPlus,
-  elZoomIn,
   elDeleteVue,
+  elDownloadVue,
+  elPlushVue,
+  elZoomInVue,
 } from "@/imgs/icons";
-import { ElUpload } from "element-plus";
-
 import type { UploadFile } from "element-plus";
 
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
-const disabled = ref(false);
 
 const handleRemove = (file: UploadFile) => {
   console.log(file);
@@ -28,29 +24,32 @@ const handlePictureCardPreview = (file: UploadFile) => {
 <template>
   <div class="w-full h-full bg-red-300">
     <el-upload action="#" list-type="picture-card" :auto-upload="false">
-      <img :src="elPlus" alt="" />
+      <elPlushVue color="black" class="w-[50px]"></elPlushVue>
 
       <template #file="{ file }">
         <div>
           <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
           <span class="el-upload-list__item-actions">
-            <img
-              :src="elZoomIn"
-              class="w-[50px]"
-              fill="white"
+            <elZoomInVue
+              class="w-[50px] m-2"
+              color="white"
               @click="handlePictureCardPreview(file)"
-            />
+            ></elZoomInVue>
 
-            <elDeleteVue color="white"> </elDeleteVue>
+            <elDeleteVue
+              class="w-[50px] m-2"
+              color="white"
+              @click="handleRemove(file)"
+            ></elDeleteVue>
           </span>
         </div>
       </template>
     </el-upload>
+
+    <el-dialog v-model="dialogVisible">
+      <img w-full :src="dialogImageUrl" alt="Preview Image" />
+    </el-dialog>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.op {
-  color: white;
-}
-</style>
+<style lang="scss" scoped></style>
