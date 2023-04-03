@@ -96,7 +96,7 @@ function listFilte() {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .list-move,
 .list-enter-active,
 .list-leave-active {
