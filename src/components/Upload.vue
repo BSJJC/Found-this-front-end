@@ -25,7 +25,6 @@ const handlePictureCardPreview = (file: UploadFile) => {
   <div class="w-full h-full bg-red-300">
     <el-upload action="#" list-type="picture-card" :auto-upload="false">
       <elPlushVue color="black" class="w-[50px]"></elPlushVue>
-      
 
       <template #file="{ file }">
         <div>
