@@ -43,6 +43,7 @@ const handlePictureCardPreview = (file: UploadFile) => {
             ></elDeleteVue>
           </span>
         </div>
+        
       </template>
     </el-upload>
 
