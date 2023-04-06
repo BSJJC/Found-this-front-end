@@ -1,24 +1,32 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import type { UploadFile } from "element-plus";
 
 import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
+import { ElMessage } from "element-plus";
 import ImgZoomIn from "@/components/ImgZoomIn.vue";
-import { UploadInstance, UploadUserFile, ElMessage } from "element-plus";
+import generateUUID from "@/utils/uuid";
 
-const fileList = ref<UploadUserFile[]>([]);
+const fileUpload = ref(null);
+const fileInput = ref(null);
 
-const uploadRef = ref<UploadInstance>();
+const fileList = ref([]);
+
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
+
+interface fileConfig {
+  uuid: string;
+  type: string;
+  data: string;
+}
 
 /**
  * check if the selected file already exists
  * @param file the file that needs to be uploaded
  */
-function fileCheck(file: UploadFile): void {
+function fileCheck(file: fileConfig): void {
   const isExist = fileList.value.some(
-    (uploadFile) => file.name == uploadFile.name
+    (uploadFile) => file.uuid == uploadFile.uuid
   );
 
   if (isExist) {
@@ -28,6 +36,8 @@ function fileCheck(file: UploadFile): void {
     });
     fileList.value.pop();
   } else {
+    console.log(file);
+
     fileList.value.push(file);
   }
 }
@@ -36,13 +46,9 @@ function fileCheck(file: UploadFile): void {
  *  uncheck file
  * @param file the file that needs to be uncheck
  */
-function handleRemove(file: UploadFile): void {
-  console.log(file.name);
-
+function handleRemove(file: fileConfig): void {
   fileList.value.forEach((_file, index) => {
-    if (_file.name === file.name) {
-      console.log(index);
-
+    if (_file.uuid === file.uuid) {
       fileList.value.splice(index, 1);
     }
   });
@@ -52,7 +58,7 @@ function handleRemove(file: UploadFile): void {
  *  show the preview of image file
  * @param file the image file that should be zoom in
  */
-function handlePictureCardPreview(file: UploadFile): void {
+function handlePictureCardPreview(file: fileConfig): void {
   dialogImageUrl.value = file.url!;
   dialogVisible.value = true;
 }
@@ -68,49 +74,45 @@ function hidePreview() {
  *submit all files that selected
  */
 function submitUpload(): void {}
+
+function handleFileChange(event: { target: { files: any[] } }) {
+  const file = event.target.files[0];
+  const fileNameParts = file.name.split(".");
+  const extension = fileNameParts[fileNameParts.length - 1];
+  console.log("File extension:", extension);
+}
 </script>
 
 <template>
   <div class="w-full h-full flex justify-start items-center p-2">
-    <el-button @click="submitUpload">123</el-button>
-
-    <el-upload
-      ref="uploadRef"
-      v-model:file-list="fileList"
-      action="#"
-      list-type="picture-card"
-      :auto-upload="false"
-      class="h-[80px]"
-      :on-change="fileCheck"
+    <div
+      class="h-full transition duration-300 ease bg-red-300"
+      v-for="(file, index) in fileList"
+      :key="index"
     >
-      <elPlushVue color="white" class="w-[50px]"></elPlushVue>
+      {{ file }}
+    </div>
 
-      <template #file="{ file }">
-        <div>
-          <!-- img  -->
-          <img
-            class="el-upload-list__item-thumbnail"
-            :src="file.url"
-            alt="the selected image"
-          />
+    <div ref="fileUpload" class="w-[100px] h-full flex">
+      <div
+        class="w-[80px] h-[80px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
+        @click="
+          () => {
+            //@ts-ignore
+            fileInput.click();
+          }
+        "
+      >
+        <elPlushVue color="white" class="w-1/2"></elPlushVue>
+      </div>
 
-          <!-- img control area -->
-          <span class="el-upload-list__item-actions">
-            <elZoomInVue
-              class="m-2 hover:cursor-pointer"
-              color="white"
-              @click="handlePictureCardPreview(file)"
-            ></elZoomInVue>
-
-            <elDeleteVue
-              class="m-2 hover:cursor-pointer"
-              color="white"
-              @click="handleRemove(file)"
-            ></elDeleteVue>
-          </span>
-        </div>
-      </template>
-    </el-upload>
+      <input
+        type="file"
+        ref="fileInput"
+        style="display: none"
+        @change="handleFileChange"
+      />
+    </div>
 
     <!-- image preview -->
     <teleport to="body">
@@ -128,28 +130,18 @@ function submitUpload(): void {}
 <style lang="scss" scoped>
 @use "@/scss/animations.scss";
 
-:deep(.el-upload-list) {
-  height: 80px !important;
-
-  * {
-    :hover {
-      cursor: pointer !important;
-    }
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease;
 }
 
-:deep(.el-upload),
-:deep(.el-upload-list__item) {
-  all: unset;
-  position: relative !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  background: #7e56da88 !important;
-  width: 80px !important;
-  height: 80px !important;
-  border-radius: 0.5rem !important;
-  overflow: hidden !important;
-  margin-right: 10px !important;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>
