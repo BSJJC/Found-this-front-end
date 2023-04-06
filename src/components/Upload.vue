@@ -103,13 +103,9 @@ function handleFileChange(event: { target: { files: any[] } }) {
 
 <template>
   <div class="w-full h-full flex justify-start items-center p-2">
-    <div ref="fileUpload" class="w-[100px] h-full flex">
-      <div
-        v-for="(i, index) in fileList"
-        :key="index"
-        class="h-full bg-red-300"
-      >
-        <img :src="i.binaryString" alt="" />
+    <div ref="fileUpload" class="h-full flex bg-red-300">
+      <div v-for="(i, index) in fileList" :key="index" class="h-full">
+        <img :src="i.binaryString" />
       </div>
 
       <div
