@@ -23,22 +23,34 @@ function hidePreview() {
 </script>
 
 <template>
-  <div class="w-full h-full bg-red-300 overflow-hidden">
-    <el-upload action="#" list-type="picture-card" :auto-upload="false">
-      <elPlushVue color="black" class="w-[50px]"></elPlushVue>
+  <div class="w-full h-full flex justify-start items-center p-2">
+    <el-upload
+      action="#"
+      list-type="picture-card"
+      :auto-upload="false"
+      class="h-[80px]"
+    >
+      <elPlushVue color="white" class="w-[50px]"></elPlushVue>
 
       <template #file="{ file }">
         <div>
-          <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
+          <!-- img  -->
+          <img
+            class="el-upload-list__item-thumbnail"
+            :src="file.url"
+            alt="the selected image"
+          />
+
+          <!-- img control area -->
           <span class="el-upload-list__item-actions">
             <elZoomInVue
-              class="w-[50px] m-2"
+              class="m-1 hover:cursor-pointer"
               color="white"
               @click="handlePictureCardPreview(file)"
             ></elZoomInVue>
 
             <elDeleteVue
-              class="w-[50px] m-2"
+              class="m-1 hover:cursor-pointer"
               color="white"
               @click="handleRemove(file)"
             ></elDeleteVue>
@@ -47,7 +59,7 @@ function hidePreview() {
       </template>
     </el-upload>
 
-    <!-- <el-dialog v-model="dialogVisible"> 123 </el-dialog> -->
+    <!-- image preview -->
     <teleport to="body">
       <transition name="opacity-fade">
         <Img-zoom-in
@@ -62,4 +74,29 @@ function hidePreview() {
 
 <style lang="scss" scoped>
 @use "@/scss/animations.scss";
+
+:deep(.el-upload-list) {
+  height: 80px !important;
+
+  * {
+    :hover {
+      cursor: pointer !important;
+    }
+  }
+}
+
+:deep(.el-upload),
+:deep(.el-upload-list__item) {
+  all: unset;
+  position: relative !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: #7e56da88 !important;
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+  margin-right: 10px !important;
+}
 </style>

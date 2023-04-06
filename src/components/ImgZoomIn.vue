@@ -19,7 +19,7 @@ function hidePreview() {
   >
     <el-scrollbar>
       <!-- main img preview -->
-      <div class="w-screen h-full flex justify-start items-center flex-col">
+      <div class="flex justify-start items-center flex-col">
         <img :src="props.imgUrl" alt="the image that user wants to preview" />
       </div>
     </el-scrollbar>
