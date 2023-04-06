@@ -9,15 +9,15 @@ import generateUUID from "@/utils/uuid";
 const fileUpload = ref(null);
 const fileInput = ref(null);
 
-const fileList = ref([]);
+const fileList = ref<fileConfig[]>([]);
 
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 
 interface fileConfig {
   uuid: string;
-  type: string;
-  data: string;
+  extends: string;
+  binaryString: string;
 }
 
 /**
@@ -77,23 +77,41 @@ function submitUpload(): void {}
 
 function handleFileChange(event: { target: { files: any[] } }) {
   const file = event.target.files[0];
+
+  // get UUID
+  const uuid = generateUUID();
+
+  // get extension
   const fileNameParts = file.name.split(".");
   const extension = fileNameParts[fileNameParts.length - 1];
-  console.log("File extension:", extension);
+
+  // get data
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+
+  reader.onload = () => {
+    const binaryString = reader.result as string;
+
+    fileList.value.push({
+      uuid: uuid,
+      extends: extension,
+      binaryString: binaryString,
+    });
+  };
 }
 </script>
 
 <template>
   <div class="w-full h-full flex justify-start items-center p-2">
-    <div
-      class="h-full transition duration-300 ease bg-red-300"
-      v-for="(file, index) in fileList"
-      :key="index"
-    >
-      {{ file }}
-    </div>
-
     <div ref="fileUpload" class="w-[100px] h-full flex">
+      <div
+        v-for="(i, index) in fileList"
+        :key="index"
+        class="h-full bg-red-300"
+      >
+        <img :src="i.binaryString" alt="" />
+      </div>
+
       <div
         class="w-[80px] h-[80px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
         @click="
