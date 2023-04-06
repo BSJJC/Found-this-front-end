@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import {
-  elDeleteVue,
-  elDownloadVue,
-  elPlushVue,
-  elZoomInVue,
-} from "@/imgs/icons";
+import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
 import type { UploadFile } from "element-plus";
+
+import ImgZoomIn from "@/components/ImgZoomIn.vue";
 
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
@@ -19,10 +16,14 @@ const handlePictureCardPreview = (file: UploadFile) => {
   dialogImageUrl.value = file.url!;
   dialogVisible.value = true;
 };
+
+function hidePreview() {
+  dialogVisible.value = false;
+}
 </script>
 
 <template>
-  <div class="w-full h-full bg-red-300">
+  <div class="w-full h-full bg-red-300 overflow-hidden">
     <el-upload action="#" list-type="picture-card" :auto-upload="false">
       <elPlushVue color="black" class="w-[50px]"></elPlushVue>
 
@@ -43,14 +44,22 @@ const handlePictureCardPreview = (file: UploadFile) => {
             ></elDeleteVue>
           </span>
         </div>
-        
       </template>
     </el-upload>
 
-    <el-dialog v-model="dialogVisible">
-      <img w-full :src="dialogImageUrl" alt="Preview Image" />
-    </el-dialog>
+    <!-- <el-dialog v-model="dialogVisible"> 123 </el-dialog> -->
+    <teleport to="body">
+      <transition name="opacity-fade">
+        <Img-zoom-in
+          v-show="dialogVisible"
+          :imgUrl="dialogImageUrl"
+          @hidePreview="hidePreview"
+        ></Img-zoom-in>
+      </transition>
+    </teleport>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "@/scss/animations.scss";
+</style>
