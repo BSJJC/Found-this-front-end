@@ -4,8 +4,7 @@ import type { UploadFile } from "element-plus";
 
 import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
 import ImgZoomIn from "@/components/ImgZoomIn.vue";
-import type { UploadInstance } from "element-plus";
-import type { UploadProps, UploadUserFile } from "element-plus";
+import { UploadInstance, UploadUserFile, ElMessage } from "element-plus";
 
 const fileList = ref<UploadUserFile[]>([]);
 
@@ -24,7 +23,10 @@ function fileCheck(file: UploadFile): void {
 
   if (isExist) {
     console.log("same file already exists");
-    fileList.value = fileList.value.splice(0, fileList.value.length);
+    ElMessage.error({
+      message: "Same file exits",
+    });
+    fileList.value.pop();
   } else {
     fileList.value.push(file);
   }
