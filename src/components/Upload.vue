@@ -44,13 +44,13 @@ function hidePreview() {
           <!-- img control area -->
           <span class="el-upload-list__item-actions">
             <elZoomInVue
-              class="m-1 hover:cursor-pointer"
+              class="m-2 hover:cursor-pointer"
               color="white"
               @click="handlePictureCardPreview(file)"
             ></elZoomInVue>
 
             <elDeleteVue
-              class="m-1 hover:cursor-pointer"
+              class="m-2 hover:cursor-pointer"
               color="white"
               @click="handleRemove(file)"
             ></elDeleteVue>
