@@ -36,7 +36,17 @@ function fileCheck(file: UploadFile): void {
  *  uncheck file
  * @param file the file that needs to be uncheck
  */
-function handleRemove(file: UploadFile): void {}
+function handleRemove(file: UploadFile): void {
+  console.log(file.name);
+
+  fileList.value.forEach((_file, index) => {
+    if (_file.name === file.name) {
+      console.log(index);
+
+      fileList.value.splice(index, 1);
+    }
+  });
+}
 
 /**
  *  show the preview of image file
