@@ -1,34 +1,75 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
 import type { UploadFile } from "element-plus";
 
+import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
 import ImgZoomIn from "@/components/ImgZoomIn.vue";
+import type { UploadInstance } from "element-plus";
+import type { UploadProps, UploadUserFile } from "element-plus";
 
+const fileList = ref<UploadUserFile[]>([]);
+
+const uploadRef = ref<UploadInstance>();
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 
-const handleRemove = (file: UploadFile) => {
-  console.log(file);
-};
+/**
+ * check if the selected file already exists
+ * @param file the file that needs to be uploaded
+ */
+function fileCheck(file: UploadFile): void {
+  const isExist = fileList.value.some(
+    (uploadFile) => file.name == uploadFile.name
+  );
 
-const handlePictureCardPreview = (file: UploadFile) => {
+  if (isExist) {
+    console.log("same file already exists");
+    fileList.value = fileList.value.splice(0, fileList.value.length);
+  } else {
+    fileList.value.push(file);
+  }
+}
+
+/**
+ *  uncheck file
+ * @param file the file that needs to be uncheck
+ */
+function handleRemove(file: UploadFile): void {}
+
+/**
+ *  show the preview of image file
+ * @param file the image file that should be zoom in
+ */
+function handlePictureCardPreview(file: UploadFile): void {
   dialogImageUrl.value = file.url!;
   dialogVisible.value = true;
-};
+}
 
+/**
+ * hide the preview of selected image file
+ */
 function hidePreview() {
   dialogVisible.value = false;
 }
+
+/**
+ *submit all files that selected
+ */
+function submitUpload(): void {}
 </script>
 
 <template>
   <div class="w-full h-full flex justify-start items-center p-2">
+    <el-button @click="submitUpload">123</el-button>
+
     <el-upload
+      ref="uploadRef"
+      v-model:file-list="fileList"
       action="#"
       list-type="picture-card"
       :auto-upload="false"
       class="h-[80px]"
+      :on-change="fileCheck"
     >
       <elPlushVue color="white" class="w-[50px]"></elPlushVue>
 
