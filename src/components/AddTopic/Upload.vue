@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 
-import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
+import { elPlushVue } from "@/imgs/icons";
 import generateUUID from "@/utils/uuid";
 
 const fileUpload = ref(null);
@@ -12,6 +12,8 @@ const fileList = ref<fileConfig[]>([]);
 
 const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
+
+const ImgFile = defineAsyncComponent(() => import("./ImgFile.vue"));
 
 interface fileConfig {
   uuid: string;
@@ -51,25 +53,6 @@ function getFiles() {
       fileInputKey.value++;
     };
   }
-}
-
-/**
- *  delay load image preview
- * @param uuid the id of the img tag
- */
-function delayLoadImg(uuid: string): void {
-  const el = document.getElementById(uuid);
-  const src = el!.getAttribute("src");
-  el!.setAttribute("src", "");
-
-  setTimeout(() => {
-    el!.setAttribute("src", src!);
-  }, 500);
-
-  setTimeout(() => {
-    el!.style.left = "0px";
-    el!.style.opacity = "1";
-  }, 700);
 }
 
 /**
@@ -113,48 +96,12 @@ function submitUpload(): void {}
         <!-- selected images -->
         <transition-group name="width-grown">
           <div
-            v-for="(i, index) in fileList"
+            v-for="(file, index) in fileList"
             :key="index"
             class="w-[80px] h-[80px] mr-4 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
           >
-            <!-- image preview -->
-            <div
-              class="w-full h-full relative flex justify-center items-center"
-            >
-              <!-- control are -->
-              <div
-                class="z-20 w-full h-full bg-[#00000078] grid grid-cols-2 opacity-0 transition duration2-00 ease hover:opacity-100"
-              >
-                <!-- hover mask -->
-                <div class="col-span-1 flex justify-center items-center">
-                  <elZoomInVue
-                    color="white"
-                    class="w-full m-2 hover:cursor-pointer"
-                  ></elZoomInVue>
-                </div>
-                <div class="col-span-1 flex justify-center items-center">
-                  <elDeleteVue
-                    color="white"
-                    class="w-full m-2 hover:cursor-pointer"
-                  ></elDeleteVue>
-                </div>
-              </div>
-
-              <!-- image -->
-              <div class="w-full h-full absolute">
-                <div class="absolute w-full h-full z-0" v-loading="true"></div>
-
-                <transition name="opacity-fade">
-                  <img
-                    :src="i.binaryString"
-                    :id="i.uuid"
-                    alt="selected img preview"
-                    class="absolute -left-[100%] opacity-0 transition-all duration-700 ease z-10"
-                    @load.once="delayLoadImg(i.uuid)"
-                  />
-                </transition>
-              </div>
-            </div>
+            {{ file.extends }}
+            <img-file :file="file"></img-file>
           </div>
         </transition-group>
 
