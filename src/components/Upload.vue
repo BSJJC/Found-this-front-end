@@ -110,49 +110,55 @@ function submitUpload(): void {}
 
 <template>
   <div class="w-full h-full flex justify-start items-center p-2">
-    <div ref="fileUpload" class="flex">
-      <!-- selected images -->
-      <transition-group name="width-grown">
-        <div
-          v-for="(i, index) in fileList"
-          :key="index"
-          class="w-[80px] h-[80px] mr-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
-        >
-          <!-- image preview -->
-          <div class="w-full h-full relative flex justify-center items-center">
-            <transition name="opacity-fade">
-              <img
-                :src="i.binaryString"
-                :id="i.uuid"
-                class="absolute -left-[100%] opacity-0 transition-all duration-700 ease"
-                @load.once="delayLoadImg(i.uuid)"
-              />
-            </transition>
+    <el-scrollbar>
+      <div ref="fileUpload" class="flex flex-wrap">
+        <!-- selected images -->
+        <transition-group name="width-grown">
+          <div
+            v-for="(i, index) in fileList"
+            :key="index"
+            class="w-[80px] h-[80px] mr-4 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
+          >
+            <!-- image preview -->
+            <div
+              class="w-full h-full relative flex justify-center items-center"
+            >
+              <transition name="opacity-fade">
+                <img
+                  :src="i.binaryString"
+                  :id="i.uuid"
+                  alt="selected img preview"
+                  class="absolute -left-[100%] opacity-0 transition-all duration-700 ease"
+                  @load.once="delayLoadImg(i.uuid)"
+                />
+              </transition>
+            </div>
           </div>
+        </transition-group>
+
+        <!-- select file button -->
+        <div
+          class="w-[80px] h-[80px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
+          @click="
+            () => {
+              //@ts-ignore
+              fileInput.click();
+            }
+          "
+        >
+          <elPlushVue color="white" class="w-1/2"></elPlushVue>
         </div>
-      </transition-group>
 
-      <div
-        class="w-[80px] h-[80px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
-        @click="
-          () => {
-            //@ts-ignore
-            fileInput.click();
-          }
-        "
-      >
-        <elPlushVue color="white" class="w-1/2"></elPlushVue>
+        <input
+          type="file"
+          ref="fileInput"
+          style="display: none"
+          @input="getFiles"
+          :key="fileInputKey"
+          multiple
+        />
       </div>
-
-      <input
-        type="file"
-        ref="fileInput"
-        style="display: none"
-        @input="getFiles"
-        :key="fileInputKey"
-        multiple
-      />
-    </div>
+    </el-scrollbar>
 
     <!-- image preview -->
     <teleport to="body">
