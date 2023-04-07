@@ -8,6 +8,7 @@ import generateUUID from "@/utils/uuid";
 
 const fileUpload = ref(null);
 const fileInput = ref(null);
+const fileInputKey = ref(0);
 
 const fileList = ref<fileConfig[]>([]);
 
@@ -18,6 +19,40 @@ interface fileConfig {
   uuid: string;
   extends: string;
   binaryString: string;
+}
+
+/**
+ * get files that needs to be uploaded
+ */
+function getFiles() {
+  // @ts-ignore
+  for (let i = 0; i < fileInput.value.files.length; i++) {
+    // @ts-ignore
+    const file = fileInput.value.files[i];
+
+    // get UUID
+    const uuid = generateUUID();
+
+    // get extension
+    const fileNameParts = file.name.split(".");
+    const extension = fileNameParts[fileNameParts.length - 1];
+
+    // get data
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      const binaryString = reader.result as string;
+
+      fileList.value.push({
+        uuid: uuid,
+        extends: extension,
+        binaryString: binaryString,
+      });
+
+      fileInputKey.value++;
+    };
+  }
 }
 
 /**
@@ -46,7 +81,7 @@ function fileCheck(file: fileConfig): void {
  *  uncheck file
  * @param file the file that needs to be uncheck
  */
-function handleRemove(file: fileConfig): void {
+function removeFIle(file: fileConfig): void {
   fileList.value.forEach((_file, index) => {
     if (_file.uuid === file.uuid) {
       fileList.value.splice(index, 1);
@@ -58,15 +93,15 @@ function handleRemove(file: fileConfig): void {
  *  show the preview of image file
  * @param file the image file that should be zoom in
  */
-function handlePictureCardPreview(file: fileConfig): void {
-  dialogImageUrl.value = file.url!;
+function picturePreview(file: fileConfig): void {
+  dialogImageUrl.value = file.binaryString;
   dialogVisible.value = true;
 }
 
 /**
  * hide the preview of selected image file
  */
-function hidePreview() {
+function hidePicturePreview() {
   dialogVisible.value = false;
 }
 
@@ -74,39 +109,21 @@ function hidePreview() {
  *submit all files that selected
  */
 function submitUpload(): void {}
-
-function handleFileChange(event: { target: { files: any[] } }) {
-  const file = event.target.files[0];
-
-  // get UUID
-  const uuid = generateUUID();
-
-  // get extension
-  const fileNameParts = file.name.split(".");
-  const extension = fileNameParts[fileNameParts.length - 1];
-
-  // get data
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-
-  reader.onload = () => {
-    const binaryString = reader.result as string;
-
-    fileList.value.push({
-      uuid: uuid,
-      extends: extension,
-      binaryString: binaryString,
-    });
-  };
-}
 </script>
 
 <template>
   <div class="w-full h-full flex justify-start items-center p-2">
-    <div ref="fileUpload" class="h-full flex bg-red-300">
-      <div v-for="(i, index) in fileList" :key="index" class="h-full">
-        <img :src="i.binaryString" />
-      </div>
+    <div ref="fileUpload" class="flex">
+      <!-- selected images -->
+      <transition-group name="width-grown">
+        <div
+          v-for="(i, index) in fileList"
+          :key="index"
+          class="w-[80px] h-[80px] mr-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
+        >
+          <img :src="i.binaryString" />
+        </div>
+      </transition-group>
 
       <div
         class="w-[80px] h-[80px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
@@ -124,7 +141,9 @@ function handleFileChange(event: { target: { files: any[] } }) {
         type="file"
         ref="fileInput"
         style="display: none"
-        @change="handleFileChange"
+        @input="getFiles"
+        :key="fileInputKey"
+        multiple
       />
     </div>
 
@@ -134,7 +153,7 @@ function handleFileChange(event: { target: { files: any[] } }) {
         <Img-zoom-in
           v-show="dialogVisible"
           :imgUrl="dialogImageUrl"
-          @hidePreview="hidePreview"
+          @hidePreview="hidePicturePreview"
         ></Img-zoom-in>
       </transition>
     </teleport>
@@ -142,20 +161,20 @@ function handleFileChange(event: { target: { files: any[] } }) {
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/animations.scss";
-
-.fade-enter-active,
-.fade-leave-active {
+.width-grown-enter-active,
+.width-grown-leave-active {
   transition: all 0.3s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.width-grown-enter-from,
+.width-grown-leave-to {
+  width: 0px;
+  margin: 0px;
 }
 
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
+.width-grown-enter-to,
+.width-grown-leave-from {
+  width: 80px;
+  margin-right: 1rem;
 }
 </style>
