@@ -56,25 +56,17 @@ function getFiles() {
 }
 
 /**
- * check if the selected file already exists
- * @param file the file that needs to be uploaded
+ *  delay load image preview
+ * @param uuid the id of the img tag
  */
-function fileCheck(file: fileConfig): void {
-  const isExist = fileList.value.some(
-    (uploadFile) => file.uuid == uploadFile.uuid
-  );
+function delayLoadImg(uuid: string): void {
+  const el = document.getElementById(uuid);
+  const src = el!.getAttribute("src");
+  el!.setAttribute("src", "");
 
-  if (isExist) {
-    console.log("same file already exists");
-    ElMessage.error({
-      message: "Same file exits",
-    });
-    fileList.value.pop();
-  } else {
-    console.log(file);
-
-    fileList.value.push(file);
-  }
+  setTimeout(() => {
+    el!.setAttribute("src", src!);
+  }, 500);
 }
 
 /**
@@ -119,9 +111,16 @@ function submitUpload(): void {}
         <div
           v-for="(i, index) in fileList"
           :key="index"
-          class="w-[80px] h-[80px] mr-4 flex justify-center items-center overflow-hidden rounded-lg relative bg-gray-300"
+          class="w-[80px] h-[80px] mr-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
         >
-          <img :src="i.binaryString" class="absolute -left-[50%]" />
+          <!-- image preview -->
+          <div class="w-full h-full relative flex justify-center items-center">
+            <img
+              :src="i.binaryString"
+              :id="i.uuid"
+              @load.once="delayLoadImg(i.uuid)"
+            />
+          </div>
         </div>
       </transition-group>
 
