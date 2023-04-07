@@ -123,12 +123,30 @@ function submitUpload(): void {}
             <div
               class="w-full h-full relative flex justify-center items-center"
             >
+              <div
+                class="z-20 w-full h-full bg-[#00000078] grid grid-cols-2 opacity-0 transition duration2-00 ease hover:opacity-100"
+              >
+                <!-- hover mask -->
+                <div class="col-span-1 flex justify-center items-center">
+                  <elZoomInVue
+                    color="white"
+                    class="w-full m-2 hover:cursor-pointer"
+                  ></elZoomInVue>
+                </div>
+                <div class="col-span-1 flex justify-center items-center">
+                  <elDeleteVue
+                    color="white"
+                    class="w-full m-2 hover:cursor-pointer"
+                  ></elDeleteVue>
+                </div>
+              </div>
+
               <transition name="opacity-fade">
                 <img
                   :src="i.binaryString"
                   :id="i.uuid"
                   alt="selected img preview"
-                  class="absolute -left-[100%] opacity-0 transition-all duration-700 ease"
+                  class="absolute -left-[100%] opacity-0 transition-all duration-700 ease z-0"
                   @load.once="delayLoadImg(i.uuid)"
                 />
               </transition>
@@ -175,4 +193,8 @@ function submitUpload(): void {}
 
 <style lang="scss" scoped>
 @use "@/scss/animations.scss";
+
+* {
+  user-select: none;
+}
 </style>
