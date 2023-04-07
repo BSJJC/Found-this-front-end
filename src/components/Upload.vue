@@ -67,6 +67,11 @@ function delayLoadImg(uuid: string): void {
   setTimeout(() => {
     el!.setAttribute("src", src!);
   }, 500);
+
+  setTimeout(() => {
+    el!.style.left = "0px";
+    el!.style.opacity = "1";
+  }, 700);
 }
 
 /**
@@ -115,11 +120,14 @@ function submitUpload(): void {}
         >
           <!-- image preview -->
           <div class="w-full h-full relative flex justify-center items-center">
-            <img
-              :src="i.binaryString"
-              :id="i.uuid"
-              @load.once="delayLoadImg(i.uuid)"
-            />
+            <transition name="opacity-fade">
+              <img
+                :src="i.binaryString"
+                :id="i.uuid"
+                class="absolute -left-[100%] opacity-0 transition-all duration-700 ease"
+                @load.once="delayLoadImg(i.uuid)"
+              />
+            </transition>
           </div>
         </div>
       </transition-group>
