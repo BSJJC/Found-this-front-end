@@ -5,7 +5,9 @@ import Editor from "@tinymce/tinymce-vue";
 const editorData = ref(`123`);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
-const Upload = defineAsyncComponent(() => import("@/components/Upload.vue"));
+const Upload = defineAsyncComponent(
+  () => import("@/components/AddTopic/Upload.vue")
+);
 </script>
 
 <template>

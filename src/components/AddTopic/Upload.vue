@@ -2,8 +2,6 @@
 import { ref } from "vue";
 
 import { elPlushVue, elDeleteVue, elZoomInVue } from "@/imgs/icons";
-import { ElMessage } from "element-plus";
-import ImgZoomIn from "@/components/ImgZoomIn.vue";
 import generateUUID from "@/utils/uuid";
 
 const fileUpload = ref(null);
@@ -179,15 +177,7 @@ function submitUpload(): void {}
     </el-scrollbar>
 
     <!-- image preview -->
-    <teleport to="body">
-      <transition name="opacity-fade">
-        <Img-zoom-in
-          v-show="dialogVisible"
-          :imgUrl="dialogImageUrl"
-          @hidePreview="hidePicturePreview"
-        ></Img-zoom-in>
-      </transition>
-    </teleport>
+    <!-- <teleport to="body"> 123123213 </teleport> -->
   </div>
 </template>
 
