@@ -119,9 +119,9 @@ function submitUpload(): void {}
         <div
           v-for="(i, index) in fileList"
           :key="index"
-          class="w-[80px] h-[80px] mr-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
+          class="w-[80px] h-[80px] mr-4 flex justify-center items-center overflow-hidden rounded-lg relative bg-gray-300"
         >
-          <img :src="i.binaryString" />
+          <img :src="i.binaryString" class="absolute -left-[50%]" />
         </div>
       </transition-group>
 
@@ -161,20 +161,5 @@ function submitUpload(): void {}
 </template>
 
 <style lang="scss" scoped>
-.width-grown-enter-active,
-.width-grown-leave-active {
-  transition: all 0.3s ease;
-}
-
-.width-grown-enter-from,
-.width-grown-leave-to {
-  width: 0px;
-  margin: 0px;
-}
-
-.width-grown-enter-to,
-.width-grown-leave-from {
-  width: 80px;
-  margin-right: 1rem;
-}
+@use "@/scss/animations.scss";
 </style>

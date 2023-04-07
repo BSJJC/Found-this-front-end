@@ -35,3 +35,23 @@ opacity fade with scale
   opacity: 1;
   transform: scale(1);
 }
+
+/*
+wdith grown
+*/
+.width-grown-enter-active,
+.width-grown-leave-active {
+  transition: all 0.3s ease;
+}
+
+.width-grown-enter-from,
+.width-grown-leave-to {
+  width: 0px;
+  margin: 0px;
+}
+
+.width-grown-enter-to,
+.width-grown-leave-from {
+  width: 80px;
+  margin-right: 1rem;
+}
