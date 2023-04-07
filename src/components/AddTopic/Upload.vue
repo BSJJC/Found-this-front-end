@@ -100,7 +100,6 @@ function submitUpload(): void {}
             :key="index"
             class="w-[80px] h-[80px] mr-4 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
           >
-            {{ file.extends }}
             <img-file :file="file"></img-file>
           </div>
         </transition-group>
