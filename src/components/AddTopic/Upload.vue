@@ -121,6 +121,7 @@ function submitUpload(): void {}
             <div
               class="w-full h-full relative flex justify-center items-center"
             >
+              <!-- control are -->
               <div
                 class="z-20 w-full h-full bg-[#00000078] grid grid-cols-2 opacity-0 transition duration2-00 ease hover:opacity-100"
               >
@@ -139,15 +140,20 @@ function submitUpload(): void {}
                 </div>
               </div>
 
-              <transition name="opacity-fade">
-                <img
-                  :src="i.binaryString"
-                  :id="i.uuid"
-                  alt="selected img preview"
-                  class="absolute -left-[100%] opacity-0 transition-all duration-700 ease z-0"
-                  @load.once="delayLoadImg(i.uuid)"
-                />
-              </transition>
+              <!-- image -->
+              <div class="w-full h-full absolute">
+                <div class="absolute w-full h-full z-0" v-loading="true"></div>
+
+                <transition name="opacity-fade">
+                  <img
+                    :src="i.binaryString"
+                    :id="i.uuid"
+                    alt="selected img preview"
+                    class="absolute -left-[100%] opacity-0 transition-all duration-700 ease z-10"
+                    @load.once="delayLoadImg(i.uuid)"
+                  />
+                </transition>
+              </div>
             </div>
           </div>
         </transition-group>
