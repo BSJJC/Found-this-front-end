@@ -14,10 +14,12 @@ const dialogImageUrl = ref("");
 const dialogVisible = ref(false);
 
 const ImgFile = defineAsyncComponent(() => import("./ImgFile.vue"));
+const OtherFile = defineAsyncComponent(() => import("./OtherFile.vue"));
 
 interface fileConfig {
-  uuid: string;
+  name: string;
   extends: string;
+  uuid: string;
   binaryString: string;
 }
 
@@ -33,9 +35,13 @@ function getFiles() {
     // get UUID
     const uuid = generateUUID();
 
-    // get extension
+    // get file extension
     const fileNameParts = file.name.split(".");
     const extension = fileNameParts[fileNameParts.length - 1];
+
+    // get file name
+    const fileName = fileNameParts[0];
+    console.log(fileName);
 
     // get data
     const reader = new FileReader();
@@ -45,6 +51,7 @@ function getFiles() {
       const binaryString = reader.result as string;
 
       fileList.value.push({
+        name: fileName,
         uuid: uuid,
         extends: extension,
         binaryString: binaryString,
@@ -82,11 +89,6 @@ function picturePreview(file: fileConfig): void {
 function hidePicturePreview() {
   dialogVisible.value = false;
 }
-
-/**
- *submit all files that selected
- */
-function submitUpload(): void {}
 </script>
 
 <template>
@@ -100,7 +102,12 @@ function submitUpload(): void {}
             :key="index"
             class="w-[80px] h-[80px] mr-4 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
           >
-            <img-file :file="file"></img-file>
+            <img-file
+              v-if="file.extends === 'jpg' || file.extends === 'png'"
+              :file="file"
+            ></img-file>
+
+            <other-file v-else :file="file"></other-file>
           </div>
         </transition-group>
 

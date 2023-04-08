@@ -23,7 +23,6 @@ function delayLoadImg(uuid: string): void {
 
   setTimeout(() => {
     el!.setAttribute("src", src!);
-    
   }, 500);
 
   setTimeout(() => {
@@ -37,9 +36,8 @@ function delayLoadImg(uuid: string): void {
   <div class="w-full h-full relative flex justify-center items-center">
     <!-- control are -->
     <div
-      class="z-20 w-full h-full bg-[#00000078] grid grid-cols-2 opacity-0 transition duration2-00 ease hover:opacity-100"
+      class="z-20 w-full h-full bg-[#00000078] grid grid-cols-2 opacity-0 transition duration-200 ease hover:opacity-100"
     >
-      <!-- hover mask -->
       <div class="col-span-1 flex justify-center items-center">
         <elZoomInVue
           color="white"
