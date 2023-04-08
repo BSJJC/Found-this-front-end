@@ -23,6 +23,7 @@ function delayLoadImg(uuid: string): void {
 
   setTimeout(() => {
     el!.setAttribute("src", src!);
+    
   }, 500);
 
   setTimeout(() => {
