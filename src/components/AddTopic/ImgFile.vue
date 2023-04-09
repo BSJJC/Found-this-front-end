@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ref, Ref } from "vue";
 import { elDeleteVue, elZoomInVue } from "@/imgs/icons";
 
 type fileType = {
@@ -10,6 +11,7 @@ interface config {
   file: fileType;
 }
 
+const showPreview: Ref<boolean> = ref(false);
 const props = defineProps<config>();
 
 /**
@@ -42,6 +44,7 @@ function delayLoadImg(uuid: string): void {
         <elZoomInVue
           color="white"
           class="w-full m-2 hover:cursor-pointer"
+          @click="showPreview = true"
         ></elZoomInVue>
       </div>
       <div class="col-span-1 flex justify-center items-center">
@@ -65,6 +68,15 @@ function delayLoadImg(uuid: string): void {
           @load.once="delayLoadImg(props.file.uuid)"
         />
       </transition>
+
+      <teleport to="body">
+        <div
+          v-if="showPreview"
+          class="w-[200px] h-[200px] bg-red-200 absolute top-0 z-[999]"
+        >
+          <img :src="props.file.binaryString" />
+        </div>
+      </teleport>
     </div>
   </div>
 </template>
