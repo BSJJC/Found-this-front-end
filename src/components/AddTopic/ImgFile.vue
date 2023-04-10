@@ -48,8 +48,6 @@ function showPreview() {
 
   copyElPostions.top = reactObject.top;
   copyElPostions.left = reactObject.left;
-  copyElPostions.width = reactObject.width;
-  copyElPostions.height = reactObject.height;
 
   ifShowPreview.value = true;
 }
@@ -60,7 +58,10 @@ function hidePreview() {
 </script>
 
 <template>
-  <div class="w-full h-full relative flex justify-center items-center">
+  <div
+    v-show="!ifShowPreview"
+    class="w-full h-full relative flex justify-center items-center"
+  >
     <!-- control are -->
     <div
       class="z-20 w-full h-full bg-[#00000078] grid grid-cols-2 opacity-0 transition duration-200 ease hover:opacity-100"
@@ -95,16 +96,20 @@ function hidePreview() {
       </transition>
 
       <!-- copy element -->
-      <teleport to="body">
-        <img-preview
-          v-if="ifShowPreview"
-          :binary-string="props.file.binaryString"
-          :start-postions="copyElPostions"
-          @hidePreview="hidePreview"
-        ></img-preview>
-      </teleport>
+      <transition name="opacity">
+        <teleport to="body">
+          <img-preview
+            v-if="ifShowPreview"
+            :binary-string="props.file.binaryString"
+            :start-postions="copyElPostions"
+            @hidePreview="hidePreview"
+          ></img-preview>
+        </teleport>
+      </transition>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "@/scss/animations.scss";
+</style>

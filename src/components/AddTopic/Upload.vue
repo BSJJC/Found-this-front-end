@@ -133,9 +133,6 @@ function hidePicturePreview() {
         />
       </div>
     </el-scrollbar>
-
-    <!-- image preview -->
-    <!-- <teleport to="body"> 123123213 </teleport> -->
   </div>
 </template>
 
