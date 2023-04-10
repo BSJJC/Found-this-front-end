@@ -21,7 +21,10 @@ const state = ref({
 
 const emits = defineEmits(["hidePreview"]);
 
-function zoomIn() {
+/**
+ * zoom in image preview
+ */
+function zoomIn(): void {
   state.value.top = "-75px";
   state.value.left = "25vw";
   state.value.width = "50vw";
@@ -31,13 +34,16 @@ function zoomIn() {
   }, 400);
 }
 
-function zoomOut() {
+/**
+ * zomm out image preview
+ */
+function zoomOut(): void {
   state.value.top = `${props.startPostions.top}px`;
   state.value.left = `${props.startPostions.left}px`;
   state.value.width = "80px";
 }
 
-function hidePreview() {
+function hidePreview(): void {
   zoomOut();
 
   setTimeout(() => {
