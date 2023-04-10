@@ -41,7 +41,6 @@ function getFiles() {
 
     // get file name
     const fileName = fileNameParts[0];
-    console.log(fileName);
 
     // get data
     const reader = new FileReader();

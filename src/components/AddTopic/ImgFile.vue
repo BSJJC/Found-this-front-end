@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, Ref } from "vue";
+import { ref, Ref, reactive, defineAsyncComponent } from "vue";
 import { elDeleteVue, elZoomInVue } from "@/imgs/icons";
 
 type fileType = {
@@ -11,8 +11,16 @@ interface config {
   file: fileType;
 }
 
-const showPreview: Ref<boolean> = ref(false);
+const ifShowPreview: Ref<boolean> = ref(false);
 const props = defineProps<config>();
+
+const imgPreview = defineAsyncComponent(() => import("./ImgFilePreview.vue"));
+const copyElPostions = reactive({
+  top: 0,
+  left: 0,
+  width: 0,
+  height: 0,
+});
 
 /**
  *  delay load image preview
@@ -32,6 +40,23 @@ function delayLoadImg(uuid: string): void {
     el!.style.opacity = "1";
   }, 700);
 }
+
+function showPreview() {
+  const el = document.getElementById(props.file.uuid);
+
+  const reactObject = el!.getBoundingClientRect();
+
+  copyElPostions.top = reactObject.top;
+  copyElPostions.left = reactObject.left;
+  copyElPostions.width = reactObject.width;
+  copyElPostions.height = reactObject.height;
+
+  ifShowPreview.value = true;
+}
+
+function hidePreview() {
+  ifShowPreview.value = false;
+}
 </script>
 
 <template>
@@ -44,7 +69,7 @@ function delayLoadImg(uuid: string): void {
         <elZoomInVue
           color="white"
           class="w-full m-2 hover:cursor-pointer"
-          @click="showPreview = true"
+          @click="showPreview"
         ></elZoomInVue>
       </div>
       <div class="col-span-1 flex justify-center items-center">
@@ -69,13 +94,14 @@ function delayLoadImg(uuid: string): void {
         />
       </transition>
 
+      <!-- copy element -->
       <teleport to="body">
-        <div
-          v-if="showPreview"
-          class="w-[200px] h-[200px] bg-red-200 absolute top-0 z-[999]"
-        >
-          <img :src="props.file.binaryString" />
-        </div>
+        <img-preview
+          v-if="ifShowPreview"
+          :binary-string="props.file.binaryString"
+          :start-postions="copyElPostions"
+          @hidePreview="hidePreview"
+        ></img-preview>
       </teleport>
     </div>
   </div>
