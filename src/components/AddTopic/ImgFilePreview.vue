@@ -22,9 +22,13 @@ const state = ref({
 const emits = defineEmits(["hidePreview"]);
 
 function zoomIn() {
-  state.value.top = "0px";
+  state.value.top = "-75px";
   state.value.left = "25vw";
   state.value.width = "50vw";
+
+  setTimeout(() => {
+    state.value.top = "0px";
+  }, 400);
 }
 
 function zoomOut() {
@@ -51,18 +55,21 @@ onMounted(() => {
 <template>
   <div
     class="w-screen h-screen bg-[#00000080] absolute top-0 z-[999] flex justify-center items-start"
-    @click.self="hidePreview"
   >
-    <img
-      :src="props.binaryString"
-      alt="the preview of the selected image"
-      class="rounded-lg absolute transition-all duration-500 ease"
-      :style="{
-        top: `${state.top}`,
-        left: `${state.left}`,
-        width: `${state.width}`,
-      }"
-    />
+    <el-scrollbar>
+      <div class="w-screen h-full relative" @click="hidePreview">
+        <img
+          :src="props.binaryString"
+          alt="the preview of the selected image"
+          class="rounded-lg absolute transition-all duration-500 ease"
+          :style="{
+            top: `${state.top}`,
+            left: `${state.left}`,
+            width: `${state.width}`,
+          }"
+        />
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 

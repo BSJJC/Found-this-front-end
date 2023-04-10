@@ -96,20 +96,19 @@ function hidePreview() {
       </transition>
 
       <!-- copy element -->
-      <transition name="opacity">
-        <teleport to="body">
+      <teleport to="body">
+        <transition name="opacity-fade">
           <img-preview
             v-if="ifShowPreview"
             :binary-string="props.file.binaryString"
             :start-postions="copyElPostions"
             @hidePreview="hidePreview"
           ></img-preview>
-        </teleport>
-      </transition>
+        </transition>
+      </teleport>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/animations.scss";
 </style>

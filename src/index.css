@@ -2,10 +2,6 @@
   height: 100vh;
 }
 
-body {
-  overflow: hidden;
-}
-
 * {
   font-family: "得意黑";
   -webkit-user-drag: none;
