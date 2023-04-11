@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import { useAppendix } from "@/stores/index";
+import { storeToRefs } from "pinia";
+
 import { elDeleteVue } from "@/imgs/icons";
 
 type fileType = {
@@ -12,6 +15,21 @@ interface config {
 }
 
 const props = defineProps<config>();
+
+const store = useAppendix();
+const { fileList } = storeToRefs(store);
+
+/**
+ * delete this non-image file
+ */
+function deleteFile(uuid: string) {
+  fileList.value.forEach((file, index) => {
+    if (file.uuid === uuid) {
+      fileList.value.splice(index, 1);
+      return;
+    }
+  });
+}
 </script>
 
 <template>
@@ -24,6 +42,7 @@ const props = defineProps<config>();
         <elDeleteVue
           color="white"
           class="w-1/3 hover:cursor-pointer"
+          @click="deleteFile(props.file.uuid)"
         ></elDeleteVue>
       </div>
     </div>

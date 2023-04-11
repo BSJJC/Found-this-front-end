@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { ref, defineAsyncComponent } from "vue";
+import { useAppendix } from "@/stores/index";
+import { storeToRefs } from "pinia";
 
 import { elPlushVue } from "@/imgs/icons";
 import generateUUID from "@/utils/uuid";
@@ -8,20 +10,11 @@ const fileUpload = ref(null);
 const fileInput = ref(null);
 const fileInputKey = ref(0);
 
-const fileList = ref<fileConfig[]>([]);
-
-const dialogImageUrl = ref("");
-const dialogVisible = ref(false);
+const store = useAppendix();
+const { fileList } = storeToRefs(store);
 
 const ImgFile = defineAsyncComponent(() => import("./ImgFile.vue"));
 const OtherFile = defineAsyncComponent(() => import("./OtherFile.vue"));
-
-interface fileConfig {
-  name: string;
-  extends: string;
-  uuid: string;
-  binaryString: string;
-}
 
 /**
  * get files that needs to be uploaded
@@ -60,34 +53,6 @@ function getFiles() {
     };
   }
 }
-
-/**
- *  uncheck file
- * @param file the file that needs to be uncheck
- */
-function removeFIle(file: fileConfig): void {
-  fileList.value.forEach((_file, index) => {
-    if (_file.uuid === file.uuid) {
-      fileList.value.splice(index, 1);
-    }
-  });
-}
-
-/**
- *  show the preview of image file
- * @param file the image file that should be zoom in
- */
-function picturePreview(file: fileConfig): void {
-  dialogImageUrl.value = file.binaryString;
-  dialogVisible.value = true;
-}
-
-/**
- * hide the preview of selected image file
- */
-function hidePicturePreview() {
-  dialogVisible.value = false;
-}
 </script>
 
 <template>
@@ -98,7 +63,7 @@ function hidePicturePreview() {
         <transition-group name="width-grown">
           <div
             v-for="(file, index) in fileList"
-            :key="index"
+            :key="fileList[index].uuid"
             class="w-[80px] h-[80px] mr-4 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
           >
             <img-file

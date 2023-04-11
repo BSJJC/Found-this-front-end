@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import { ref, Ref, reactive, defineAsyncComponent } from "vue";
+import { useAppendix } from "@/stores/index";
+import { storeToRefs } from "pinia";
+
 import { elDeleteVue, elZoomInVue } from "@/imgs/icons";
 
 type fileType = {
@@ -7,13 +10,16 @@ type fileType = {
   uuid: string;
 };
 
-interface config {
+type config = {
   file: fileType;
-}
+};
 
 const props = defineProps<config>();
 const ifShowPreview: Ref<boolean> = ref(false);
 const loading: Ref<boolean> = ref(true);
+
+const store = useAppendix();
+const { fileList } = storeToRefs(store);
 
 const imgPreview = defineAsyncComponent(() => import("./ImgFilePreview.vue"));
 const copyElPostions = reactive({
@@ -59,6 +65,19 @@ function showPreview() {
 }
 
 /**
+ *  delete image file
+ * @param uuid the uuid of the selectedd image file that needs to be deleted
+ */
+function deleteImg(uuid: string) {
+  fileList.value.forEach((file, index) => {
+    if (file.uuid === uuid) {
+      fileList.value.splice(index, 1);
+      return;
+    }
+  });
+}
+
+/**
  * hide the preview of the selected image file
  */
 function hidePreview() {
@@ -83,10 +102,12 @@ function hidePreview() {
             @click="showPreview"
           ></elZoomInVue>
         </div>
+
         <div class="col-span-1 flex justify-center items-center">
           <elDeleteVue
             color="white"
             class="w-full m-2 hover:cursor-pointer"
+            @click="deleteImg(props.file.uuid)"
           ></elDeleteVue>
         </div>
       </div>
