@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, Ref, reactive, defineAsyncComponent } from "vue";
-import { useAppendix } from "@/stores/index";
+import { useNewTopic } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 import { elDeleteVue, elZoomInVue } from "@/imgs/icons";
@@ -18,7 +18,7 @@ const props = defineProps<config>();
 const ifShowPreview: Ref<boolean> = ref(false);
 const loading: Ref<boolean> = ref(true);
 
-const store = useAppendix();
+const store = useNewTopic();
 const { fileList } = storeToRefs(store);
 
 const imgPreview = defineAsyncComponent(() => import("./ImgFilePreview.vue"));

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, defineAsyncComponent } from "vue";
-import { useAppendix } from "@/stores/index";
+import { useNewTopic } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 import { elPlushVue } from "@/imgs/icons";
@@ -10,7 +10,7 @@ const fileUpload = ref(null);
 const fileInput = ref(null);
 const fileInputKey = ref(0);
 
-const store = useAppendix();
+const store = useNewTopic();
 const { fileList } = storeToRefs(store);
 
 const ImgFile = defineAsyncComponent(() => import("./ImgFile.vue"));

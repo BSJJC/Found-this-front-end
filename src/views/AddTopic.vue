@@ -1,9 +1,12 @@
 <script lang="ts" setup>
-import { ref, defineAsyncComponent } from "vue";
+import { defineAsyncComponent } from "vue";
+import { useNewTopic } from "@/stores/index";
+import { storeToRefs } from "pinia";
+
 import Editor from "@tinymce/tinymce-vue";
 
-const topicName = ref("");
-const editorData = ref(`123`);
+const store = useNewTopic();
+const { topicName, editorText } = storeToRefs(store);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const Upload = defineAsyncComponent(
@@ -29,7 +32,9 @@ const Upload = defineAsyncComponent(
         <logo class="text-5xl"></logo>
       </div>
 
-      <div class="col-span-1 flex justify-center items-center text-4xl text-[#7E56DA]">
+      <div
+        class="col-span-1 flex justify-center items-center text-4xl text-[#7E56DA]"
+      >
         <div class="font-bold drop-shadow-lg">topic name:</div>
         <input
           v-model="topicName"
@@ -52,19 +57,18 @@ const Upload = defineAsyncComponent(
       :v-loading="true"
     >
       <Editor
-        v-model="editorData"
+        v-model="editorText"
         class="h-full transition duration-300 ease absolute z-10"
         api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y"
         :init="{
           plugins:
-            'preview importcss searchreplace autolink autosave  directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+            'preview importcss searchreplace autolink autosave  directionality code visualblocks visualchars fullscreen link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
           toolbar:
-            'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview  print | insertfile image media template link anchor codesample | ltr rtl',
+            'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview  print | link anchor codesample | ltr rtl',
           toolbar_sticky: true,
-          contextmenu: 'link image table',
+          contextmenu: 'link table',
           language: '',
           resize: false,
-          editimage_cors_hosts: ['picsum.photos'],
           skin: 'oxide',
           content_css: 'light',
         }"

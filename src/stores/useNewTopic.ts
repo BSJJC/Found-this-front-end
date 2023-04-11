@@ -7,11 +7,13 @@ type fileType = {
   binaryString: string;
 };
 
-export const useAppendix = defineStore({
-  id: "appendix",
+export const useNewTopic = defineStore({
+  id: "newTopic",
   state: () => ({
+    topicName: "",
+    editorText: "",
     fileList: [] as fileType[],
   }),
 });
 
-export default useAppendix;
+export default useNewTopic;
