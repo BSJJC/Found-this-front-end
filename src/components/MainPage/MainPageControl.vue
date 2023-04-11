@@ -4,6 +4,8 @@ import { useHome } from "@/stores";
 import { storeToRefs } from "pinia";
 import router from "@/router";
 
+import { ElMessage } from "element-plus";
+
 const sortWays = ref(["POPULAR", "CATEGORIES"]);
 
 const homeStore = useHome();
@@ -14,6 +16,13 @@ const copyElTop = ref(0);
 const copyElLeft = ref(0);
 
 function addNewTopic() {
+  const user = sessionStorage.getItem("user");
+
+  if (!user) {
+    ElMessage.error("please log in first.");
+    return;
+  }
+
   showNavBar.value = !showNavBar.value;
 
   const reactObject = (

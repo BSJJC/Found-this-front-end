@@ -7,7 +7,7 @@ import logInUser from "@/api/logInUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, loggedIn, remember, showPanel } =
+const { mode, loggedIn, rememberAccount, showPanel } =
   storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
@@ -147,14 +147,14 @@ function logIn(formEl: FormInstance | undefined) {
         <div class="w-full flex justify-between items-center text-lg my-3">
           <div
             class="cursor-pointer h-full flex justify-center items-center flex-row"
-            @click="remember = !remember"
+            @click="rememberAccount = !rememberAccount"
           >
-            <el-checkbox v-model="remember"></el-checkbox>
+            <el-checkbox v-model="rememberAccount"></el-checkbox>
             <div
               class="ml-3 select-none transition duration-300"
-              :style="{ color: `${remember ? '#7E56DA' : '#999'}` }"
+              :style="{ color: `${rememberAccount ? '#7E56DA' : '#999'}` }"
             >
-              Remember me for 30 days
+              Remember account
             </div>
           </div>
 
