@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAppendix } from "@/stores/index";
+import { useNewTopic } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 import { elDeleteVue } from "@/imgs/icons";
@@ -16,7 +16,7 @@ interface config {
 
 const props = defineProps<config>();
 
-const store = useAppendix();
+const store = useNewTopic();
 const { fileList } = storeToRefs(store);
 
 /**

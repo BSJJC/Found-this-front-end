@@ -4,14 +4,34 @@ import { useNewTopic } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 import Editor from "@tinymce/tinymce-vue";
+import { ElMessage } from "element-plus";
+import disableInputSpace from "@/utils/disableInputSpace";
 
 const store = useNewTopic();
-const { topicName, editorText } = storeToRefs(store);
+const { topicName, editorText, fileList } = storeToRefs(store);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const Upload = defineAsyncComponent(
   () => import("@/components/AddTopic/Upload.vue")
 );
+
+function submitTopic() {
+  if (topicName.value.length === 0) {
+    ElMessage.error("topic name is necessary");
+    return;
+  }
+
+  if (editorText.value.length === 0) {
+    ElMessage.error("text is necessary");
+    return;
+  }
+
+  const topicInfo = {
+    topicName: topicName.value,
+    editorText: editorText.value,
+    fileList: fileList.value,
+  };
+}
 </script>
 
 <template>
@@ -39,12 +59,14 @@ const Upload = defineAsyncComponent(
         <input
           v-model="topicName"
           class="h-[40px] w-[400px] ml-2 outline-none border-[1px] border-[#7E56DA] rounded-full text-2xl indent-4 shadow-lg translate-y-1"
+          @input="topicName = disableInputSpace(topicName)"
         />
       </div>
 
       <div class="h-full px-3 col-span-1 flex justify-end items-center">
         <button
           class="bg-[#7E56DA] text-white px-8 py-3 rounded-lg text-xl shadow-md shadow-[#7E56DA] transition duration-300 ease hover:-translate-y-1"
+          @click="submitTopic"
         >
           SUBMIT
         </button>
