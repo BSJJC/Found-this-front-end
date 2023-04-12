@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp } from "@/stores";
 import { menuVue } from "@/imgs/icons";
@@ -9,21 +9,11 @@ const logInAndSignUp = defineAsyncComponent(
 );
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { showPanel, loggedIn } = storeToRefs(logInAndSignUpStore);
+const { showPanel, loggedIn, userAvaterData } =
+  storeToRefs(logInAndSignUpStore);
 
-const name = ref("");
 const userOptions = ref(["123", "abc", "666"]);
 const showUserOptions = ref(false);
-
-watch(
-  () => loggedIn.value,
-  (val) => {
-    if (val) {
-      const email = JSON.parse(sessionStorage.getItem("user") as string).email;
-      name.value = email.slice(0, 2);
-    }
-  }
-);
 
 function showLogInAndSignUp() {
   showPanel.value = true;
@@ -57,7 +47,19 @@ function userControl(i: string) {
           }
         "
       >
-        {{ !loggedIn ? "Log In" : `${name}` }}
+        <transition name="opacity-fade" mode="out-in">
+          <div v-if="!loggedIn">
+            {{ "Log In" }}
+          </div>
+
+          <div v-else>
+            <img
+              :src="userAvaterData"
+              alt="user avater"
+              class="shadow-lg rounded-full"
+            />
+          </div>
+        </transition>
       </div>
 
       <teleport to="body">
@@ -65,7 +67,7 @@ function userControl(i: string) {
       </teleport>
 
       <div
-        class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] rounded-full transition duration-200 hover:cursor-pointer hover:-translate-y-1"
+        class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] shadow-lg rounded-full transition duration-200 hover:cursor-pointer hover:-translate-y-1"
         @click="showUserOptions = !showUserOptions"
       >
         <menu-vue color="black" class="w-2/3"></menu-vue>
@@ -93,6 +95,8 @@ function userControl(i: string) {
 </template>
 
 <style lang="scss" scoped>
+@use "@/scss/animations.scss";
+
 * {
   user-select: none;
 }

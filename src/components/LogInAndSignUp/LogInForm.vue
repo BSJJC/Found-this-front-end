@@ -7,7 +7,7 @@ import logInUser from "@/api/logInUser";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, loggedIn, rememberAccount, showPanel } =
+const { mode, loggedIn, userAvaterData, rememberAccount, showPanel } =
   storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
@@ -73,11 +73,11 @@ function logIn(formEl: FormInstance | undefined) {
           status.value = "success";
           loggedIn.value = true;
 
-          console.log(user.data);
+          userAvaterData.value = `data:image;base64,${user.data.avaterData}`;
+
           sessionStorage.setItem("user", JSON.stringify(user.data));
 
           console.log("log in success");
-          console.log(user);
         }, 1000);
 
         setTimeout(() => {
