@@ -36,7 +36,6 @@ function getFiles() {
 
     // add file to allAppendixs
     const formData = new FormData();
-    //@ts-ignore
     formData.append("userAppendix", file);
     allAppendixs.value.push(formData);
 
