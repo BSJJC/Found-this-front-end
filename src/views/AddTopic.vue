@@ -6,16 +6,18 @@ import { storeToRefs } from "pinia";
 import Editor from "@tinymce/tinymce-vue";
 import { ElMessage } from "element-plus";
 import disableInputSpace from "@/utils/disableInputSpace";
+import generateUUID from "@/utils/uuid";
+import uploadNewTopicInfo from "@/api/topic/uploadNewTopicInfo";
 
 const store = useNewTopic();
-const { topicName, editorText, fileList } = storeToRefs(store);
+const { topicName, editorText, allAppendixs } = storeToRefs(store);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const Upload = defineAsyncComponent(
   () => import("@/components/AddTopic/Upload.vue")
 );
 
-function submitTopic() {
+async function submitTopic() {
   if (topicName.value.length === 0) {
     ElMessage.error("topic name is necessary");
     return;
@@ -26,11 +28,22 @@ function submitTopic() {
     return;
   }
 
-  const topicInfo = {
-    topicName: topicName.value,
-    editorText: editorText.value,
-    fileList: fileList.value,
+  const newTopicId = generateUUID();
+  const userInfo = JSON.parse(sessionStorage.getItem("user") as string);
+  console.log(userInfo.email);
+
+  const newTopicInfo = {
+    topicID: newTopicId,
+    founder: userInfo.email,
+    title: topicName.value,
+    text: editorText.value,
   };
+
+  const res = await uploadNewTopicInfo(newTopicInfo);
+
+  console.log(res.data);
+
+  const newTopicAppendixs = allAppendixs.value;
 }
 </script>
 
