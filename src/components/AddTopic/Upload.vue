@@ -8,10 +8,9 @@ import generateUUID from "@/utils/uuid";
 
 const fileUpload = ref(null);
 const fileInput = ref(null);
-const fileInputKey = ref(0);
 
 const store = useNewTopic();
-const { fileList } = storeToRefs(store);
+const { fileList, allAppendixs } = storeToRefs(store);
 
 const ImgFile = defineAsyncComponent(() => import("./ImgFile.vue"));
 const OtherFile = defineAsyncComponent(() => import("./OtherFile.vue"));
@@ -35,7 +34,14 @@ function getFiles() {
     // get file name
     const fileName = fileNameParts[0];
 
-    // get data
+    // add file to allAppendixs
+    const formData = new FormData();
+    //@ts-ignore
+    formData.append("userAppendix", file);
+    allAppendixs.value.push(formData);
+
+    // just for show the files
+    // add to file list,
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
@@ -48,8 +54,6 @@ function getFiles() {
         extends: extension,
         binaryString: binaryString,
       });
-
-      fileInputKey.value++;
     };
   }
 }
@@ -93,7 +97,6 @@ function getFiles() {
           ref="fileInput"
           style="display: none"
           @input="getFiles"
-          :key="fileInputKey"
           multiple
         />
       </div>

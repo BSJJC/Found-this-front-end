@@ -12,7 +12,8 @@ export const useNewTopic = defineStore({
   state: () => ({
     topicName: "",
     editorText: "",
-    fileList: [] as fileType[],
+    fileList: [] as fileType[], // just for show all files
+    allAppendixs: [] as FormData[],
   }),
 });
 
