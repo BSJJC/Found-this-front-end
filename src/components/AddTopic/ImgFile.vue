@@ -19,7 +19,7 @@ const ifShowPreview: Ref<boolean> = ref(false);
 const loading: Ref<boolean> = ref(true);
 
 const store = useNewTopic();
-const { fileList } = storeToRefs(store);
+const { fileList, allAppendixs } = storeToRefs(store);
 
 const imgPreview = defineAsyncComponent(() => import("./ImgFilePreview.vue"));
 const copyElPostions = reactive({
@@ -72,6 +72,7 @@ function deleteImg(uuid: string) {
   fileList.value.forEach((file, index) => {
     if (file.uuid === uuid) {
       fileList.value.splice(index, 1);
+      allAppendixs.value.splice(index, 1);
       return;
     }
   });

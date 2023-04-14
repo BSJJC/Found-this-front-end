@@ -17,7 +17,7 @@ interface config {
 const props = defineProps<config>();
 
 const store = useNewTopic();
-const { fileList } = storeToRefs(store);
+const { fileList, allAppendixs } = storeToRefs(store);
 
 /**
  * delete this non-image file
@@ -26,6 +26,7 @@ function deleteFile(uuid: string) {
   fileList.value.forEach((file, index) => {
     if (file.uuid === uuid) {
       fileList.value.splice(index, 1);
+      allAppendixs.value.splice(index, 1);
       return;
     }
   });
