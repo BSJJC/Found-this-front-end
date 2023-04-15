@@ -9,7 +9,7 @@ const logInAndSignUp = defineAsyncComponent(
 );
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { showPanel, loggedIn, userAvaterData } =
+const { showPanel, loggedIn, userAvaterUrl } =
   storeToRefs(logInAndSignUpStore);
 
 const userOptions = ref(["123", "abc", "666"]);
@@ -54,7 +54,7 @@ function userControl(i: string) {
 
           <div v-else>
             <img
-              :src="userAvaterData"
+              :src="userAvaterUrl"
               alt="user avater"
               class="shadow-lg rounded-full"
             />

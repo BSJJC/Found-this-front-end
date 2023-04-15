@@ -6,7 +6,7 @@ export const useLogInAndSignUp = defineStore({
     mode: "login-mode",
     loggedIn: false,
 
-    userAvaterData: "",
+    userAvaterUrl: "",
 
     rememberAccount: false,
 
