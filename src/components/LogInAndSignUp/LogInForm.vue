@@ -3,7 +3,7 @@ import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp, useLoading } from "@/stores/index";
 import type { FormInstance, FormRules } from "element-plus";
-import logInUser from "@/api/logInUser";
+import logInUser from "@/api/user/logInUser.js";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();

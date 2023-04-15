@@ -7,7 +7,9 @@ import Editor from "@tinymce/tinymce-vue";
 import { ElMessage } from "element-plus";
 import disableInputSpace from "@/utils/disableInputSpace";
 import generateUUID from "@/utils/uuid";
+
 import uploadNewTopicInfo from "@/api/topic/uploadNewTopicInfo";
+import uploadNewTopicAppendix from "@/api/topic/uploadNewTopicAppendix";
 
 const store = useNewTopic();
 const { topicName, editorText, allAppendixs } = storeToRefs(store);
@@ -30,7 +32,6 @@ async function submitTopic() {
 
   const newTopicId = generateUUID();
   const userInfo = JSON.parse(sessionStorage.getItem("user") as string);
-  console.log(userInfo.email);
 
   const newTopicInfo = {
     topicID: newTopicId,
@@ -39,11 +40,15 @@ async function submitTopic() {
     text: editorText.value,
   };
 
-  const res = await uploadNewTopicInfo(newTopicInfo);
-
-  console.log(res.data);
+  // const res = await uploadNewTopicInfo(newTopicInfo);
 
   const newTopicAppendixs = allAppendixs.value;
+
+
+  //@ts-ignore
+  const res = await uploadNewTopicAppendix(newTopicAppendixs[0]);
+
+  console.log(res);
 }
 </script>
 

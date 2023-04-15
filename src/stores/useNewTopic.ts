@@ -10,8 +10,8 @@ type fileType = {
 export const useNewTopic = defineStore({
   id: "newTopic",
   state: () => ({
-    topicName: "",
-    editorText: "",
+    topicName: "name",
+    editorText: "text",
     fileList: [] as fileType[], // just for show all files
     allAppendixs: [] as FormData[],
   }),
