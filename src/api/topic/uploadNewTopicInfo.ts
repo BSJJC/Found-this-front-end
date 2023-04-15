@@ -7,7 +7,6 @@ const instance = axios.create({
 });
 
 const uploadNewTopicInfo = async (data: {
-  topicID: string;
   founder: string;
   title: string;
   text: string;

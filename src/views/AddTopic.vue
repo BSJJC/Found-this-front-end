@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineAsyncComponent } from "vue";
+import { ref, Ref, defineAsyncComponent } from "vue";
 import { useNewTopic } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
@@ -13,11 +13,34 @@ import uploadNewTopicAppendix from "@/api/topic/uploadNewTopicAppendix";
 
 const store = useNewTopic();
 const { topicName, editorText, allAppendixs } = storeToRefs(store);
+const allObjectIDs: Ref<string[]> = ref([]);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const Upload = defineAsyncComponent(
   () => import("@/components/AddTopic/Upload.vue")
 );
+
+async function topicInfo() {
+  const userInfo = JSON.parse(sessionStorage.getItem("user") as string);
+
+  const newTopicInfo = {
+    founder: userInfo.email,
+    title: topicName.value,
+    text: editorText.value,
+  };
+
+  const res = await uploadNewTopicInfo(newTopicInfo);
+
+  console.log(res);
+}
+
+async function topicAppendix() {
+  allAppendixs.value.forEach(async (appendix) => {
+    const res = await uploadNewTopicAppendix(appendix);
+
+    console.log(res.data);
+  });
+}
 
 async function submitTopic() {
   if (topicName.value.length === 0) {
@@ -30,25 +53,9 @@ async function submitTopic() {
     return;
   }
 
-  const newTopicId = generateUUID();
-  const userInfo = JSON.parse(sessionStorage.getItem("user") as string);
+  await topicAppendix();
 
-  const newTopicInfo = {
-    topicID: newTopicId,
-    founder: userInfo.email,
-    title: topicName.value,
-    text: editorText.value,
-  };
-
-  // const res = await uploadNewTopicInfo(newTopicInfo);
-
-  const newTopicAppendixs = allAppendixs.value;
-
-
-  //@ts-ignore
-  const res = await uploadNewTopicAppendix(newTopicAppendixs[0]);
-
-  console.log(res);
+  topicInfo();
 }
 </script>
 

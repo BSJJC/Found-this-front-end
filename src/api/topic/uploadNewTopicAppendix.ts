@@ -9,7 +9,7 @@ const instance = axios.create({
   },
 });
 
-const uploadNewTopicAppendix = async (data: any) => {
+const uploadNewTopicAppendix = async (data: FormData) => {
   return await instance.request({
     data,
   });
