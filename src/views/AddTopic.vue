@@ -4,7 +4,7 @@ import { useNewTopic } from "@/stores/index";
 import { storeToRefs } from "pinia";
 
 import Editor from "@tinymce/tinymce-vue";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElNotification } from "element-plus";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 import uploadNewTopicInfo from "@/api/topic/uploadNewTopicInfo";
@@ -14,13 +14,22 @@ import { AxiosResponse } from "axios";
 const store = useNewTopic();
 const { topicName, editorText, fileList, allAppendixs } = storeToRefs(store);
 const allObjectIDs: Ref<string[]> = ref([]);
+const allFIleUploaded: Ref<boolean> = ref(true);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const Upload = defineAsyncComponent(
   () => import("@/components/AddTopic/Upload.vue")
 );
 
-async function topicInfo() {
+/**
+ * Send request, upload new topic info
+ * if any file fail to upload, this method will not be run
+ */
+async function topicInfo(): Promise<void> {
+  if (!allFIleUploaded.value) {
+    return;
+  }
+
   const userInfo = JSON.parse(sessionStorage.getItem("user") as string);
 
   const newTopicInfo = {
@@ -31,9 +40,24 @@ async function topicInfo() {
   };
 
   await uploadNewTopicInfo(newTopicInfo);
+
+  topicName.value = "";
+  editorText.value = "";
+
+  ElNotification({
+    title: "Success",
+    position: "bottom-right",
+    message: "The new topic is created!",
+    type: "success",
+  });
 }
 
-async function topicAppendix() {
+/**
+ * Send request, upload new topic appendix
+ */
+async function topicAppendix(): Promise<void> {
+  allFIleUploaded.value = true;
+
   const promises: Promise<AxiosResponse<any>>[] = [];
 
   try {
@@ -43,33 +67,56 @@ async function topicAppendix() {
 
     const results = await Promise.allSettled(promises);
 
-    const uploadedFIleIndexs: number[] = [];
-
-    // error handle
-    results.forEach((result, index) => {
-      if (result.status === "rejected") {
-        console.error(`Error uploading appendix ${index}: ${result.reason}`);
-      } else {
-        const response = result.value;
-        allObjectIDs.value.push(response.data);
-
-        uploadedFIleIndexs.push(index);
-      }
-    });
-
-    // delete the uploaded file from fileList and allAppendixs
-    for (let i = uploadedFIleIndexs.length - 1; i >= 0; i--) {
-      fileList.value.splice(uploadedFIleIndexs[i], 1);
-      allAppendixs.value.splice(uploadedFIleIndexs[i], 1);
-    }
-
-    console.log(allAppendixs.value);
+    topicAppendixErrorHandler(results);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function submitTopic() {
+/**
+ * handle error if any file is fail to upload
+ * @param results the Pormise array of all requests
+ */
+function topicAppendixErrorHandler(
+  results: PromiseSettledResult<AxiosResponse<any, any>>[]
+): void {
+  const uploadedFIleIndexs: number[] = [];
+
+  // error handle
+  results.forEach((result, index) => {
+    if (result.status === "rejected") {
+      console.error(`Error uploading appendix ${index}: ${result.reason}`);
+
+      allFIleUploaded.value = false;
+    } else {
+      const response = result.value;
+      allObjectIDs.value.push(response.data);
+
+      uploadedFIleIndexs.push(index);
+    }
+  });
+
+  // delete the uploaded file from fileList and allAppendixs
+  for (let i = uploadedFIleIndexs.length - 1; i >= 0; i--) {
+    fileList.value.splice(uploadedFIleIndexs[i], 1);
+    allAppendixs.value.splice(uploadedFIleIndexs[i], 1);
+  }
+
+  // show error message if any file failed to upload
+  if (!allFIleUploaded.value) {
+    ElNotification({
+      title: "Error",
+      position: "bottom-right",
+      message: `Some appendix failed to upload, please click "SUBMIT" again to try uploading`,
+      type: "error",
+    });
+  }
+}
+
+/**
+ * try submit new topic
+ */
+async function submitTopic(): Promise<void> {
   if (topicName.value.length === 0) {
     ElMessage.error("topic name is necessary");
     return;
