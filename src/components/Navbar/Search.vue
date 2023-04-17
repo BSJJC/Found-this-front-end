@@ -1,38 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import { searchVue } from "@/imgs/icons";
-
-const maxHeight = ref(0);
-const keyWords = ref("");
-const list = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-];
-
-const _list = ref([
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-]);
-
-function listFilte() {
-  if (keyWords.value.length === 0) {
-    _list.value = [...list];
-
-    maxHeight.value = (_list.value.length >= 5 ? 5 : _list.value.length) * 48;
-
-    return;
-  }
-
-  _list.value = [...list];
-  for (let i = 0; i < _list.value.length; i++) {
-    if (
-      _list.value[i].toString().toLowerCase().indexOf(keyWords.value) === -1
-    ) {
-      _list.value.splice(i, 1);
-      i--;
-    }
-  }
-
-  maxHeight.value = (_list.value.length >= 5 ? 5 : _list.value.length) * 48;
-}
 </script>
 
 <template>
