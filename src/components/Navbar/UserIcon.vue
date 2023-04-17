@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useLogInAndSignUp } from "@/stores";
 import { menuVue } from "@/imgs/icons";
@@ -9,8 +9,7 @@ const logInAndSignUp = defineAsyncComponent(
 );
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { showPanel, loggedIn, userAvaterUrl } =
-  storeToRefs(logInAndSignUpStore);
+const { showPanel, loggedIn, userAvaterUrl } = storeToRefs(logInAndSignUpStore);
 
 const userOptions = ref(["123", "abc", "666"]);
 const showUserOptions = ref(false);
@@ -27,6 +26,15 @@ function userControl(i: string) {
   console.log(i);
   showUserOptions.value = false;
 }
+
+onMounted(() => {
+  const user = JSON.parse(sessionStorage.getItem("user")!);
+
+  if (user) {
+    loggedIn.value = true;
+    userAvaterUrl.value = `http://localhost:5000/api/userAvaters/${user.userAvaterUrl}`;
+  }
+});
 </script>
 
 <template>
