@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
 
           <!-- logo-->
           <div class="w-full h-[70px] flex flex-row flex-none select-none">
-            <logo class="text-3xl"></logo>
+            <logo class="text-3xl" :enableGoToHomePage="false"></logo>
           </div>
 
           <!-- Main form  -->

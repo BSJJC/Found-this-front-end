@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ref, Ref, defineAsyncComponent } from "vue";
-import { useNewTopic } from "@/stores/index";
+import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
+import { useNewTopic } from "@/stores/index";
 
 import Editor from "@tinymce/tinymce-vue";
 import { ElMessage, ElNotification } from "element-plus";
@@ -13,8 +14,11 @@ import { AxiosResponse } from "axios";
 
 const store = useNewTopic();
 const { topicName, editorText, fileList, allAppendixs } = storeToRefs(store);
+
 const allObjectIDs: Ref<string[]> = ref([]);
 const allFIleUploaded: Ref<boolean> = ref(true);
+
+const router = useRouter();
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const Upload = defineAsyncComponent(
@@ -129,6 +133,10 @@ async function submitTopic(): Promise<void> {
 
   await topicAppendix();
   await topicInfo();
+
+  setTimeout(() => {
+    router.push("/");
+  }, 2000);
 }
 </script>
 
@@ -147,7 +155,7 @@ async function submitTopic(): Promise<void> {
     <!-- header -->
     <header class="h-[10%] w-full grid grid-cols-3">
       <div class="col-span-1 h-full flex justify-start items-center">
-        <logo class="text-5xl"></logo>
+        <logo class="text-5xl" :enable-go-to-home-page="true"></logo>
       </div>
 
       <div
