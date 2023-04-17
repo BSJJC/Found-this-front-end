@@ -12,7 +12,7 @@ import uploadNewTopicAppendix from "@/api/topic/uploadNewTopicAppendix";
 import { AxiosResponse } from "axios";
 
 const store = useNewTopic();
-const { topicName, editorText, allAppendixs } = storeToRefs(store);
+const { topicName, editorText, fileList, allAppendixs } = storeToRefs(store);
 const allObjectIDs: Ref<string[]> = ref([]);
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
@@ -30,27 +30,43 @@ async function topicInfo() {
     appendixIDs: [...allObjectIDs.value],
   };
 
-  console.log(newTopicInfo);
-
   await uploadNewTopicInfo(newTopicInfo);
 }
 
 async function topicAppendix() {
   const promises: Promise<AxiosResponse<any>>[] = [];
 
-  return new Promise<void>((resolve) => {
+  try {
     allAppendixs.value.forEach((appendix) => {
       promises.push(uploadNewTopicAppendix(appendix));
     });
 
-    Promise.all(promises).then((response) => {
-      console.log(`All request completed`);
+    const results = await Promise.allSettled(promises);
 
-      allObjectIDs.value = response.map((response) => response.data);
+    const uploadedFIleIndexs: number[] = [];
 
-      resolve();
+    // error handle
+    results.forEach((result, index) => {
+      if (result.status === "rejected") {
+        console.error(`Error uploading appendix ${index}: ${result.reason}`);
+      } else {
+        const response = result.value;
+        allObjectIDs.value.push(response.data);
+
+        uploadedFIleIndexs.push(index);
+      }
     });
-  });
+
+    // delete the uploaded file from fileList and allAppendixs
+    for (let i = uploadedFIleIndexs.length - 1; i >= 0; i--) {
+      fileList.value.splice(uploadedFIleIndexs[i], 1);
+      allAppendixs.value.splice(uploadedFIleIndexs[i], 1);
+    }
+
+    console.log(allAppendixs.value);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function submitTopic() {
