@@ -6,10 +6,10 @@ import { storeToRefs } from "pinia";
 import Editor from "@tinymce/tinymce-vue";
 import { ElMessage } from "element-plus";
 import disableInputSpace from "@/utils/disableInputSpace";
-import generateUUID from "@/utils/uuid";
 
 import uploadNewTopicInfo from "@/api/topic/uploadNewTopicInfo";
 import uploadNewTopicAppendix from "@/api/topic/uploadNewTopicAppendix";
+import { AxiosResponse } from "axios";
 
 const store = useNewTopic();
 const { topicName, editorText, allAppendixs } = storeToRefs(store);
@@ -27,18 +27,29 @@ async function topicInfo() {
     founder: userInfo.email,
     title: topicName.value,
     text: editorText.value,
+    appendixIDs: [...allObjectIDs.value],
   };
 
-  const res = await uploadNewTopicInfo(newTopicInfo);
+  console.log(newTopicInfo);
 
-  console.log(res);
+  await uploadNewTopicInfo(newTopicInfo);
 }
 
 async function topicAppendix() {
-  allAppendixs.value.forEach(async (appendix) => {
-    const res = await uploadNewTopicAppendix(appendix);
+  const promises: Promise<AxiosResponse<any>>[] = [];
 
-    console.log(res.data);
+  return new Promise<void>((resolve) => {
+    allAppendixs.value.forEach((appendix) => {
+      promises.push(uploadNewTopicAppendix(appendix));
+    });
+
+    Promise.all(promises).then((response) => {
+      console.log(`All request completed`);
+
+      allObjectIDs.value = response.map((response) => response.data);
+
+      resolve();
+    });
   });
 }
 
@@ -54,8 +65,7 @@ async function submitTopic() {
   }
 
   await topicAppendix();
-
-  topicInfo();
+  await topicInfo();
 }
 </script>
 
