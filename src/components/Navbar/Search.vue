@@ -24,39 +24,3 @@ import { searchVue } from "@/imgs/icons";
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-
-.value-list {
-  overflow: hidden;
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
-  transition: 0.3s ease;
-}
-
-.el-divider {
-  height: 80%;
-  margin: 0px;
-}
-
-ul {
-  z-index: 999;
-  * {
-    z-index: 999;
-  }
-}
-</style>
