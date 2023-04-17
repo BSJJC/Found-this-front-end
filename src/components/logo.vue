@@ -22,7 +22,7 @@ function goToHomePage() {
   >
     <div class="text-[#7e56da81]">Found</div>
     <div class="text-[#7E56DA] font-bold mx-2">this</div>
-    !
+    <div class="text-[#7e56da81]">!</div>
   </div>
 </template>
 

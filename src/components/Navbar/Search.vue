@@ -36,62 +36,24 @@ function listFilte() {
 </script>
 
 <template>
-  <div class="flex flex-row w-[700px] h-[50px] rounded-3xl border shadow-md">
+  <div
+    class="flex justify-center items-center flex-row w-[700px] h-[50px] rounded-3xl border shadow-md"
+  >
     <!-- search input -->
-    <div class="w-1/2 flex justify-center items-center rounded-l-3xl">
+    <div
+      class="w-[calc(100%-100px)] flex justify-center items-center rounded-l-3xl"
+    >
       <input
-        class="w-4/6 outline-none text-xl text-[#7E56DA]"
+        class="w-5/6 outline-none text-xl text-[#7E56DA]"
         placeholder="I want..."
       />
     </div>
 
-    <!-- divider -->
-    <div class="h-full w-2 flex justify-center items-center">
-      <el-divider direction="vertical" class="h-full" />
-    </div>
-
-    <!-- selects -->
-    <div class="w-1/2 flex justify-around items-center rounded-r-3xl">
-      <div class="w-3/4 h-full">
-        <input
-          v-model="keyWords"
-          class="w-full h-full transition duration-300 focus:outline-none text-xl indent-4 text-[#7E56DA]"
-          type="text"
-          placeholder="Type to filter"
-          @click="
-            maxHeight === 0
-              ? (maxHeight = (_list.length >= 5 ? 5 : _list.length) * 48)
-              : (maxHeight = 0)
-          "
-          @input="listFilte"
-          @focusout="maxHeight = 0"
-        />
-
-        <ul
-          class="value-list rounded-b-xl"
-          :style="{ maxHeight: `${maxHeight}px` }"
-        >
-          <el-scrollbar height="240px">
-            <transition-group name="list">
-              <li
-                v-for="(i, index) in _list"
-                :key="_list[index]"
-                class="overflow-hidden h-[3rem] p-[1rem] flex items-center cursor-pointer text-lg bg-[#7e56da70] transition duration-300 text-white hover:bg-[#7E56DA]"
-                @mousedown="keyWords = i.toString()"
-              >
-                {{ i }}
-              </li>
-            </transition-group>
-          </el-scrollbar>
-        </ul>
-      </div>
-
-      <!-- search button -->
-      <div
-        class="w-[50px] h-[40px] rounded-3xl bg-[#7E56DA] shadow shadow-[#9375da] flex justify-center items-center cursor-pointer"
-      >
-        <search-vue color="white" class="w-[30px]"> </search-vue>
-      </div>
+    <!-- search buttton -->
+    <div
+      class="w-[50px] h-[40px] rounded-3xl bg-[#7E56DA] shadow shadow-[#9375da] flex justify-center items-center cursor-pointer"
+    >
+      <search-vue color="white" class="w-[30px]"> </search-vue>
     </div>
   </div>
 </template>
