@@ -5,7 +5,7 @@ import { storeToRefs } from "pinia";
 import { useNewTopic } from "@/stores/index";
 
 import Editor from "@tinymce/tinymce-vue";
-import { ElMessage, ElNotification } from "element-plus";
+import { ElMessage } from "element-plus";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 import uploadNewTopicInfo from "@/api/topic/uploadNewTopicInfo";
@@ -48,11 +48,9 @@ async function topicInfo(): Promise<void> {
   topicName.value = "";
   editorText.value = "";
 
-  ElNotification({
-    title: "Success",
-    position: "bottom-right",
-    message: "The new topic is created!",
+  ElMessage({
     type: "success",
+    message: "The new topic is created!",
   });
 }
 
@@ -108,11 +106,9 @@ function topicAppendixErrorHandler(
 
   // show error message if any file failed to upload
   if (!allFIleUploaded.value) {
-    ElNotification({
-      title: "Error",
-      position: "bottom-right",
-      message: `Some appendix failed to upload, please click "SUBMIT" again to try uploading`,
+    ElMessage({
       type: "error",
+      message: `Some appendix failed to upload, please click "SUBMIT" again to try uploading`,
     });
   }
 }
