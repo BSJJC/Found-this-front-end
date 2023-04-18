@@ -1,15 +1,11 @@
 <script lang="ts" setup>
-import { ref } from "vue";
-
 import Avater from "@/components/Avater.vue";
 import BackgroundImg from "@/components/BackgroundImg.vue";
 
 // const bgUrl = ``;
 // const url = ``;
-const url = `http://localhost:5000/api/topicBackground/64290e15c49898aeddb98a6a`;
-const bgUrl = `http://localhost:5000/api/topicBackground/64210f2e07d89082ede20e46`;
-
-const loading = ref(true);
+const url = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780ca3`;
+const bgUrl = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780ca3`;
 </script>
 
 <template>
