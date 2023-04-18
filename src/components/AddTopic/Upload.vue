@@ -36,7 +36,7 @@ function getFiles() {
 
     // add file to allAppendixs
     const formData = new FormData();
-    formData.append("topicAppendix", file);
+    formData.append("topicAppendix", file, encodeURIComponent(file.name));
     allAppendixs.value.push(formData);
 
     // just for show the files
