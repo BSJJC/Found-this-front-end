@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onBeforeMount } from "vue";
 import { useTopics } from "@/stores";
 import { storeToRefs } from "pinia";
+
+import getTopicInfos from "@/api/topic/getTopicInfos";
 
 const topicStore = useTopics();
 const { topics } = storeToRefs(topicStore);
@@ -10,6 +12,13 @@ const MainPageControl = defineAsyncComponent(
   () => import("./MainPageControl.vue")
 );
 const Topic = defineAsyncComponent(() => import("./Topic.vue"));
+
+onBeforeMount(() => {
+  getTopicInfos().then((res) => {
+    console.log(res.data);
+    topics.value = res.data;
+  });
+});
 </script>
 
 <template>
@@ -18,7 +27,11 @@ const Topic = defineAsyncComponent(() => import("./Topic.vue"));
 
     <div class="w-full grid grid-cols-3">
       <transition-group name="opacity-scale">
-        <topic v-for="(i, index) in topics" :key="topics[index]"></topic>
+        <topic
+          v-for="(i, index) in topics"
+          :key="topics[index]"
+          :topic-info="i"
+        ></topic>
       </transition-group>
     </div>
   </div>

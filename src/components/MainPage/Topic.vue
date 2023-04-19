@@ -2,16 +2,30 @@
 import Avater from "@/components/Avater.vue";
 import BackgroundImg from "@/components/BackgroundImg.vue";
 
-// const bgUrl = ``;
-// const url = ``;
+interface config {
+  founder: string;
+  title: string;
+  text: string;
+  appendixIDs: Array<string>;
+  bgID: string;
+  isDeleted: boolean;
+}
+
+type topicInfoType = {
+  topicInfo: config;
+};
+
+const props = defineProps<topicInfoType>();
+
+console.log(props.topicInfo);
+
 const url = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780ca3`;
-const bgUrl = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780ca3`;
 </script>
 
 <template>
   <div class="flex justify-center items-center">
     <div
-      class="w-[80%] h-[400px] m-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-md shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da] hover:-translate-y-1"
+      class="w-[80%] h-[400px] m-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da] hover:-translate-y-1"
     >
       <!-- title -->
       <div
@@ -20,11 +34,11 @@ const bgUrl = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780
         <div
           class="absolute w-full h-full flex justify-start items-center p-8 z-10 text-white text-3xl"
         >
-          TOPICS
+          {{ props.topicInfo.title }}
         </div>
 
         <background-img
-          :src="bgUrl"
+          :src="`http://localhost:5000/api/topic/bg/download/${props.topicInfo.bgID}`"
           alt="test"
           class="absolute z-0"
         ></background-img>
@@ -38,7 +52,7 @@ const bgUrl = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780
             <div
               class="w-full h-1/3 text-md flex justify-start items-center text-[#adadad]"
             >
-              TOPICS
+              REPLIES
             </div>
             <div class="w-full h-2/3 text-2xl text-[#5d5d5d]">114514</div>
           </div>
@@ -63,7 +77,7 @@ const bgUrl = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780
           <div
             class="w-full h-1/3 text-md flex justify-start items-center flex-row text-[#adadad]"
           >
-            LAST TOPIC
+            LAST REPLY
           </div>
           <div
             class="w-full h-2/3 text-2xl text-[#5d5d5d] flex justify-center items-center flex-row"
