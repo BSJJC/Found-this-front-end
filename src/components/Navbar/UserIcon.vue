@@ -32,7 +32,7 @@ onMounted(() => {
 
   if (user) {
     loggedIn.value = true;
-    userAvaterUrl.value = `http://localhost:5000/api/userAvaters/${user.userAvaterUrl}`;
+    userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.userAvaterUrl}`;
   }
 });
 </script>
