@@ -55,3 +55,30 @@ wdith grown
   width: 80px;
   margin-right: 1rem;
 }
+
+/*
+topic animation
+*/
+.topic-leave-active {
+  transition: all 0.3s ease;
+}
+
+.topic-leave-active {
+  position: absolute;
+}
+
+.topic-enter-from,
+.topic-leave-to {
+  width: 0px;
+  opacity: 0;
+}
+
+.topic-enter-to,
+.topic-leave-from {
+  width: calc(100% / 3);
+  opacity: 1;
+}
+
+.topic-move {
+  transition: all 0.5s ease-in-out;
+}

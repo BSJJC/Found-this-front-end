@@ -15,18 +15,45 @@ const Topic = defineAsyncComponent(() => import("./Topic.vue"));
 
 onBeforeMount(() => {
   getTopicInfos().then((res) => {
-    console.log(res.data);
     topics.value = res.data;
   });
 });
+
+setTimeout(() => {
+  topics.value.reverse();
+}, 1000);
+
+setTimeout(() => {
+  topics.value.splice(1, 1);
+}, 2000);
+
+setTimeout(() => {
+  topics.value.splice(0, 1);
+}, 3000);
+
+setTimeout(() => {
+  topics.value.splice(2, 1);
+}, 4000);
+
+setTimeout(() => {
+  topics.value.splice(0, 1);
+}, 5000);
+
+setTimeout(() => {
+  topics.value.splice(0, 1);
+}, 6000);
+
+setTimeout(() => {
+  topics.value.splice(0, 1);
+}, 7000);
 </script>
 
 <template>
   <div class="px-20">
     <main-page-control></main-page-control>
 
-    <div class="w-full grid grid-cols-3">
-      <transition-group name="opacity-scale">
+    <div class="w-full flex justify-start items-center flex-wrap relative">
+      <transition-group name="topic">
         <topic
           v-for="(i, index) in topics"
           :key="topics[index]"
@@ -40,7 +67,5 @@ onBeforeMount(() => {
 <style lang="scss" scoped>
 @use "@/scss/animations.scss";
 
-.opacity-scale-move {
-  transition: all 0.3s ease-in-out;
-}
+
 </style>

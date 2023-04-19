@@ -84,8 +84,6 @@ function signUp(formEl: FormInstance | undefined) {
           password: ruleForm.password,
         });
 
-        console.log(user.data);
-
         sessionStorage.setItem("user", JSON.stringify(user.data));
 
         userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterUrl}`;

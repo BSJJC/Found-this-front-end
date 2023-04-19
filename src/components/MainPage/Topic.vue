@@ -16,14 +16,10 @@ type topicInfoType = {
 };
 
 const props = defineProps<topicInfoType>();
-
-console.log(props.topicInfo);
-
-const url = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780ca3`;
 </script>
 
 <template>
-  <div class="flex justify-center items-center">
+  <div class="flex justify-center items-center w-1/3">
     <div
       class="w-[80%] h-[400px] m-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da] hover:-translate-y-1"
     >
@@ -83,7 +79,7 @@ const url = `http://localhost:5000/api/topic/bg/download/643e2f84efee0675a2780ca
             class="w-full h-2/3 text-2xl text-[#5d5d5d] flex justify-center items-center flex-row"
           >
             <div class="h-full w-[20%] flex justify-start items-center">
-              <Avater :src="url" alt="test" loading-text="loading"></Avater>
+              <Avater src="" alt="test" loading-text="loading"></Avater>
             </div>
             <div class="h-full w-[80%] text-[1.2rem] overflow-clip">
               Lorem ipsum, dolor sit amet consectetur consectetur consectetur
