@@ -8,11 +8,9 @@ interface background {
 
 const props = defineProps<background>();
 const loading: Ref<boolean> = ref(true);
-const translateY: Ref<number> = ref(100);
 
 function backgroundLoaded() {
   loading.value = false;
-  translateY.value = 0;
 }
 </script>
 
@@ -34,7 +32,6 @@ function backgroundLoaded() {
       :alt="props.alt"
       @load="backgroundLoaded"
       class="absolute w-full h-full transition duration-300 ease z-10"
-      :style="{ transform: `translateY(${translateY}%)` }"
     />
   </div>
 </template>

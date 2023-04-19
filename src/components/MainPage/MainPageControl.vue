@@ -15,6 +15,8 @@ const addNewTopicBtn = ref(null);
 const copyElTop = ref(0);
 const copyElLeft = ref(0);
 
+const show = ref(false);
+
 function addNewTopic() {
   const user = sessionStorage.getItem("user");
 
@@ -38,8 +40,6 @@ function addNewTopic() {
     router.push("addTopic");
   }, 1000);
 }
-
-const show = ref(false);
 </script>
 
 <template>

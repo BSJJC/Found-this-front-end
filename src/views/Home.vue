@@ -18,7 +18,6 @@ const SquareBackground = defineAsyncComponent(
   ></square-background>
 
   <div class="h-screen w-screen overflow-hidden relative">
-  
     <nav-bar class="z-[50]"></nav-bar>
 
     <el-scrollbar height="90%">
