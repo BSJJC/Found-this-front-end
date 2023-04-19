@@ -73,7 +73,7 @@ function logIn(formEl: FormInstance | undefined) {
           status.value = "success";
           loggedIn.value = true;
 
-          userAvaterUrl.value = `http://localhost:5000/api/userAvaters/${user.data.userAvaterUrl}`;
+          userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterUrl}`;
 
           sessionStorage.setItem("user", JSON.stringify(user.data));
 

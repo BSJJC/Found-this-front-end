@@ -84,18 +84,17 @@ function signUp(formEl: FormInstance | undefined) {
           password: ruleForm.password,
         });
 
+        console.log(user.data);
+
         sessionStorage.setItem("user", JSON.stringify(user.data));
 
-        console.log(user);
-
-        userAvaterUrl.value = user.data.userAvaterUrl;
+        userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterUrl}`;
 
         setTimeout(() => {
           status.value = "success";
           loggedIn.value = true;
 
           console.log("submit!");
-          console.log(user.data);
         }, 1000);
 
         setTimeout(() => {
