@@ -70,6 +70,7 @@ onBeforeMount(() => {
             height: `${copyEl.height}px`,
           }"
         >
+        
           <topic
             :topic-info="topics[copyElIndex]"
             :style="{
