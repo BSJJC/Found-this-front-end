@@ -55,10 +55,11 @@ onBeforeMount(() => {
           :key="topics[index]"
           :topic-info="i"
           @click="showTopic(index)"
+          class="w-1/3"
         ></topic>
       </transition-group>
 
-      <teleport to="body">
+      <!-- <teleport to="body">
         <div
           v-if="showTele"
           id="copyEl"
@@ -70,7 +71,6 @@ onBeforeMount(() => {
             height: `${copyEl.height}px`,
           }"
         >
-        
           <topic
             :topic-info="topics[copyElIndex]"
             :style="{
@@ -79,6 +79,20 @@ onBeforeMount(() => {
             }"
           ></topic>
         </div>
+      </teleport> -->
+
+      <teleport to="body">
+        <topic
+          v-if="showTele"
+          class="absolute top-0 bg-[#7E56DA] z-[500]"
+          :style="{
+            top: `${copyEl.top}px`,
+            left: `${copyEl.left}px`,
+            width: `${copyEl.width}px`,
+            height: `${copyEl.height}px`,
+          }"
+          :topic-info="topics[copyElIndex]"
+        ></topic>
       </teleport>
     </div>
   </div>

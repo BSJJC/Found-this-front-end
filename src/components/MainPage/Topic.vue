@@ -19,9 +19,9 @@ const props = defineProps<topicInfoType>();
 </script>
 
 <template>
-  <div class="flex justify-center items-center w-1/3">
+  <div class="flex justify-center items-center">
     <div
-      class="topic w-[80%] h-[400px] m-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da] hover:-translate-y-1"
+      class="topic w-full h-[400px] mb-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da]"
     >
       <!-- title -->
       <div
