@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref, reactive, defineAsyncComponent, onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
 import { useTopics } from "@/stores";
 import { storeToRefs } from "pinia";
 
@@ -13,6 +14,8 @@ const MainPageControl = defineAsyncComponent(
 );
 const Topic = defineAsyncComponent(() => import("./Topic.vue"));
 
+const router = useRouter();
+
 const copyEl = reactive({
   top: 0,
   left: 0,
@@ -22,7 +25,7 @@ const copyEl = reactive({
 const copyElIndex = ref(0);
 const showTele = ref(false);
 
-function showTopic(index: number) {
+function showTopicDetail(index: number) {
   const topic = document.getElementsByClassName("topic")[index];
 
   const reactObject = (topic as HTMLElement).getBoundingClientRect();
@@ -35,6 +38,12 @@ function showTopic(index: number) {
   copyElIndex.value = index;
 
   showTele.value = true;
+
+  sessionStorage.setItem("topicDetail", JSON.stringify(topics.value[index]));
+
+  setTimeout(() => {
+    router.push("topicDetail");
+  }, 1000);
 }
 
 onBeforeMount(() => {
@@ -52,38 +61,16 @@ onBeforeMount(() => {
       <transition-group name="topic">
         <topic
           v-for="(i, index) in topics"
-          :key="topics[index]"
+          :key="topics[index]._id"
           :topic-info="i"
-          @click="showTopic(index)"
-          class="w-1/3"
+          @click="showTopicDetail(index)"
         ></topic>
       </transition-group>
-
-      <!-- <teleport to="body">
-        <div
-          v-if="showTele"
-          id="copyEl"
-          class="absolute top-0 bg-[#7E56DA] z-[500] flex justify-center items-center"
-          :style="{
-            top: `${copyEl.top}px`,
-            left: `${copyEl.left}px`,
-            width: `${copyEl.width}px`,
-            height: `${copyEl.height}px`,
-          }"
-        >
-          <topic
-            :topic-info="topics[copyElIndex]"
-            :style="{
-              width: `${copyEl.width * 5}px`,
-              height: `${copyEl.height * 2}px`,
-            }"
-          ></topic>
-        </div>
-      </teleport> -->
 
       <teleport to="body">
         <topic
           v-if="showTele"
+          id="copyEl"
           class="absolute top-0 bg-[#7E56DA] z-[500]"
           :style="{
             top: `${copyEl.top}px`,
@@ -110,12 +97,21 @@ onBeforeMount(() => {
 }
 
 @keyframes copyEl {
+  0% {
+    border-radius: 0.75rem;
+  }
+
+  99% {
+    border-radius: 0.75rem;
+  }
+
   100% {
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     opacity: 1;
+    border-radius: 0rem;
   }
 }
 </style>

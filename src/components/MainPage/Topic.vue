@@ -3,6 +3,7 @@ import Avater from "@/components/Avater.vue";
 import BackgroundImg from "@/components/BackgroundImg.vue";
 
 interface config {
+  _id: string;
   founder: string;
   title: string;
   text: string;
@@ -19,9 +20,9 @@ const props = defineProps<topicInfoType>();
 </script>
 
 <template>
-  <div class="flex justify-center items-center">
+  <div class="topic flex justify-center items-center w-1/3 h-[400px] mb-5">
     <div
-      class="topic w-full h-[400px] mb-[20px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da]"
+      class="w-[90%] max-w-[800px] h-[100%] max-h-[600px] rounded-xl overflow-hidden p-[30px] bg-white shadow-lg shadow-[#d5d5d5] transition duration-300 hover:cursor-pointer hover:shadow-xl hover:shadow-[#7e56da]"
     >
       <!-- title -->
       <div
