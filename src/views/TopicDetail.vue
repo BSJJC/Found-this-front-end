@@ -48,7 +48,8 @@ onMounted(() => {
 <template>
   <!-- mask -->
   <topic
-    id="topic"
+    v-if="showMask"
+    id="mask"
     :topic-info="topicDeatil"
     class="fixed w-screen h-screen bg-[#7E56DA]"
   ></topic>
@@ -74,14 +75,15 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-#topic {
-  animation: mask-out 0.3s ease forwards;
+#mask {
+  animation: mask-out 0.5s ease forwards;
 }
 
 @keyframes mask-out {
   99% {
     opacity: 0;
     display: block;
+    z-index: 100;
   }
 
   100% {
