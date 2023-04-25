@@ -1,12 +1,21 @@
 import axios from "axios";
 
+type dataType = {
+  founder: string;
+  founderUserName: string;
+  founderAvaterID: string;
+  title: string;
+  text: string;
+  appendixIDs: Array<string>;
+};
+
 const instance = axios.create({
   baseURL: "http://localhost:5000/api/topic/info/create",
   method: "POST",
   timeout: 3000,
 });
 
-const uploadNewTopicInfo = async (data: any) => {
+const uploadNewTopicInfo = async (data: dataType) => {
   return await instance.request({
     data,
   });

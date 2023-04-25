@@ -8,6 +8,7 @@ const showMask = ref(true);
 const topicDeatil = reactive({
   _id: "",
   founder: "",
+  founderUserName: "",
   founderAvaterID: "",
   title: "",
   text: "",
@@ -22,6 +23,7 @@ onBeforeMount(() => {
   const {
     _id,
     founder,
+    founderUserName,
     founderAvaterID,
     title,
     text,
@@ -32,6 +34,7 @@ onBeforeMount(() => {
 
   topicDeatil._id = _id;
   topicDeatil.founder = founder;
+  topicDeatil.founderUserName = founderUserName;
   topicDeatil.founderAvaterID = founderAvaterID;
   topicDeatil.title = title;
   topicDeatil.text = text;
@@ -73,7 +76,7 @@ onBeforeMount(() => {
               class="h-full rounded-full"
             />
 
-            {{ topicDeatil.founder }}
+            {{ topicDeatil.founderUserName }}
           </div>
         </div>
       </div>
