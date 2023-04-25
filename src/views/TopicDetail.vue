@@ -3,6 +3,10 @@ import { ref, reactive, onBeforeMount, defineAsyncComponent } from "vue";
 
 import Topic from "@/components/MainPage/Topic.vue";
 
+const TopicInfo = defineAsyncComponent(
+  () => import("@/components/TopicDetail/TopicInfo.vue")
+);
+
 const showMask = ref(true);
 
 const topicDeatil = reactive({
@@ -58,28 +62,8 @@ onBeforeMount(() => {
     <div
       class="w-full h-full flex justify-center items-center rounded-3xl overflow-hidden shadow-xl shadow-[#7E56DA]"
     >
-      <!-- topic details -->
-      <div class="h-full w-[45%] bg-red-300 flex justify-center items-center">
-        <div
-          class="w-[90%] h-[95%] bg-yellow-200 rounded-3xl flex justify-center items-center flex-col p-12"
-        >
-          <!-- title -->
-          <div class="w-full bg-red-200 text-5xl">
-            {{ topicDeatil.title }}
-          </div>
-
-          <!-- avater -->
-          <div class="w-full h-[50px] bg-red-300">
-            <img
-              :src="`http://localhost:5000/api/userAvaters/get/${topicDeatil.founderAvaterID}`"
-              alt="founder avater"
-              class="h-full rounded-full"
-            />
-
-            {{ topicDeatil.founderUserName }}
-          </div>
-        </div>
-      </div>
+      <!-- topic info -->
+      <topic-info :data="topicDeatil"></topic-info>
 
       <!-- replies -->
       <div class="flex h-full w-[55%] bg-blue-300">2</div>
