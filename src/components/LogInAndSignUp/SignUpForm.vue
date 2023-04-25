@@ -7,7 +7,7 @@ import signUpUser from "@/api/user/signUpUser.js";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, loggedIn, showPanel, userAvaterUrl } =
+const { mode, loggedIn, showPanel, userAvaterID } =
   storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
@@ -86,7 +86,9 @@ function signUp(formEl: FormInstance | undefined) {
 
         sessionStorage.setItem("user", JSON.stringify(user.data));
 
-        userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterUrl}`;
+        
+
+        userAvaterID.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterID}`;
 
         setTimeout(() => {
           status.value = "success";

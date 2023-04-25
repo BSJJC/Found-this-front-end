@@ -7,7 +7,7 @@ import logInUser from "@/api/user/logInUser.js";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, loggedIn, userAvaterUrl, rememberAccount, showPanel } =
+const { mode, loggedIn, userAvaterID, rememberAccount, showPanel } =
   storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
@@ -73,7 +73,7 @@ function logIn(formEl: FormInstance | undefined) {
           status.value = "success";
           loggedIn.value = true;
 
-          userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterUrl}`;
+          userAvaterID.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterID}`;
 
           sessionStorage.setItem("user", JSON.stringify(user.data));
 

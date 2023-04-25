@@ -9,7 +9,7 @@ const logInAndSignUp = defineAsyncComponent(
 );
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { showPanel, loggedIn, userAvaterUrl } = storeToRefs(logInAndSignUpStore);
+const { showPanel, loggedIn, userAvaterID } = storeToRefs(logInAndSignUpStore);
 
 const userOptions = ref(["123", "abc", "666"]);
 const showUserOptions = ref(false);
@@ -32,7 +32,7 @@ onMounted(() => {
 
   if (user) {
     loggedIn.value = true;
-    userAvaterUrl.value = `http://localhost:5000/api/userAvaters/get/${user.userAvaterUrl}`;
+    userAvaterID.value = `http://localhost:5000/api/userAvaters/get/${user.userAvaterID}`;
   }
 });
 </script>
@@ -62,7 +62,7 @@ onMounted(() => {
 
           <div v-else>
             <img
-              :src="userAvaterUrl"
+              :src="userAvaterID"
               alt="user avater"
               class="shadow-lg rounded-full"
             />

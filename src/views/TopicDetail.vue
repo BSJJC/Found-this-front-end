@@ -1,16 +1,7 @@
 <script lang="ts" setup>
-import {
-  ref,
-  reactive,
-  onBeforeMount,
-  onMounted,
-  defineAsyncComponent,
-} from "vue";
+import { ref, reactive, onBeforeMount, defineAsyncComponent } from "vue";
 
 import Topic from "@/components/MainPage/Topic.vue";
-const NavBar = defineAsyncComponent(
-  () => import("@/components/Navbar/NavBar.vue")
-);
 
 const showMask = ref(true);
 
@@ -37,12 +28,6 @@ onBeforeMount(() => {
   topicDeatil.bgID = bgID;
   topicDeatil.isDeleted = isDeleted;
 });
-
-onMounted(() => {
-  setTimeout(() => {
-    showMask.value = false;
-  }, 500);
-});
 </script>
 
 <template>
@@ -55,22 +40,30 @@ onMounted(() => {
   ></topic>
 
   <!-- main -->
-
   <main class="flex justify-center items-center w-screen h-screen p-3">
-    <!-- topic details -->
-    <div class="h-full w-[40%] bg-red-300 flex justify-start items-center">
-      <div
-        class="w-[95%] h-[95%] bg-yellow-200 rounded-3xl flex justify-center items-center flex-col p-12"
-      >
-        <!-- title -->
-        <div class="w-full bg-red-200 text-3xl">
-          {{ topicDeatil.title }}
+    <div
+      class="w-full h-full flex justify-center items-center rounded-3xl overflow-hidden shadow-xl shadow-[#7E56DA]"
+    >
+      <!-- topic details -->
+      <div class="h-full w-[45%] bg-red-300 flex justify-center items-center">
+        <div
+          class="w-[90%] h-[95%] bg-yellow-200 rounded-3xl flex justify-center items-center flex-col p-12"
+        >
+          <!-- title -->
+          <div class="w-full bg-red-200 text-3xl">
+            {{ topicDeatil.title }}
+          </div>
+
+          <!-- avater -->
+          <div>
+            {{ topicDeatil._id }}
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- replies -->
-    <div class="flex h-full w-[60%] bg-blue-300">2</div>
+      <!-- replies -->
+      <div class="flex h-full w-[55%] bg-blue-300">2</div>
+    </div>
   </main>
 </template>
 

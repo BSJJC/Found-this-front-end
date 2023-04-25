@@ -36,8 +36,11 @@ async function topicInfo(): Promise<void> {
 
   const userInfo = JSON.parse(sessionStorage.getItem("user") as string);
 
+  console.log(userInfo);
+
   const newTopicInfo = {
     founder: userInfo.email,
+    founderAvaterID: "123",
     title: topicName.value,
     text: editorText.value,
     appendixIDs: [...allObjectIDs.value],
