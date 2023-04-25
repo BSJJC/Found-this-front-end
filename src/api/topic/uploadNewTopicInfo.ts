@@ -6,11 +6,7 @@ const instance = axios.create({
   timeout: 3000,
 });
 
-const uploadNewTopicInfo = async (data: {
-  founder: string;
-  title: string;
-  text: string;
-}) => {
+const uploadNewTopicInfo = async (data: any) => {
   return await instance.request({
     data,
   });

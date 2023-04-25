@@ -17,11 +17,12 @@ const ruleFormRef = ref<FormInstance>();
 
 const ruleForm = reactive({
   email: "",
+  userName: "",
   password: "",
   confirmPassword: "",
 });
 
-const emailCheck = (rule: any, value: any, callback: any) => {
+function emailCheck(rule: any, value: any, callback: any) {
   if (value === "") {
     callback(new Error("Please input the email"));
   }
@@ -31,23 +32,25 @@ const emailCheck = (rule: any, value: any, callback: any) => {
     callback(new Error("Please input the right email"));
   }
 
-  if (ruleForm.email !== "") {
-    if (!ruleFormRef.value) return;
+  callback();
+}
+function userNameCheck(rule: any, value: any, callback: any) {
+  if (value === "") {
+    callback(new Error("Please input your user name"));
   }
 
   callback();
-};
-const passwordCheck = (rule: any, value: any, callback: any) => {
+}
+function passwordCheck(rule: any, value: any, callback: any) {
   if (value === "") {
     callback(new Error("Please input the password"));
-  } else {
-    if (ruleForm.password !== "") {
-      if (!ruleFormRef.value) return;
-    }
-    callback();
   }
-};
-const confirmPasswordCheck = (rule: any, value: any, callback: any) => {
+
+  if (!ruleFormRef.value) return;
+
+  callback();
+}
+function confirmPasswordCheck(rule: any, value: any, callback: any) {
   if (value === "") {
     callback(new Error("Please input password again to confirm"));
   }
@@ -59,10 +62,11 @@ const confirmPasswordCheck = (rule: any, value: any, callback: any) => {
   if (!ruleFormRef.value) return;
 
   callback();
-};
+}
 
 const rules = reactive<FormRules>({
   email: [{ validator: emailCheck, trigger: "blur" }],
+  userName: [{ validator: userNameCheck, trigger: "blur" }],
   password: [{ validator: passwordCheck, trigger: "blur" }],
   confirmPassword: [{ validator: confirmPasswordCheck, trigger: "blur" }],
 });
@@ -81,6 +85,7 @@ function signUp(formEl: FormInstance | undefined) {
 
         const user = await signUpUser({
           email: ruleForm.email,
+          userName: ruleForm.userName,
           password: ruleForm.password,
         });
 
@@ -139,6 +144,18 @@ function signUp(formEl: FormInstance | undefined) {
           v-model="ruleForm.email"
           type="text"
           placeholder="Enter your email"
+          class="text-[#7E56DA]"
+          @input="ruleForm.email = disableInputSpace(ruleForm.email)"
+        />
+      </el-form-item>
+
+      <div class="text-xl">User name:</div>
+
+      <el-form-item prop="userName">
+        <el-input
+          v-model="ruleForm.userName"
+          type="text"
+          placeholder="Enter your user name"
           class="text-[#7E56DA]"
           @input="ruleForm.email = disableInputSpace(ruleForm.email)"
         />

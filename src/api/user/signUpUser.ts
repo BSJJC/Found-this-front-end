@@ -6,7 +6,11 @@ const instance = axios.create({
   timeout: 3000,
 });
 
-const signUpUser = async (data: { email: string; password: string }) => {
+const signUpUser = async (data: {
+  email: string;
+  userName: string;
+  password: string;
+}) => {
   return await instance.request({
     data,
   });

@@ -40,7 +40,8 @@ async function topicInfo(): Promise<void> {
 
   const newTopicInfo = {
     founder: userInfo.email,
-    founderAvaterID: "123",
+    founderUserName: userInfo.userName,
+    founderAvaterID: userInfo.userAvaterID,
     title: topicName.value,
     text: editorText.value,
     appendixIDs: [...allObjectIDs.value],
@@ -75,6 +76,7 @@ async function topicAppendix(): Promise<void> {
     topicAppendixErrorHandler(results);
   } catch (error) {
     console.log(error);
+    return;
   }
 }
 

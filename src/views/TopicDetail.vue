@@ -8,6 +8,7 @@ const showMask = ref(true);
 const topicDeatil = reactive({
   _id: "",
   founder: "",
+  founderAvaterID: "",
   title: "",
   text: "",
   appendixIDs: [] as string[],
@@ -18,10 +19,20 @@ const topicDeatil = reactive({
 onBeforeMount(() => {
   const data = JSON.parse(sessionStorage.getItem("topicDetail")!);
 
-  const { _id, founder, title, text, appendixIDs, bgID, isDeleted } = data;
+  const {
+    _id,
+    founder,
+    founderAvaterID,
+    title,
+    text,
+    appendixIDs,
+    bgID,
+    isDeleted,
+  } = data;
 
   topicDeatil._id = _id;
   topicDeatil.founder = founder;
+  topicDeatil.founderAvaterID = founderAvaterID;
   topicDeatil.title = title;
   topicDeatil.text = text;
   topicDeatil.appendixIDs = appendixIDs;
@@ -50,13 +61,19 @@ onBeforeMount(() => {
           class="w-[90%] h-[95%] bg-yellow-200 rounded-3xl flex justify-center items-center flex-col p-12"
         >
           <!-- title -->
-          <div class="w-full bg-red-200 text-3xl">
+          <div class="w-full bg-red-200 text-5xl">
             {{ topicDeatil.title }}
           </div>
 
           <!-- avater -->
-          <div>
-            {{ topicDeatil._id }}
+          <div class="w-full h-[50px] bg-red-300">
+            <img
+              :src="`http://localhost:5000/api/userAvaters/get/${topicDeatil.founderAvaterID}`"
+              alt="founder avater"
+              class="h-full rounded-full"
+            />
+
+            {{ topicDeatil.founder }}
           </div>
         </div>
       </div>

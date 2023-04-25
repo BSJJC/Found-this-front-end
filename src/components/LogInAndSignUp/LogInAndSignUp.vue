@@ -86,17 +86,6 @@ onBeforeUnmount(() => {
               </div>
             </transition>
           </div>
-
-          <!-- copyright -->
-          <div
-            class="flex-none h-[70px] flex justify-start items-end opacity-60 select-none"
-          >
-            <copyright-vue
-              color="black"
-              class="w-[20px] h-auto mr-1"
-            ></copyright-vue>
-            copyright
-          </div>
         </div>
 
         <!-- decorate -->
