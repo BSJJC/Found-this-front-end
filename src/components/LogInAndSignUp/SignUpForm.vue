@@ -86,8 +86,6 @@ function signUp(formEl: FormInstance | undefined) {
 
         sessionStorage.setItem("user", JSON.stringify(user.data));
 
-        
-
         userAvaterID.value = `http://localhost:5000/api/userAvaters/get/${user.data.userAvaterID}`;
 
         setTimeout(() => {
