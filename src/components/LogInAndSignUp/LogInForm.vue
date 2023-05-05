@@ -7,8 +7,9 @@ import logInUser from "@/api/user/logInUser.js";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, loggedIn, userAvaterID, rememberAccount, showPanel } =
-  storeToRefs(logInAndSignUpStore);
+const { mode, loggedIn, userAvaterID, rememberAccount, showPanel } = storeToRefs(
+  logInAndSignUpStore
+);
 
 const loadingStore = useLoading();
 const { showLoading, status, animations } = storeToRefs(loadingStore);
@@ -109,17 +110,8 @@ function logIn(formEl: FormInstance | undefined) {
   <div>
     <div class="text-3xl w-[400px] h-[40px] text-[#7E56DA]">Welcome back!</div>
 
-    <div class="w-[400px] opacity-80">
-      Welcome back! Pleace enter your details.
-    </div>
-
-    <el-form
-      class="w-[400px] mt-5"
-      ref="ruleFormRef"
-      :model="ruleForm"
-      :rules="rules"
-    >
-      <div class="text-xl">Email:</div>
+    <el-form class="w-[400px] mt-5" ref="ruleFormRef" :model="ruleForm" :rules="rules">
+      <div>Email:</div>
 
       <el-form-item prop="email">
         <el-input
@@ -131,7 +123,7 @@ function logIn(formEl: FormInstance | undefined) {
         />
       </el-form-item>
 
-      <div class="text-xl">Password:</div>
+      <div>Password:</div>
 
       <el-form-item prop="password">
         <el-input
@@ -158,9 +150,7 @@ function logIn(formEl: FormInstance | undefined) {
             </div>
           </div>
 
-          <a
-            href="#"
-            class="transition duration-300 text-[#7E56DA] hover:text-[#a07bf7]"
+          <a href="#" class="transition duration-300 text-[#7E56DA] hover:text-[#a07bf7]"
             >Forget password?</a
           >
         </div>
@@ -176,10 +166,7 @@ function logIn(formEl: FormInstance | undefined) {
 
     <div class="w-1/2 h-[45px] flex justify-center items-center opacity-50">
       Don't have an account?
-      <a
-        href="#"
-        class="text-[#7E56DA] hover:text-[#a07bf7]"
-        @click="toSignUpForm"
+      <a href="#" class="text-[#7E56DA] hover:text-[#a07bf7]" @click="toSignUpForm"
         >Sign up!</a
       >
     </div>
@@ -189,7 +176,7 @@ function logIn(formEl: FormInstance | undefined) {
 <style lang="scss" scoped>
 .el-input {
   all: unset;
-  height: 50px;
+  height: 40px;
   width: 100%;
   margin-top: 10px;
   text-indent: 10px;

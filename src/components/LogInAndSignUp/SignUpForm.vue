@@ -7,8 +7,7 @@ import signUpUser from "@/api/user/signUpUser.js";
 import disableInputSpace from "@/utils/disableInputSpace";
 
 const logInAndSignUpStore = useLogInAndSignUp();
-const { mode, loggedIn, showPanel, userAvaterID } =
-  storeToRefs(logInAndSignUpStore);
+const { mode, loggedIn, showPanel, userAvaterID } = storeToRefs(logInAndSignUpStore);
 
 const loadingStore = useLoading();
 const { showLoading, status, animations } = storeToRefs(loadingStore);
@@ -125,19 +124,10 @@ function signUp(formEl: FormInstance | undefined) {
 
 <template>
   <div>
-    <div class="text-3xl w-[400px] h-[40px] text-[#7E56DA]">
-      Welcome! New friend!
-    </div>
+    <div class="text-3xl w-[400px] h-[40px] text-[#7E56DA]">Welcome! New friend!</div>
 
-    <div class="w-[400px] opacity-80">Pleace enter your details.</div>
-
-    <el-form
-      class="w-[400px] mt-5"
-      ref="ruleFormRef"
-      :model="ruleForm"
-      :rules="rules"
-    >
-      <div class="text-xl">Email:</div>
+    <el-form class="w-[400px] mt-5" ref="ruleFormRef" :model="ruleForm" :rules="rules">
+      <div>Email:</div>
 
       <el-form-item prop="email">
         <el-input
@@ -149,7 +139,7 @@ function signUp(formEl: FormInstance | undefined) {
         />
       </el-form-item>
 
-      <div class="text-xl">User name:</div>
+      <div class="text-lg">User name:</div>
 
       <el-form-item prop="userName">
         <el-input
@@ -161,7 +151,7 @@ function signUp(formEl: FormInstance | undefined) {
         />
       </el-form-item>
 
-      <div class="text-xl">Password:</div>
+      <div>Password:</div>
 
       <el-form-item prop="password">
         <el-input
@@ -173,7 +163,7 @@ function signUp(formEl: FormInstance | undefined) {
         />
       </el-form-item>
 
-      <div class="text-xl">Confirm Password:</div>
+      <div>Confirm Password:</div>
 
       <el-form-item prop="confirmPassword">
         <el-input
@@ -181,11 +171,7 @@ function signUp(formEl: FormInstance | undefined) {
           type="password"
           placeholder="Enter your password again"
           class="text-[#7E56DA]"
-          @input="
-            ruleForm.confirmPassword = disableInputSpace(
-              ruleForm.confirmPassword
-            )
-          "
+          @input="ruleForm.confirmPassword = disableInputSpace(ruleForm.confirmPassword)"
         />
       </el-form-item>
     </el-form>
@@ -199,11 +185,7 @@ function signUp(formEl: FormInstance | undefined) {
 
     <div class="w-1/2 h-[45px] flex justify-center items-center opacity-50">
       Already have an account?
-      <a
-        href="#"
-        class="text-[#7E56DA] hover:text-[#a07bf7]"
-        @click="toLogInForm"
-      >
+      <a href="#" class="text-[#7E56DA] hover:text-[#a07bf7]" @click="toLogInForm">
         Log in!</a
       >
     </div>
@@ -224,7 +206,7 @@ input {
 
 .el-input {
   all: unset;
-  height: 50px;
+  height: 40px;
   width: 100%;
   margin-top: 10px;
   text-indent: 10px;

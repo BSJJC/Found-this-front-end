@@ -2,7 +2,6 @@
 import { defineAsyncComponent, onBeforeUnmount } from "vue";
 import { useLogInAndSignUp, useLoading } from "@/stores";
 import { storeToRefs } from "pinia";
-import { copyrightVue } from "@/imgs/icons";
 
 const LottieAnimation = defineAsyncComponent(
   () => import("@/components/Effects/LottieAnimation.vue")
@@ -16,7 +15,6 @@ const Loading = defineAsyncComponent(
   () => import("@/components/LogInAndSignUp/Loading.vue")
 );
 
-const logo = defineAsyncComponent(() => import("@/components/logo.vue"));
 const LogInForm = defineAsyncComponent(
   () => import("@/components/LogInAndSignUp/LogInForm.vue")
 );
@@ -25,8 +23,9 @@ const SignUpForm = defineAsyncComponent(
 );
 
 const LogInAndSignUpStore = useLogInAndSignUp();
-const { mode, showPanel, logInAnimationUrl, signUpAnimationUrl } =
-  storeToRefs(LogInAndSignUpStore);
+const { mode, showPanel, logInAnimationUrl, signUpAnimationUrl } = storeToRefs(
+  LogInAndSignUpStore
+);
 
 const loadingStore = useLoading();
 const { showLoading } = storeToRefs(loadingStore);
@@ -51,29 +50,15 @@ onBeforeUnmount(() => {
     >
       <loading v-if="showLoading"></loading>
       <!-- panel -->
-      <div
-        id="panel"
-        class="w-[1px] h-[1px] shadow-xl grid grid-cols-2"
-        :class="mode"
-      >
+      <div id="panel" class="w-[1px] h-[1px] shadow-xl grid grid-cols-2" :class="mode">
         <!-- form -->
-        <div
-          id="form"
-          class="bg-white col-span-1 flex flex-col relative overflow-hidden"
-        >
+        <div id="form" class="bg-white col-span-1 flex flex-col relative overflow-hidden">
           <square-background
             class="absolute w-full h-full -translate-x-10"
           ></square-background>
 
-          <!-- logo-->
-          <div class="w-full h-[70px] flex flex-row flex-none select-none">
-            <logo class="text-3xl" :enableGoToHomePage="false"></logo>
-          </div>
-
           <!-- Main form  -->
-          <div
-            class="w-full flex-grow flex justify-center items-center flex-col"
-          >
+          <div class="w-full flex-grow flex justify-center items-center flex-col">
             <transition name="mode-change" mode="out-in">
               <!-- Log in main page -->
               <div v-if="mode === 'login-mode'">
