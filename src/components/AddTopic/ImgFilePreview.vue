@@ -16,7 +16,7 @@ const props = defineProps<config>();
 const state = ref({
   top: `${props.startPostions.top}px`,
   left: `${props.startPostions.left}px`,
-  width: "80px",
+  width: "50px",
 });
 
 const emits = defineEmits(["hidePreview"]);
@@ -35,12 +35,12 @@ function zoomIn(): void {
 }
 
 /**
- * zomm out image preview
+ * zoom out image preview
  */
 function zoomOut(): void {
   state.value.top = `${props.startPostions.top}px`;
   state.value.left = `${props.startPostions.left}px`;
-  state.value.width = "80px";
+  state.value.width = "70px";
 }
 
 function hidePreview(): void {

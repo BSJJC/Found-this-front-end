@@ -87,7 +87,7 @@ function hidePreview() {
 </script>
 
 <template>
-  <transition name="opacity-fade">
+  <transition name="">
     <div
       v-show="!ifShowPreview"
       class="w-full h-full relative flex justify-center items-center"
@@ -99,7 +99,7 @@ function hidePreview() {
         <div class="col-span-1 flex justify-center items-center">
           <elZoomInVue
             color="white"
-            class="w-full m-2 hover:cursor-pointer"
+            class="w-full m-1 hover:cursor-pointer"
             @click="showPreview"
           ></elZoomInVue>
         </div>
@@ -107,7 +107,7 @@ function hidePreview() {
         <div class="col-span-1 flex justify-center items-center">
           <elDeleteVue
             color="white"
-            class="w-full m-2 hover:cursor-pointer"
+            class="w-full m-1 hover:cursor-pointer"
             @click="deleteImg(props.file.uuid)"
           ></elDeleteVue>
         </div>

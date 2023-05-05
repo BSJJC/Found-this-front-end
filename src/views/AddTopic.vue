@@ -21,9 +21,7 @@ const allFIleUploaded: Ref<boolean> = ref(true);
 const router = useRouter();
 
 const Logo = defineAsyncComponent(() => import("@/components/logo.vue"));
-const Upload = defineAsyncComponent(
-  () => import("@/components/AddTopic/Upload.vue")
-);
+const Upload = defineAsyncComponent(() => import("@/components/AddTopic/Upload.vue"));
 
 /**
  * Send request, upload new topic info
@@ -150,18 +148,14 @@ async function submitTopic(): Promise<void> {
   </div>
 
   <!-- main container -->
-  <div
-    class="w-screen h-screen flex justify-around items-center flex-col px-10"
-  >
+  <div class="w-screen h-screen flex justify-around items-center flex-col px-10">
     <!-- header -->
-    <header class="h-[10%] w-full grid grid-cols-3">
+    <header class="h-[10%] w-full grid grid-cols-5">
       <div class="col-span-1 h-full flex justify-start items-center">
-        <logo class="text-5xl" :enable-go-to-home-page="true"></logo>
+        <logo class="text-4xl" :enable-go-to-home-page="true"></logo>
       </div>
 
-      <div
-        class="col-span-1 flex justify-center items-center text-4xl text-[#7E56DA]"
-      >
+      <div class="col-span-3 flex justify-center items-center text-4xl text-[#7E56DA]">
         <div class="font-bold drop-shadow-lg">topic name:</div>
         <input
           v-model="topicName"
@@ -212,7 +206,7 @@ async function submitTopic(): Promise<void> {
     </main>
 
     <!-- footer -->
-    <footer class="w-full h-[10%] shadow-lg shadow-[#7E56DA] rounded-lg">
+    <footer class="w-full max-h-[10%] shadow-lg shadow-[#7E56DA] rounded-lg">
       <Upload></Upload>
     </footer>
   </div>

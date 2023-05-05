@@ -67,7 +67,7 @@ function getFiles() {
           <div
             v-for="(file, index) in fileList"
             :key="fileList[index].uuid"
-            class="w-[80px] h-[80px] mr-4 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
+            class="w-[70px] h-[70px] mr-2 mb-4 flex justify-center items-center overflow-hidden rounded-lg bg-gray-300"
           >
             <img-file
               v-if="file.extends === 'jpg' || file.extends === 'png'"
@@ -80,7 +80,7 @@ function getFiles() {
 
         <!-- select file button -->
         <div
-          class="w-[80px] h-[80px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
+          class="w-[70px] h-[70px] flex justify-center items-center bg-[#7E56DA] rounded-lg hover:cursor-pointer"
           @click="
             () => {
               //@ts-ignore
@@ -88,7 +88,7 @@ function getFiles() {
             }
           "
         >
-          <elPlushVue color="white" class="w-1/2"></elPlushVue>
+          <elPlushVue color="white" class="w-2/3"></elPlushVue>
         </div>
 
         <input
