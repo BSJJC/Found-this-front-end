@@ -32,7 +32,7 @@ const props = defineProps<topicInfoType>();
         <div
           class="absolute w-full h-full flex justify-start items-center p-8 z-10 text-white text-3xl"
         >
-          {{ props.topicInfo.title }}
+          {{ props.topicInfo.title.slice(0, 20) }}
         </div>
 
         <background-img

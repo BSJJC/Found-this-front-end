@@ -38,7 +38,7 @@ async function topicInfo(): Promise<void> {
     founder: userInfo.email,
     founderUserName: userInfo.userName,
     founderAvaterID: userInfo.userAvaterID,
-    title: topicName.value,
+    title: topicName.value.trim(),
     text: editorText.value,
     appendixIDs: [...allObjectIDs.value],
   };
