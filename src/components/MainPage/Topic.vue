@@ -5,6 +5,7 @@ import BackgroundImg from "@/components/BackgroundImg.vue";
 interface config {
   _id: string;
   founder: string;
+  founderAvaterID: string;
   title: string;
   text: string;
   appendixIDs: Array<string>;
@@ -56,9 +57,7 @@ const props = defineProps<topicInfoType>();
 
           <!-- last active -->
           <div class="w-[75%] h-full">
-            <div
-              class="w-full h-full flex justify-center items-center flex-col pl-8"
-            >
+            <div class="w-full h-full flex justify-center items-center flex-col pl-8">
               <div
                 class="w-full h-1/3 text-md flex justify-start items-center flex-row text-[#adadad]"
               >
@@ -80,11 +79,15 @@ const props = defineProps<topicInfoType>();
             class="w-full h-2/3 text-2xl text-[#5d5d5d] flex justify-center items-center flex-row"
           >
             <div class="h-full w-[20%] flex justify-start items-center">
-              <Avater src="" alt="test" loading-text="loading"></Avater>
+              <Avater
+                :src="`http://localhost:5000/api/userAvaters/get/${props.topicInfo.founderAvaterID}`"
+                alt="topic founder avatar"
+                loading-text="loading"
+              ></Avater>
             </div>
             <div class="h-full w-[80%] text-[1.2rem] overflow-clip">
-              Lorem ipsum, dolor sit amet consectetur consectetur consectetur
-              consectetur consectetur
+              Lorem ipsum, dolor sit amet consectetur consectetur consectetur consectetur
+              consectetur
             </div>
           </div>
         </div>

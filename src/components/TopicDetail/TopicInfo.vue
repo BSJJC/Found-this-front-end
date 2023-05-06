@@ -33,9 +33,7 @@ const props = defineProps<topicInfoType>();
       </div>
 
       <!-- avater -->
-      <div
-        class="w-full h-[10%] bg-red-300 flex justify-start items-center py-4"
-      >
+      <div class="w-full h-[10%] bg-red-300 flex justify-start items-center py-4">
         <img
           :src="`http://localhost:5000/api/userAvaters/get/${props.data.founderAvaterID}`"
           alt="founder avater"
@@ -48,10 +46,7 @@ const props = defineProps<topicInfoType>();
       </div>
 
       <!-- main text -->
-      <div
-        class="w-full h-[50%] bg-blue-300 p-[5px]"
-        v-html="props.data.text"
-      ></div>
+      <div class="w-full h-[50%] bg-blue-300 p-[5px]" v-html="props.data.text"></div>
 
       <!-- control area -->
       <div class="w-full h-[25%] bg-purple-300 grid grid-rows-3">

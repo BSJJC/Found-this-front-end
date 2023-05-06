@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 interface config {
   _id: string;
   founder: string;
+  founderAvaterID: string,
   title: string;
   text: string;
   appendixIDs: Array<string>;

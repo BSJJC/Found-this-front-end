@@ -14,6 +14,7 @@ const topicDeatil = reactive({
   founder: "",
   founderUserName: "",
   founderAvaterID: "",
+  founderAvaterId: "",
   title: "",
   text: "",
   appendixIDs: [] as string[],
@@ -28,7 +29,6 @@ onBeforeMount(() => {
     _id,
     founder,
     founderUserName,
-    founderAvaterID,
     title,
     text,
     appendixIDs,
@@ -39,7 +39,6 @@ onBeforeMount(() => {
   topicDeatil._id = _id;
   topicDeatil.founder = founder;
   topicDeatil.founderUserName = founderUserName;
-  topicDeatil.founderAvaterID = founderAvaterID;
   topicDeatil.title = title;
   topicDeatil.text = text;
   topicDeatil.appendixIDs = appendixIDs;
