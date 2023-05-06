@@ -9,9 +9,7 @@ import getTopicInfos from "@/api/topic/getTopicInfos";
 const topicStore = useTopics();
 const { topics } = storeToRefs(topicStore);
 
-const MainPageControl = defineAsyncComponent(
-  () => import("./MainPageControl.vue")
-);
+const MainPageControl = defineAsyncComponent(() => import("./MainPageControl.vue"));
 const Topic = defineAsyncComponent(() => import("./Topic.vue"));
 
 const router = useRouter();
@@ -38,6 +36,8 @@ function showTopicDetail(index: number) {
   copyElIndex.value = index;
 
   showTele.value = true;
+
+  console.log(topics.value[index]);
 
   sessionStorage.setItem("topicDetail", JSON.stringify(topics.value[index]));
 

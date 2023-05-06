@@ -12,9 +12,8 @@ const showMask = ref(true);
 const topicDeatil = reactive({
   _id: "",
   founder: "",
-  founderUserName: "",
+  founderName: "",
   founderAvaterID: "",
-  founderAvaterId: "",
   title: "",
   text: "",
   appendixIDs: [] as string[],
@@ -28,7 +27,8 @@ onBeforeMount(() => {
   const {
     _id,
     founder,
-    founderUserName,
+    founderName,
+    founderAvaterID,
     title,
     text,
     appendixIDs,
@@ -38,7 +38,8 @@ onBeforeMount(() => {
 
   topicDeatil._id = _id;
   topicDeatil.founder = founder;
-  topicDeatil.founderUserName = founderUserName;
+  topicDeatil.founderName = founderName;
+  topicDeatil.founderAvaterID = founderAvaterID;
   topicDeatil.title = title;
   topicDeatil.text = text;
   topicDeatil.appendixIDs = appendixIDs;

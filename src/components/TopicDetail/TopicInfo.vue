@@ -6,7 +6,7 @@ const heart = defineAsyncComponent(() => import("@/imgs/icons/heart.vue"));
 interface config {
   _id: string;
   founder: string;
-  founderUserName: string;
+  founderName: string;
   founderAvaterID: string;
   title: string;
   text: string;
@@ -41,7 +41,7 @@ const props = defineProps<topicInfoType>();
         />
 
         <div class="ml-5 text-2xl text-white">
-          {{ props.data.founderUserName }}
+          {{ props.data.founderName }}
         </div>
       </div>
 

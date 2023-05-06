@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 interface config {
   _id: string;
   founder: string;
+  founderName: string;
   founderAvaterID: string,
   title: string;
   text: string;
@@ -11,7 +12,7 @@ interface config {
   isDeleted: boolean;
 }
 
-export const useTopics = defineStore({
+const useTopics = defineStore({
   id: "topics",
   state: () => ({
     topics: [] as config[],

@@ -2,7 +2,7 @@ import axios from "axios";
 
 type dataType = {
   founder: string;
-  founderUserName: string;
+  founderName: string;
   founderAvaterID: string;
   title: string;
   text: string;
