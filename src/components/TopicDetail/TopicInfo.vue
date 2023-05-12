@@ -2,6 +2,7 @@
 import { defineAsyncComponent } from "vue";
 
 const TopicFeedback = defineAsyncComponent(() => import("./TopicFeedback.vue"));
+const TopicInfoOverview = defineAsyncComponent(() => import("./TopicInfoOverview.vue"));
 
 interface config {
   _id: string;
@@ -50,10 +51,8 @@ const props = defineProps<topicInfoType>();
 
       <!-- control area -->
       <div class="w-full h-[25%] bg-purple-300 grid grid-rows-3">
-        <div>
-          <TopicFeedback></TopicFeedback>
-        </div>
-        <div>2</div>
+        <topic-feedback></topic-feedback>
+        <topic-info-overview></topic-info-overview>
         <div>3</div>
       </div>
     </div>
