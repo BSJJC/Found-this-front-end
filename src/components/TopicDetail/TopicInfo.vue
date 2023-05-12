@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent } from "vue";
 
-const heart = defineAsyncComponent(() => import("@/imgs/icons/heart.vue"));
+const TopicFeedback = defineAsyncComponent(() => import("./TopicFeedback.vue"));
 
 interface config {
   _id: string;
@@ -51,7 +51,7 @@ const props = defineProps<topicInfoType>();
       <!-- control area -->
       <div class="w-full h-[25%] bg-purple-300 grid grid-rows-3">
         <div>
-          <heart color="#999999"></heart>
+          <TopicFeedback></TopicFeedback>
         </div>
         <div>2</div>
         <div>3</div>
