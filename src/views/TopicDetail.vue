@@ -7,6 +7,10 @@ const TopicInfo = defineAsyncComponent(
   () => import("@/components/TopicDetail/TopicInfo.vue")
 );
 
+const TopicReply = defineAsyncComponent(
+  () => import("@/components/TopicDetail/TopicReply.vue")
+);
+
 const showMask = ref(true);
 
 const topicDeatil = reactive({
@@ -66,7 +70,11 @@ onBeforeMount(() => {
       <topic-info :data="topicDeatil"></topic-info>
 
       <!-- replies -->
-      <div class="flex h-full w-[55%] bg-blue-300">2</div>
+      <div class="flex justify-center items-start flex-col w-full h-full bg-blue-300 p-5">
+        <el-scrollbar class="w-full pr-2">
+          <topic-reply v-for="(i, index) in 10" :key="index"></topic-reply>
+        </el-scrollbar>
+      </div>
     </div>
   </main>
 </template>

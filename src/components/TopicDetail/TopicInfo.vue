@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent } from "vue";
 
-const TopicFeedback = defineAsyncComponent(() => import("./TopicFeedback.vue"));
+const Feedback = defineAsyncComponent(() => import("./Feedback.vue"));
 const TopicInfoOverview = defineAsyncComponent(() => import("./TopicInfoOverview.vue"));
 
 interface config {
@@ -51,7 +51,7 @@ const props = defineProps<topicInfoType>();
 
       <!-- control area -->
       <div class="w-full h-[25%] bg-purple-300 grid grid-rows-3">
-        <topic-feedback></topic-feedback>
+        <feedback></feedback>
         <topic-info-overview></topic-info-overview>
         <div>3</div>
       </div>

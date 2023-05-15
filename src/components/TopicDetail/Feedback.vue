@@ -8,7 +8,7 @@ const reply = defineAsyncComponent(() => import("@/imgs/icons/reply.vue"));
 </script>
 
 <template>
-  <div class="w-full h-full bg-red-500 flex justify-start items-center">
+  <div class="h-full bg-red-500 flex justify-start items-center">
     <!-- like -->
     <div
       class="flex justify-center items-center h-1/2 px-3 bg-blue-300 text-xl text-white rounded-full gap-2 mr-2"
