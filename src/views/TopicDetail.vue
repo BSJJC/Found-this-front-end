@@ -72,7 +72,7 @@ onBeforeMount(() => {
       <!-- replies -->
       <div class="flex justify-center items-start flex-col w-full h-full bg-blue-300 p-5">
         <el-scrollbar class="w-full pr-2">
-          <topic-reply v-for="(i, index) in 10" :key="index"></topic-reply>
+          <topic-reply v-for="(i, index) in 1" :key="index"></topic-reply>
         </el-scrollbar>
       </div>
     </div>
