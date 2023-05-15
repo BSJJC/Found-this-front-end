@@ -17,17 +17,13 @@ const data: Array<dataType> = [
     type: "LIKES",
     num: "80",
   },
-  {
-    type: "LAST REPLY",
-    num: "14hr",
-  },
 ];
 </script>
 
 <template>
-  <div class="bg-blue-500 grid grid-cols-4">
+  <div class="grid grid-cols-3">
     <div
-      class="flex justify-center items-center bg-red-300 flex-col text-lg"
+      class="flex justify-center items-center flex-col text-lg"
       v-for="(i, index) in data"
       :key="index"
     >

@@ -62,15 +62,17 @@ onBeforeMount(() => {
   ></topic>
 
   <!-- main -->
-  <main class="flex justify-center items-center w-screen h-screen p-3">
+  <main class="flex justify-center items-center w-screen h-screen p-10">
     <div
-      class="w-full h-full flex justify-center items-center rounded-3xl overflow-hidden shadow-xl shadow-[#7E56DA]"
+      class="w-full h-full flex justify-center items-center rounded-3xl overflow-hidden shadow-box shadow-[#7E56DA]"
     >
       <!-- topic info -->
       <topic-info :data="topicDeatil"></topic-info>
 
       <!-- replies -->
-      <div class="flex justify-center items-start flex-col w-full h-full bg-blue-300 p-5">
+      <div
+        class="flex justify-center items-start flex-col w-[55%] h-full bg-blue-300 p-5"
+      >
         <el-scrollbar class="w-full pr-2">
           <topic-reply v-for="(i, index) in 1" :key="index"></topic-reply>
         </el-scrollbar>

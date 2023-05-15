@@ -12,7 +12,7 @@ const repliesHeight = ref(150);
 onMounted(() => {
   console.log(repliesOfReply.value);
 
-  let rect = repliesOfReply.value[0].getBoundingClientRect();
+  let rect = repliesOfReply.value.getBoundingClientRect();
 
   repliesHeight.value = rect.height;
 });
@@ -42,7 +42,7 @@ onMounted(() => {
     <feedback></feedback>
   </div>
 
-  <div class="flex justify-center items-center flex-row my-2">
+  <div class="flex justify-center items-center flex-row my-2" v-show="false">
     <!-- height of replies -->
     <div
       class="w-[2%] flex justify-center items-center"
@@ -52,17 +52,11 @@ onMounted(() => {
     </div>
 
     <!-- replies of reply -->
-    <div
-      class="w-[98%] flex justify-center items-center flex-col"
-      v-for="(i, index) in 2"
-      :key="index"
-    >
+    <div class="w-[98%] flex justify-center items-center flex-col" ref="repliesOfReply">
       <!--  body of the reply of topic -->
-      <div class="w-full" ref="repliesOfReply">
-        <div class="h-[70px] w-full bg-red-500 flex flex-row">
-          <div class="h-full w-[70px] flex justify-center items-center bg-purple-300">
-            user icon
-          </div>
+      <div class="w-full bg-red-300" v-for="(i, index) in 5" :key="index">
+        <div class="h-[70px] w-full flex flex-row">
+          <div class="h-full w-[70px] flex justify-center items-center">user icon</div>
           <div class="h-full flex flex-col pl-3">
             <div class="h-1/2 flex items-end text-xl">Lorem ipsum dolor sit esse</div>
             <div class="h-1/2 flex items-start opacity-70 text-white">
@@ -71,7 +65,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div class="bg-blue-500 w-full min-h-[70px] max-h-[140px]" v-html="text"></div>
+        <div class="w-full min-h-[70px] max-h-[140px]" v-html="text"></div>
       </div>
     </div>
   </div>
