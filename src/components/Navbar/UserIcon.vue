@@ -39,33 +39,25 @@ onMounted(() => {
 
 <template>
   <div class="w-[110px] h-[60px] overflow-hidden absolute">
-    <div
-      class="w-full h-full flex justify-between items-center transition duration-500"
-      :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }"
-    >
+    <div class="w-full h-full flex justify-between items-center transition duration-500"
+      :style="{ transform: `translateX(${loggedIn ? 0 : 50}%)` }">
       <div
         class="h-[45px] w-[45px] rounded-full flex justify-center items-center text-lg bg-[#7E56DA] text-white transition duration-200 hover:cursor-pointer hover:-translate-y-1"
-        @click="
-          () => {
-            if (loggedIn) {
-              showUserInfo();
-            } else {
-              showLogInAndSignUp();
-            }
+        @click="() => {
+          if (loggedIn) {
+            showUserInfo();
+          } else {
+            showLogInAndSignUp();
           }
-        "
-      >
+        }
+          ">
         <transition name="opacity-fade" mode="out-in">
           <div v-if="!loggedIn">
             {{ "Log In" }}
           </div>
 
           <div v-else>
-            <img
-              :src="userAvaterID"
-              alt="user avater"
-              class="shadow-lg rounded-full"
-            />
+            <img :src="userAvaterID" alt="user avater" class="shadow-lg rounded-full" />
           </div>
         </transition>
       </div>
@@ -76,8 +68,7 @@ onMounted(() => {
 
       <div
         class="w-[45px] h-[45px] flex justify-center items-center bg-[#d0d0d0] shadow-lg rounded-full transition duration-200 hover:cursor-pointer hover:-translate-y-1"
-        @click="showUserOptions = !showUserOptions"
-      >
+        @click="showUserOptions = !showUserOptions">
         <menu-vue color="black" class="w-2/3"></menu-vue>
       </div>
     </div>
@@ -88,14 +79,10 @@ onMounted(() => {
     :style="{
       height: `${showUserOptions ? userOptions.length * 2 : 0}rem`,
       boxShadow: ` 0px 5px 8px 0px rgba(0, 0, 0, 0.2)`,
-    }"
-  >
-    <div
-      v-for="(i, index) in userOptions"
-      :key="index"
+    }">
+    <div v-for="(i, index) in userOptions" :key="index"
       class="w-full h-[2rem] text-center flex justify-center items-center text-lg text-white bg-[#9d7ce9] transition duration-200 hover:cursor-pointer hover:-translate-y-1"
-      @click="userControl(i)"
-    >
+      @click="userControl(i)">
       {{ i }}
     </div>
   </div>
