@@ -49,6 +49,9 @@ onBeforeUnmount(() => {
       @click.self="hidePanel"
     >
       <loading v-if="showLoading"></loading>
+
+
+
       <!-- panel -->
       <div id="panel" class="w-[1px] h-[1px] shadow-xl grid grid-cols-2" :class="mode">
         <!-- form -->
@@ -93,6 +96,8 @@ onBeforeUnmount(() => {
           </transition>
         </div>
       </div>
+
+      
     </div>
   </transition>
 </template>

@@ -130,64 +130,42 @@ function signUp(formEl: FormInstance | undefined) {
       <div>Email:</div>
 
       <el-form-item prop="email">
-        <el-input
-          v-model="ruleForm.email"
-          type="text"
-          placeholder="Enter your email"
-          class="text-[#7E56DA]"
-          @input="ruleForm.email = disableInputSpace(ruleForm.email)"
-        />
+        <el-input v-model="ruleForm.email" type="text" placeholder="Enter your email" class="text-[#7E56DA]"
+          @input="ruleForm.email = disableInputSpace(ruleForm.email)" />
       </el-form-item>
 
       <div class="text-lg">User name:</div>
 
       <el-form-item prop="userName">
-        <el-input
-          v-model="ruleForm.userName"
-          type="text"
-          placeholder="Enter your user name"
-          class="text-[#7E56DA]"
-          @input="ruleForm.email = disableInputSpace(ruleForm.email)"
-        />
+        <el-input v-model="ruleForm.userName" type="text" placeholder="Enter your user name" class="text-[#7E56DA]"
+          @input="ruleForm.email = disableInputSpace(ruleForm.email)" />
       </el-form-item>
 
       <div>Password:</div>
 
       <el-form-item prop="password">
-        <el-input
-          v-model="ruleForm.password"
-          type="password"
-          placeholder="Enter your password"
-          class="text-[#7E56DA]"
-          @input="ruleForm.password = disableInputSpace(ruleForm.password)"
-        />
+        <el-input v-model="ruleForm.password" type="password" placeholder="Enter your password" class="text-[#7E56DA]"
+          @input="ruleForm.password = disableInputSpace(ruleForm.password)" />
       </el-form-item>
 
       <div>Confirm Password:</div>
 
       <el-form-item prop="confirmPassword">
-        <el-input
-          v-model="ruleForm.confirmPassword"
-          type="password"
-          placeholder="Enter your password again"
-          class="text-[#7E56DA]"
-          @input="ruleForm.confirmPassword = disableInputSpace(ruleForm.confirmPassword)"
-        />
+        <el-input v-model="ruleForm.confirmPassword" type="password" placeholder="Enter your password again"
+          class="text-[#7E56DA]" @input="ruleForm.confirmPassword = disableInputSpace(ruleForm.confirmPassword)" />
       </el-form-item>
     </el-form>
 
     <button
       class="w-[400px] h-[45px] bg-[#7E56DA] text-white text-xl rounded-lg transition duration-200 my-3 hover:bg-[#a07bf7]"
-      @click="signUp(ruleFormRef)"
-    >
+      @click="signUp(ruleFormRef)">
       Sign up!
     </button>
 
     <div class="w-1/2 h-[45px] flex justify-center items-center opacity-50">
       Already have an account?
       <a href="#" class="text-[#7E56DA] hover:text-[#a07bf7]" @click="toLogInForm">
-        Log in!</a
-      >
+        Log in!</a>
     </div>
   </div>
 </template>
