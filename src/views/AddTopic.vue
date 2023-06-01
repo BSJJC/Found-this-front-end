@@ -140,8 +140,7 @@ async function submitTopic(): Promise<void> {
 <template>
   <!--mask  -->
   <div
-    class="w-screen h-screen fixed flex justify-center items-center bg-[#7E56DA] z-[999] text-white text-[5rem] mask-out"
-  >
+    class="w-screen h-screen fixed flex justify-center items-center bg-[#7E56DA] z-[999] text-white text-[5rem] mask-out">
     ADD NEW TOPIC
   </div>
 
@@ -155,33 +154,24 @@ async function submitTopic(): Promise<void> {
 
       <div class="col-span-3 flex justify-center items-center text-4xl text-[#7E56DA]">
         <div class="font-bold drop-shadow-lg">topic name:</div>
-        <input
-          v-model="topicName"
+        <input v-model="topicName"
           class="h-[40px] w-[400px] ml-2 outline-none border-[1px] border-[#7E56DA] rounded-full text-2xl indent-4 shadow-lg translate-y-1"
-          @input="topicName = disableInputSpace(topicName)"
-        />
+          @input="topicName = disableInputSpace(topicName)" />
       </div>
 
       <div class="h-full px-3 col-span-1 flex justify-end items-center">
         <button
           class="bg-[#7E56DA] text-white px-8 py-3 rounded-lg text-xl shadow-md shadow-[#7E56DA] transition duration-300 ease hover:-translate-y-1"
-          @click="submitTopic"
-        >
+          @click="submitTopic">
           SUBMIT
         </button>
       </div>
     </header>
 
     <!-- main -->
-    <main
-      class="w-full h-[75%] shadow-lg shadow-[#7E56DA] rounded-lg overflow-hidden relative"
-      :v-loading="true"
-    >
-      <Editor
-        v-model="editorText"
-        class="h-full transition duration-300 ease absolute z-10"
-        api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y"
-        :init="{
+    <main class="w-full h-[75%] shadow-lg shadow-[#7E56DA] rounded-lg overflow-hidden relative" :v-loading="true">
+      <Editor v-model="editorText" class="h-full transition duration-300 ease absolute z-10"
+        api-key="tup1hjjciyq9wo6uus67ng0eemkjua5dprzb71dqrucrqh8y" :init="{
           plugins:
             'preview importcss searchreplace autolink autosave  directionality code visualblocks visualchars fullscreen link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
           toolbar:
@@ -192,13 +182,10 @@ async function submitTopic(): Promise<void> {
           resize: false,
           skin: 'oxide',
           content_css: 'light',
-        }"
-      />
+        }" />
 
       <!-- loading placeholder -->
-      <div
-        class="w-full h-full flex justify-center items-center text-5xl text-white bg-[#7e56da64] absolute"
-      >
+      <div class="w-full h-full flex justify-center items-center text-5xl text-white bg-[#7e56da64] absolute">
         Loading...
       </div>
     </main>
@@ -218,6 +205,7 @@ async function submitTopic(): Promise<void> {
 .mask-out {
   animation: mask-out 0.3s ease-in-out forwards;
 }
+
 @keyframes mask-out {
   99% {
     opacity: 0;

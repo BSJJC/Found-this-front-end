@@ -61,7 +61,7 @@ const props = defineProps<topicInfoType>();
           <div class="w-full h-1/3 text-md flex justify-start items-center flex-row text-[#adadad]">
             LAST REPLY
           </div>
-          
+
           <div class="w-full h-2/3 text-2xl text-[#5d5d5d] flex justify-center items-center flex-row">
             <div class="h-full w-[20%] flex justify-start items-center">
               <Avater :src="`http://localhost:5000/api/userAvaters/get/${props.topicInfo.founderAvaterID}`"
